@@ -1,0 +1,81 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+<ui:composition template="/sales/salesTemplate.xhtml">
+	<ui:define name="content">
+		<h:panelGroup id="mainBody">
+			<c:choose>
+				
+				<c:when test="#{salesBean.action == 'HOTLISTCANDIDATE'}">
+					<ui:include src="/sales/hotlistCandidates.xhtml" />
+				</c:when>
+				
+				<c:when test="#{salesBean.action == 'CANDIDATEDETAILS'}">
+					<ui:include src="/sales/candidateDetails.xhtml" />
+				</c:when>
+				
+				<c:when test="#{salesBean.action == 'CREATEINTERVIEWSCHEDULE'}">
+					<ui:include src="/sales/interviewScheduleForm.xhtml" />
+				</c:when>
+				
+				<c:when test="#{salesBean.action == 'FOLLOWUPFORM'}">
+					<ui:include src="/sales/followupDetails.xhtml" />
+				</c:when>
+				
+				<c:when test="#{salesBean.action == 'MAILFORM'}">
+					<ui:include src="/sales/mailForm.xhtml" />
+				</c:when>
+				
+				<c:when test="#{salesBean.action == 'MAILDETAILS'}">
+					<ui:include src="/sales/mailDetails.xhtml" />
+				</c:when>
+				
+				<c:when test="#{salesBean.action == 'REMOVECANDIDATE'}">
+					<ui:include src="/sales/removeCandidateList.xhtml" />
+				</c:when>
+				
+				<c:when test="#{salesBean.action == 'ALLDOCUMENTS'}">
+					<ui:include src="/sales/documentsList.xhtml" />
+				</c:when>
+				
+				<c:when test="#{salesBean.action == 'SIGNATUREFORM'}">
+					<ui:include src="/sales/signatureForm.xhtml" />
+				</c:when>
+				
+				<c:when test="#{salesBean.action == 'PRIORITYFORM'}">
+					<ui:include src="/sales/priorityForm.xhtml" />
+				</c:when>
+				
+				<c:when test="#{salesBean.action == 'MAILPREVIEWFORM'}">
+					<ui:include src="/sales/mailPreviewForm.xhtml" />
+				</c:when>
+				
+				<c:when test="#{salesBean.action == 'MAILFORMFORCANDIDATE'}">
+					<ui:include src="/sales/mailFormForCandidate.xhtml" />
+				</c:when>
+				
+				<c:when test="#{salesBean.action == 'SCHEDULEDCANDIDATE'}">
+					<ui:include src="/sales/scheduledCandidateList.xhtml" />
+				</c:when>
+				
+				<c:when test="#{salesBean.action == 'INTERVIEWSCHEDULEDETAILS'}">
+					<ui:include src="/sales/interviewScheduleDetails.xhtml" />
+				</c:when>
+				
+				<c:when test="#{salesBean.action == 'INTERVIEWSCHEDULEEDITINDETAILSPAGE'}">
+					<ui:include src="/sales/interviewSeheduleEditInDetailsPage.xhtml" />
+				</c:when>
+				
+				<c:when test="#{salesBean.action == 'ALLDOCUMENTSFORSCHEDULEDCANDIDATE'}">
+					<ui:include src="/sales/allDocumentForScheduledCandidate.xhtml" />
+				</c:when>
+
+			</c:choose>
+
+		</h:panelGroup>
+	</ui:define>
+</ui:composition>
+
+</html>

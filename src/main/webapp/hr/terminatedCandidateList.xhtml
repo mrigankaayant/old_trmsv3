@@ -1,0 +1,329 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<h:form>
+		<p:dataTable var="can" value="#{hrBean.terminatedCandidateLazyModel}"
+			paginator="true" rows="20" resizableColumns="true" resizeMode="true"
+			widgetVar="advanceSearch" sortBy="#{can.importedDate}"
+			sortOrder="descending"
+			paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
+			rowsPerPageTemplate="15,20,50,100,200,300,500" selectionMode="single"
+			selection="#{hrBean.selectedCandidate}" rowKey="#{can.candidateId}"
+			lazy="true" tableStyle="width:auto;table-layout:auto">
+
+
+			<f:facet name="header">Terminated Candidate List
+			
+			<p:commandLink id="referesh"
+					oncomplete="PF('advanceSearch').clearFilters()"
+					style="padding-left:92.3%;color:teal" process="@this"
+					update=":mainBody">
+					<i class="fa fa-refresh fa-1x"></i>
+				</p:commandLink>
+				<p:tooltip for="referesh" value="Referesh Data Table"
+					trackMouse="true" style="font-size:20px" />
+			</f:facet>
+
+			<p:ajax event="rowDblselect"
+				listener="#{hrBean.onRowSelectInCandidateList}"
+				onstart="PF('statusDialog').show()"
+				oncomplete="PF('statusDialog').hide()" update=":mainBody" />
+
+			<p:column headerText="Id" sortBy="#{can.candidateId}"
+				filterBy="#{can.candidateId}">
+				<h:outputText value="#{can.candidateId}" />
+			</p:column>
+
+			<p:column headerText="Name" sortBy="#{can.candidateName}"
+				filterBy="#{can.candidateName}">
+				<h:outputText value="#{can.candidateName}" />
+			</p:column>
+
+			<p:column headerText="Email" sortBy="#{can.emailId}"
+				filterBy="#{can.emailId}">
+				<h:outputText value="#{can.emailId}" />
+			</p:column>
+
+			<p:column headerText="Contact No" sortBy="#{can.contactNo}"
+				filterBy="#{can.contactNo}">
+				<h:outputText value="#{can.contactNo}" />
+			</p:column>
+
+			<p:column headerText="Service" sortBy="#{can.service}"
+				filterBy="#{can.service}">
+				<f:facet name="filter">
+					<p:selectOneMenu onchange="PF('advanceSearch').filter()">
+						<f:selectItem itemLabel="---Select Service---" itemValue=" "
+							noSelectionOption="true" />
+						<f:selectItem itemLabel="Traning" itemValue="TRAINING" />
+						<f:selectItem itemLabel="Direct Marketing"
+							itemValue="DIRECT MARKETING" />
+						<f:selectItem itemLabel="Both" itemValue="BOTH" />
+					</p:selectOneMenu>
+				</f:facet>
+				<h:outputText value="#{can.service}" />
+			</p:column>
+
+			<p:column headerText="Enrollment Date" sortBy="#{can.enrollmentDate}"
+				filterBy="#{can.enrollmentDate}">
+				<f:facet name="filter">
+					<p:calendar pattern="MM/dd/yyyy" showButtonPanel="true">
+						<p:ajax event="dateSelect"
+							oncomplete="PF('advanceSearch').filter()" />
+					</p:calendar>
+				</f:facet>
+
+				<h:outputText value="#{can.enrollmentDate}">
+					<f:convertDateTime pattern="MM/dd/yyyy" />
+				</h:outputText>
+			</p:column>
+
+			<p:column headerText="Enrollment Status"
+				sortBy="#{can.enrollmentFormStatus}"
+				filterBy="#{can.enrollmentFormStatus}">
+				<f:facet name="filter">
+					<p:selectOneMenu onchange="PF('advanceSearch').filter()">
+						<f:selectItem itemLabel="---Select Status---" itemValue=" "
+							noSelectionOption="true" />
+						<f:selectItem itemLabel="Not Received" itemValue="NOT RECEIVED" />
+						<f:selectItem itemLabel="Received" itemValue="RECEIVED" />
+						<f:selectItem itemLabel="SENT" itemValue="SENT" />
+					</p:selectOneMenu>
+				</f:facet>
+				<h:outputText value="#{can.enrollmentFormStatus}" />
+			</p:column>
+
+
+			<p:column headerText="Enrollment Next Followup"
+				sortBy="#{can.enrollmentNextFollowupDate}"
+				filterBy="#{can.enrollmentNextFollowupDate}">
+				<f:facet name="filter">
+					<p:calendar pattern="dd-MMMM-yyyy" showButtonPanel="true">
+						<p:ajax event="dateSelect"
+							oncomplete="PF('advanceSearch').filter()" />
+					</p:calendar>
+				</f:facet>
+
+				<h:outputText value="#{can.enrollmentNextFollowupDate}">
+					<f:convertDateTime pattern="dd-MMMM-yyyy" />
+				</h:outputText>
+			</p:column>
+
+
+
+			<p:column headerText="Training Status" sortBy="#{can.trainingStatus}"
+				filterBy="#{can.trainingStatus}">
+				<f:facet name="filter">
+					<p:selectOneMenu onchange="PF('advanceSearch').filter()">
+						<f:selectItem itemLabel="---Select Status---" itemValue=" "
+							noSelectionOption="true" />
+						<f:selectItem itemLabel="Not Started" itemValue="NOT STARTED" />
+						<f:selectItem itemLabel="On-Going" itemValue="ONGOING" />
+						<f:selectItem itemLabel="TFF Sent" itemValue="TFF SENT" />
+						<f:selectItem itemLabel="TFF Received" itemValue="TFF RECEIVED" />
+						<f:selectItem itemLabel="Completed" itemValue="COMPLETED" />
+					</p:selectOneMenu>
+				</f:facet>
+				<h:outputText value="#{can.trainingStatus}" />
+			</p:column>
+
+
+			<p:column headerText="Training Next Followup"
+				sortBy="#{can.trainingNextFollowupDate}"
+				filterBy="#{can.trainingNextFollowupDate}">
+				<f:facet name="filter">
+					<p:calendar pattern="dd-MMMM-yyyy" showButtonPanel="true">
+						<p:ajax event="dateSelect"
+							oncomplete="PF('advanceSearch').filter()" />
+					</p:calendar>
+				</f:facet>
+
+				<h:outputText value="#{can.trainingNextFollowupDate}">
+					<f:convertDateTime pattern="dd-MMMM-yyyy" />
+				</h:outputText>
+			</p:column>
+
+
+			<p:column headerText="Resume Status" sortBy="#{can.resumePrepStatus}"
+				filterBy="#{can.resumePrepStatus}">
+				<f:facet name="filter">
+					<p:selectOneMenu onchange="PF('advanceSearch').filter()">
+						<f:selectItem itemLabel="---Select Status---" itemValue=" "
+							noSelectionOption="true" />
+						<f:selectItem itemLabel="CEB Test Completed"
+							itemValue="CEB TEST COMPLETED" />
+						<f:selectItem itemLabel="Resume Docs Sent"
+							itemValue="RESUME DOCS SENT" />
+						<f:selectItem itemLabel="Resume Prep. On-going"
+							itemValue="RESUME PREP ON GOING" />
+						<f:selectItem itemLabel="Resume Prep. Completed"
+							itemValue="RESUME PREP COMPLETED" />
+					</p:selectOneMenu>
+				</f:facet>
+				<h:outputText value="#{can.resumePrepStatus}" />
+			</p:column>
+
+
+			<p:column headerText="Resume Next Followup"
+				sortBy="#{can.resumeNextFollowupDate}"
+				filterBy="#{can.resumeNextFollowupDate}">
+				<f:facet name="filter">
+					<p:calendar pattern="dd-MMMM-yyyy" showButtonPanel="true">
+						<p:ajax event="dateSelect"
+							oncomplete="PF('advanceSearch').filter()" />
+					</p:calendar>
+				</f:facet>
+
+				<h:outputText value="#{can.resumeNextFollowupDate}">
+					<f:convertDateTime pattern="dd-MMMM-yyyy" />
+				</h:outputText>
+			</p:column>
+
+
+			<p:column headerText="Graduation Status" sortBy="#{can.mockStatus}"
+				filterBy="#{can.mockStatus}">
+				<f:facet name="filter">
+					<p:selectOneMenu onchange="PF('advanceSearch').filter()">
+						<f:selectItem itemLabel="---Select Status---" itemValue=" "
+							noSelectionOption="true" />
+						<f:selectItem itemLabel="On-Mock" itemValue="ON MOCK" />
+						<f:selectItem itemLabel="Re-Mock" itemValue="RE-MOCK" />
+						<f:selectItem itemLabel="Mock Completed"
+							itemValue="MOCK COMPLETED" />
+						<f:selectItem itemLabel="On-Graduation" itemValue="ON GRADUATION" />
+						<f:selectItem itemLabel="Re-Graduation" itemValue="RE-GRADUATION" />
+						<f:selectItem itemLabel="Graduation Completed"
+							itemValue="GRADUATION COMPLETED" />
+					</p:selectOneMenu>
+				</f:facet>
+				<h:outputText value="#{can.mockStatus}" />
+			</p:column>
+
+
+			<p:column headerText="Graduation Next Followup"
+				sortBy="#{can.mockNextFollowupDate}"
+				filterBy="#{can.mockNextFollowupDate}">
+				<f:facet name="filter">
+					<p:calendar pattern="dd-MMMM-yyyy" showButtonPanel="true">
+						<p:ajax event="dateSelect"
+							oncomplete="PF('advanceSearch').filter()" />
+					</p:calendar>
+				</f:facet>
+
+				<h:outputText value="#{can.mockNextFollowupDate}">
+					<f:convertDateTime pattern="dd-MMMM-yyyy" />
+				</h:outputText>
+			</p:column>
+
+
+			<p:column headerText="Referce Check Status"
+				sortBy="#{can.referenceCheckStatus}"
+				rendered="#{can.referenceCheckStatus}"
+				filterBy="#{can.referenceCheckStatus}">
+				<f:facet name="filter">
+					<p:selectOneMenu onchange="PF('advanceSearch').filter()">
+						<f:selectItem itemLabel="---Select Status---" itemValue=" "
+							noSelectionOption="true" />
+						<f:selectItem itemLabel="YES" itemValue="true" />
+						<f:selectItem itemLabel="NO" itemValue="false" />
+					</p:selectOneMenu>
+				</f:facet>
+				<h:outputText value="#{can.referenceCheckStatus}" rendered="false" />
+				<h:outputText value="YES" />
+			</p:column>
+
+			<p:column headerText="Referce Check Status"
+				sortBy="#{can.referenceCheckStatus}"
+				rendered="#{!can.referenceCheckStatus}"
+				filterBy="#{can.referenceCheckStatus}">
+				<f:facet name="filter">
+					<p:selectOneMenu onchange="PF('advanceSearch').filter()">
+						<f:selectItem itemLabel="---Select Status---" itemValue=" "
+							noSelectionOption="true" />
+						<f:selectItem itemLabel="YES" itemValue="true" />
+						<f:selectItem itemLabel="NO" itemValue="false" />
+					</p:selectOneMenu>
+				</f:facet>
+				<h:outputText value="#{can.referenceCheckStatus}" rendered="false" />
+				<h:outputText value="NO" />
+			</p:column>
+
+
+			<p:column headerText="Reference Next Followup"
+				sortBy="#{can.referenceNextFollowupDate}"
+				filterBy="#{can.referenceNextFollowupDate}">
+				<f:facet name="filter">
+					<p:calendar pattern="dd-MMMM-yyyy" showButtonPanel="true">
+						<p:ajax event="dateSelect"
+							oncomplete="PF('advanceSearch').filter()" />
+					</p:calendar>
+				</f:facet>
+
+				<h:outputText value="#{can.referenceNextFollowupDate}">
+					<f:convertDateTime pattern="dd-MMMM-yyyy" />
+				</h:outputText>
+			</p:column>
+
+
+			<p:column headerText="Hotlist Status"
+				sortBy="#{can.hotlistStatusPredefine}"
+				filterBy="#{can.hotlistStatusPredefine}">
+				<f:facet name="filter">
+					<p:selectOneMenu onchange="PF('advanceSearch').filter()">
+						<f:selectItem itemLabel="---Select Status---" itemValue=" "
+							noSelectionOption="true" />
+						<f:selectItem itemLabel="On Bench" itemValue="ON BENCH" />
+						<f:selectItem itemLabel="On Hotlist" itemValue="ON HOTLIST" />
+						<f:selectItem itemLabel="Removed" itemValue="REMOVED" />
+					</p:selectOneMenu>
+				</f:facet>
+				<h:outputText value="#{can.hotlistStatusPredefine}" />
+			</p:column>
+
+
+			<p:column headerText="Pre-hotlist Next Followup"
+				sortBy="#{can.preHotlistNextFollowupDate}"
+				filterBy="#{can.preHotlistNextFollowupDate}">
+				<f:facet name="filter">
+					<p:calendar pattern="dd-MMMM-yyyy" showButtonPanel="true">
+						<p:ajax event="dateSelect"
+							oncomplete="PF('advanceSearch').filter()" />
+					</p:calendar>
+				</f:facet>
+
+				<h:outputText value="#{can.preHotlistNextFollowupDate}">
+					<f:convertDateTime pattern="dd-MMMM-yyyy" />
+				</h:outputText>
+			</p:column>
+
+
+			<p:column headerText="Terminate Phase" sortBy="#{can.terminatedFrom}"
+				filterBy="#{can.terminatedFrom}">
+				<f:facet name="filter">
+					<p:selectOneMenu onchange="PF('advanceSearch').filter()">
+						<f:selectItem itemLabel="---Select Phase---" itemValue=" "
+							noSelectionOption="true" />
+						<f:selectItem itemLabel="Enrollment Phase"
+							itemValue="Enrollment Phase" />
+						<f:selectItem itemLabel="Training Phase"
+							itemValue="Training Phase" />
+						<f:selectItem itemLabel="Resume Phase" itemValue="Resume Phase" />
+						<f:selectItem itemLabel="Mock Phase" itemValue="Mock Phase" />
+						<f:selectItem itemLabel="Graduation Phase"
+							itemValue="Graduation Phase" />
+						<f:selectItem itemLabel="Reference Check Phase"
+							itemValue="Reference Check Phase" />
+						<f:selectItem itemLabel="Pre-hotlist Phase"
+							itemValue="Pre-hotlist Phase" />
+					</p:selectOneMenu>
+				</f:facet>
+				<h:outputText value="#{can.terminatedFrom}" />
+			</p:column>
+
+		</p:dataTable>
+
+	</h:form>
+</ui:composition>

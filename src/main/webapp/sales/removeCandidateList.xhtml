@@ -1,0 +1,137 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+
+	<h:form>
+
+		<p:panel style="margin-top:1%;" rendered="#{not empty salesBean.hotlistCandidates}">
+
+			<f:facet name="header">Removed Candidates From Hotlist</f:facet>
+
+			<p:dataTable var="can" value="#{salesBean.hotlistCandidates}"
+				paginator="true" rows="50" resizableColumns="true" resizeMode="true"
+				widgetVar="advanceSearch" sortBy="#{can.candidateId}"
+				sortOrder="descending"
+				paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
+				rowsPerPageTemplate="50,100,200,300,500" rowKey="#{can.candidateId}" selection="#{salesBean.selectedCandidates}"
+				tableStyle="width:auto;table-layout:auto">
+				
+				<f:facet name="header">
+					<div align="left">
+						<p:commandButton value="Add To Hotlist" action="#{salesBean.addToHotlist()}"
+							update=":mainBody" icon="fa fa-undo" onclick="return confirm('Are you sure?')" style="background-color:LightSeaGreen" />
+							
+						<p:commandLink id="referesh"  oncomplete="PF('advanceSearch').clearFilters()" style="color:teal;padding-left:88%"
+							 process="@this" >
+								<i class="fa fa-refresh fa-1x"></i>
+						</p:commandLink>
+						<p:tooltip  for="referesh" value="Referesh Data Table" trackMouse="true" style="font-size:20px"/>
+								
+					</div>
+				</f:facet>
+				
+				<p:column selectionMode="multiple"
+					style="width:16px;text-align:center" />
+
+				<p:column headerText="Resume">
+					<h:commandLink action="#{salesBean.openFile()}" target="_blank"
+						immediate="true" style="color:blue;">
+						<h:graphicImage value="/resources/assets/icon/download.png"></h:graphicImage>
+						<f:param name="filePath" value="#{can.resumePath}" />
+						<f:param name="extension" value="#{can.resumeFileExtension}" />
+						<f:param name="filename" value="#{can.resumeFileName}" />
+					</h:commandLink>
+				</p:column>
+
+				<p:column headerText="Name" sortBy="#{can.hotlistCandidateName}"
+					filterBy="#{can.hotlistCandidateName}">
+					<h:commandLink action="#{salesBean.selectCandidate(can)}"
+						style="color:blue;" update=":mainBody">
+					    #{can.hotlistCandidateName}
+					</h:commandLink>
+				</p:column>
+
+				<p:column headerText="Email" sortBy="#{can.emailId}"
+					filterBy="#{can.emailId}" style="text-align:center;width:10%">
+					<h:outputText value="#{can.emailId}" />
+				</p:column>
+
+				<p:column headerText="Contact No" sortBy="#{can.contactNo}"
+					filterBy="#{can.contactNo}" style="text-align:center;width:10%">
+					<h:outputText value="#{can.contactNo}" />
+				</p:column>
+
+				<p:column headerText="Primary Skill" sortBy="#{can.primarySkill}"
+					filterBy="#{can.primarySkill}" style="text-align:center;width:10%">
+					<h:outputText value="#{can.primarySkill}" />
+				</p:column>
+
+				<p:column headerText="Year OF Exp" sortBy="#{can.yearsOfExperience}"
+					filterBy="#{can.yearsOfExperience}"
+					style="text-align:center;width:10%">
+					<h:outputText value="#{can.yearsOfExperience}" />
+				</p:column>
+
+				<p:column headerText="Current Loc." sortBy="#{can.currentLoc}"
+					filterBy="#{can.currentLoc}" style="text-align:center;width:10%">
+					<h:outputText value="#{can.currentLoc}" />
+				</p:column>
+
+				<p:column headerText="Preferred Loc." sortBy="#{can.preferredLoc}"
+					filterBy="#{can.preferredLoc}" style="text-align:center;width:10%">
+					<h:outputText value="#{can.preferredLoc}" />
+				</p:column>
+
+				<p:column headerText="Avaiability" sortBy="#{can.availability}"
+					filterBy="#{can.availability}" style="text-align:center;width:10%">
+					<h:outputText value="#{can.availability}" />
+				</p:column>
+
+				<p:column headerText="Visa Status" sortBy="#{can.visaStatus}"
+					filterBy="#{can.visaStatus}" style="text-align:center;width:10%">
+					<h:outputText value="#{can.visaStatus}" />
+				</p:column>
+
+				<p:column headerText="Priority" sortBy="#{can.priority}"
+					filterBy="#{can.priority}" style="text-align:center;width:10%">
+					<h:outputText value="#{can.priority}" />
+				</p:column>
+
+				<p:column headerText="Domain" sortBy="#{can.domain}"
+					filterBy="#{can.domain}" style="text-align:center;width:10%">
+					<h:outputText value="#{can.domain}" />
+				</p:column>
+
+				<p:column headerText="Alt Email" sortBy="#{can.alternateEmailId}"
+					filterBy="#{can.alternateEmailId}"
+					style="text-align:center;width:10%">
+					<h:outputText value="#{can.alternateEmailId}" />
+				</p:column>
+
+				<p:column headerText="Alt Phone No" sortBy="#{can.alternativePhone}"
+					filterBy="#{can.alternativePhone}"
+					style="text-align:center;width:10%">
+					<h:outputText value="#{can.alternativePhone}" />
+				</p:column>
+
+				<p:column headerText="Date On Hotlist" sortBy="#{can.dateOnHotlist}"
+					filterBy="#{can.dateOnHotlist}" style="text-align:center;width:10%">
+					<h:outputText value="#{can.dateOnHotlist}" />
+				</p:column>
+
+			</p:dataTable>
+		</p:panel>
+
+
+		<p:panel id="noDataPanel" style="margin-top:1%;"
+			rendered="#{empty salesBean.hotlistCandidates}">
+			<h:outputText value="No Data Found"
+				style="font-size:25px;color:teal;margin-left:45%" />
+		</p:panel>
+
+
+	</h:form>
+</ui:composition>

@@ -1,0 +1,929 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+
+	<h:form id="reference-field-panel">
+		<p:panel style="background-color:HoneyDew;">
+			<p:commandButton value="Enrollment" icon="fa fa-pencil"
+				update=":mainBody" action="#{hrBean.enrollmentDetails()}"
+				styleClass="ui-priority-primary" process="@this" />
+
+			<p:commandButton value="Training" icon="fa fa-slideshare"
+				update=":mainBody" action="#{hrBean.trainingDetails()}"
+				styleClass="ui-priority-primary" process="@this" />
+
+			<p:commandButton value="Resume" icon="fa fa-file-text-o"
+				update=":mainBody" action="#{hrBean.resumeDetails()}"
+				styleClass="ui-priority-primary" process="@this" />
+
+			<p:commandButton value="Mock-Graduation" icon="fa fa-bar-chart"
+				update=":mainBody" action="#{hrBean.mockAndGraduationDetails()}"
+				styleClass="ui-priority-primary" process="@this" />
+
+			<p:commandButton value="Reference" icon="fa fa-street-view"
+				update=":mainBody" action="#{hrBean.referenceDetails()}"
+				styleClass="ui-priority-primary" process="@this" />
+
+
+			<p:commandButton value="Pre-hotlist" icon="fa fa-list-ol"
+				update=":mainBody" action="#{hrBean.preHotlistDetails()}"
+				styleClass="ui-priority-primary" process="@this" />
+
+			<p:commandButton value="Other Documents" icon="fa fa-file"
+				update=":mainBody" action="#{hrBean.documentsDetails()}"
+				styleClass="ui-priority-primary" process="@this" />
+
+			<p:commandButton value="Mail Template" icon="fa fa-envelope"
+				update=":mainBody" action="#{hrBean.mailTemplateForm()}"
+				styleClass="ui-priority-primary" process="@this" />
+
+			<p:commandButton value="Terminate" icon="fa fa-times"
+				update=":mainBody" action="#{hrBean.terminateForm()}"
+				styleClass="ui-priority-primary" process="@this"
+				style="background-color:red" />
+
+		</p:panel>
+
+		<p:panel style="margin-top:0.5%;"
+			rendered="#{hrBean.referenceLabelPanel}">
+			<f:facet name="header">
+					Reference Check Related Information
+				</f:facet>
+			<div class="ui-g" style="border: none;">
+
+				<div class="ui-g-12 ui-md-6 ui-lg-4" style="border: none;">
+					<h:panelGrid style="border: none;" columns="2">
+						<p:outputLabel style="font-size:16px;color:teal" value="Name:" />
+						<c:if test="${empty hrBean.candidate.candidateName}">
+							<h:outputText style="font-size:16px" value="N/A" />
+						</c:if>
+						<c:if test="${!empty hrBean.candidate.candidateName}">
+							<h:outputText style="font-size:16px"
+								value="#{hrBean.candidate.candidateName}" />
+						</c:if>
+
+					</h:panelGrid>
+				</div>
+
+
+				<div class="ui-g-12 ui-md-6 ui-lg-4" style="border: none;">
+					<h:panelGrid style="border: none;" columns="2">
+						<p:outputLabel style="font-size:16px;color:teal"
+							value="Contact No:" />
+						<c:if test="${empty hrBean.candidate.contactNo}">
+							<h:outputText style="font-size:16px" value="N/A" />
+						</c:if>
+						<c:if test="${!empty hrBean.candidate.contactNo}">
+							<h:outputText style="font-size:16px"
+								value="#{hrBean.candidate.contactNo}" />
+						</c:if>
+
+					</h:panelGrid>
+				</div>
+
+
+				<div class="ui-g-12 ui-md-6 ui-lg-4" style="border: none;">
+					<h:panelGrid style="border: none;" columns="2">
+						<p:outputLabel style="font-size:16px;color:teal" value="Email Id:" />
+						<c:if test="${empty hrBean.candidate.emailId}">
+							<h:outputText style="font-size:16px" value="N/A" />
+						</c:if>
+						<c:if test="${!empty hrBean.candidate.emailId}">
+							<h:outputText style="font-size:16px"
+								value="#{hrBean.candidate.emailId}" />
+						</c:if>
+
+					</h:panelGrid>
+				</div>
+
+
+				<div class="ui-g-12 ui-md-6 ui-lg-4" style="border: none;">
+					<h:panelGrid style="border: none;" columns="2">
+						<p:outputLabel style="font-size:16px;color:teal"
+							value="Reference Form Sent Date:" />
+						<c:if test="${empty hrBean.candidate.referenceFormSentDate}">
+							<h:outputText style="font-size:16px" value="N/A" />
+						</c:if>
+						<c:if test="${!empty hrBean.candidate.referenceFormSentDate}">
+							<h:outputText style="font-size:16px"
+								value="#{hrBean.candidate.referenceFormSentDate}">
+								<f:convertDateTime pattern="dd-MMMM-yyyy" />
+							</h:outputText>
+						</c:if>
+					</h:panelGrid>
+				</div>
+
+
+				<div class="ui-g-12 ui-md-6 ui-lg-4" style="border: none;">
+					<h:panelGrid style="border: none;" columns="2">
+						<p:outputLabel style="font-size:16px;color:teal"
+							value="Reference Form Received Date:" />
+						<c:if test="${empty hrBean.candidate.referenceFormReceivedDate}">
+							<h:outputText style="font-size:16px" value="N/A" />
+						</c:if>
+						<c:if test="${!empty hrBean.candidate.referenceFormReceivedDate}">
+							<h:outputText style="font-size:16px"
+								value="#{hrBean.candidate.referenceFormReceivedDate}">
+								<f:convertDateTime pattern="dd-MMMM-yyyy" />
+							</h:outputText>
+						</c:if>
+					</h:panelGrid>
+				</div>
+
+				<div class="ui-g-12 ui-md-6 ui-lg-4" style="border: none;">
+					<h:panelGrid style="border: none;" columns="2">
+						<p:outputLabel style="font-size:16px;color:teal"
+							value="Reference Check Status:" />
+						<c:if test="${empty hrBean.candidate.referenceCheckStatus}">
+							<h:outputText style="font-size:16px" value="N/A" />
+						</c:if>
+						<c:if test="${!empty hrBean.candidate.referenceCheckStatus}">
+							<c:if test="${hrBean.candidate.referenceCheckStatus eq 'true'}">
+								<h:outputText value="Checked"
+									style="color:green;font-weight: bold;" />
+							</c:if>
+							<c:if test="${hrBean.candidate.referenceCheckStatus eq 'false'}">
+								<h:outputText value="Not Check"
+									style="color:red;font-weight: bold;" />
+							</c:if>
+						</c:if>
+					</h:panelGrid>
+				</div>
+			</div>
+
+			<f:facet name="footer">
+				<div style="text-align: center">
+					<p:commandButton value="Edit" icon="fa fa-fw fa-edit"
+						update=":reference-field-panel"
+						action="#{hrBean.editReferenceDetails()}"
+						onclick="PF('statusDialog').show()"
+						oncomplete="PF('statusDialog').hide()"
+						styleClass="ui-priority-primary" />
+
+					<p:commandButton value="Add Reference"
+						action="#{hrBean.addReference()}" update=":add-reference-form"
+						immediate="true" oncomplete="PF('addReferenceDlg').show();" />
+
+				</div>
+			</f:facet>
+		</p:panel>
+
+
+		<p:panel style="margin-top:1%;"
+			rendered="#{not empty hrBean.references}">
+			<f:facet name="header">Reference Details</f:facet>
+			<p:dataTable id="reference-tableid" var="r"
+				value="#{hrBean.references}">
+
+				<p:column headerText="Project Name"
+					style="width:10%;text-align:center">
+					<h:outputText value="#{r.projectName}" />
+				</p:column>
+
+				<p:column headerText="Project Location"
+					style="width:10%;text-align:center">
+					<h:outputText value="#{r.projectLocation}" />
+				</p:column>
+
+				<p:column headerText="Reporting Manager Name"
+					style="width:10%;text-align:center">
+					<h:outputText value="#{r.reportingManagerName}" />
+				</p:column>
+
+				<p:column headerText="Reference Name"
+					style="width:10%;text-align:center">
+					<h:outputText value="#{r.referenceName}" />
+				</p:column>
+
+				<p:column headerText="Reference Phone No"
+					style="width:10%;text-align:center">
+					<h:outputText value="#{r.referencePhoneNo}" />
+				</p:column>
+
+				<p:column headerText="Reference Email Id"
+					style="width:10%;text-align:center">
+					<h:outputText value="#{r.referenceEmailId}" />
+				</p:column>
+
+				<p:column headerText="Team Size" style="width:10%;text-align:center">
+					<h:outputText value="#{r.teamSize}" />
+				</p:column>
+
+				<p:column headerText="Duration" style="width:10%;text-align:center">
+					<h:outputText value="#{r.duration}" />
+				</p:column>
+
+				<p:column headerText="Edit" style="width:10%;text-align:center">
+
+					<p:commandLink action="#{hrBean.editReference(r)}"
+						oncomplete="PF('editReferenceDlg').show();" immediate="true"
+						update=":reference-form-edit">
+						<i class="fa fa-pencil"></i>
+					</p:commandLink>
+
+				</p:column>
+
+			</p:dataTable>
+		</p:panel>
+
+
+		<p:panel style="margin-top:0.5%;"
+			rendered="#{hrBean.referenceEditPanel}">
+			<f:facet name="header">Reference Check Related Information</f:facet>
+
+			<div class="ui-g" style="border: none;">
+
+				<div class="ui-g-12 ui-md-6 ui-lg-4" style="border: none;">
+					<h:panelGrid style="width:100%;border: none;">
+						<p:outputLabel for="reference-form-send-date"
+							style="font-size:16px" value="Reference Form Send Date:" />
+
+						<p:calendar id="reference-form-send-date"
+							placeholder="Reference Form Send Date"
+							value="#{hrBean.candidate.referenceFormSentDate}"
+							pattern="dd-MMMM-yyyy" />
+
+					</h:panelGrid>
+					<p:message for="reference-form-send-date" />
+				</div>
+
+				<div class="ui-g-12 ui-md-6 ui-lg-4" style="border: none;">
+					<h:panelGrid style="width:100%;border: none;">
+						<p:outputLabel for="reference-form-receive-date"
+							style="font-size:16px" value="Reference Form Receive Date:" />
+
+						<p:calendar id="reference-form-receive-date"
+							placeholder="Reference Form Recive Date"
+							value="#{hrBean.candidate.referenceFormReceivedDate}"
+							pattern="dd-MMMM-yyyy" />
+
+					</h:panelGrid>
+					<p:message for="reference-form-receive-date" />
+				</div>
+
+				<div class="ui-g-12 ui-md-6 ui-lg-4" style="border: none;">
+					<h:panelGrid style="width:100%;border: none;">
+						<p:outputLabel for="reference-check-status" style="font-size:16px"
+							value="Reference Check Status" />
+						<p:selectOneMenu id="reference-check-status"
+							value="#{hrBean.candidate.referenceCheckStatus}"
+							style="width:93%!important"
+							validator="#{hrBean.prehotlistNotification}">
+							<f:selectItem itemLabel="----Select----" itemValue="" />
+							<f:selectItem itemLabel="YES" itemValue="true" />
+							<f:selectItem itemLabel="NO" itemValue="false" />
+							<p:ajax event="change" />
+						</p:selectOneMenu>
+					</h:panelGrid>
+					<p:message for="reference-check-status" />
+				</div>
+			</div>
+			<f:facet name="footer">
+				<div style="text-align: center">
+					<p:commandButton value="Save" icon="fa fa-save"
+						update=":reference-field-panel,:reference-followup-form"
+						action="#{hrBean.saveReferenceDetails()}"
+						onclick="PF('statusDialog').show()"
+						oncomplete="PF('statusDialog').hide()"
+						styleClass="ui-priority-primary" />
+				</div>
+			</f:facet>
+		</p:panel>
+	</h:form>
+
+
+	<h:form id="add-reference-form">
+		<p:dialog header="Add Reference" id="dialog2"
+			widgetVar="addReferenceDlg" modal="true" showEffect="explode"
+			hideEffect="fade" width="800">
+
+			<p:panel style="margin-top:1%" id="add-reference-panelId">
+				<f:facet name="header">Add Reference</f:facet>
+				<div class="ui-g">
+					<div class="ui-g-12 ui-md-12 ui-lg-12">
+						<h:panelGrid style="width:100%">
+							<p:outputLabel for="project-name" value="Project Name:" />
+							<p:inputText id="project-name"
+								value="#{hrBean.reference.projectName}" required="true"
+								requiredMessage="Enter Project Name" placeholder="Project Name" />
+							<p:message for="project-name" />
+						</h:panelGrid>
+					</div>
+				</div>
+
+
+				<div class="ui-g">
+					<div class="ui-g-12 ui-md-12 ui-lg-12">
+						<h:panelGrid style="width:100%">
+							<p:outputLabel for="project-location" value="Project Location:" />
+							<p:inputText id="project-location"
+								value="#{hrBean.reference.projectLocation}"
+								placeholder="Project Location" />
+							<p:message for="project-location" />
+						</h:panelGrid>
+					</div>
+				</div>
+
+
+				<div class="ui-g">
+					<div class="ui-g-12 ui-md-12 ui-lg-12">
+						<h:panelGrid style="width:100%">
+							<p:outputLabel for="reporting-manager-name"
+								value="Reporting Manager Name:" />
+							<p:inputText id="reporting-manager-name"
+								value="#{hrBean.reference.reportingManagerName}" required="true"
+								requiredMessage="Enter Reporting Manager Name"
+								placeholder="Reporting Manager Name" />
+							<p:message for="reporting-manager-name" />
+						</h:panelGrid>
+					</div>
+				</div>
+
+
+				<div class="ui-g">
+					<div class="ui-g-12 ui-md-12 ui-lg-12">
+						<h:panelGrid style="width:100%">
+							<p:outputLabel for="reference-name" value="Reference Name:" />
+							<p:inputText id="reference-name"
+								value="#{hrBean.reference.referenceName}"
+								placeholder="Reference Name" />
+							<p:message for="reference-name" />
+						</h:panelGrid>
+					</div>
+				</div>
+
+				<div class="ui-g">
+					<div class="ui-g-12 ui-md-12 ui-lg-12">
+						<h:panelGrid style="width:100%">
+							<p:outputLabel for="reference-phone-no"
+								value="Reference Phone No:" />
+							<p:inputText id="reference-phone-no"
+								value="#{hrBean.reference.referencePhoneNo}" required="true"
+								requiredMessage="Enter Reference Phone No"
+								placeholder="Reference Phone No"
+								validatorMessage="Please Enter Only Number">
+								<f:validateRegex pattern="[0-9]*" />
+							</p:inputText>
+							<p:message for="reference-phone-no" />
+						</h:panelGrid>
+					</div>
+				</div>
+
+				<div class="ui-g">
+					<div class="ui-g-12 ui-md-12 ui-lg-12">
+						<h:panelGrid style="width:100%">
+							<p:outputLabel for="reference-email-id"
+								value="Reference Email Id:" />
+							<p:inputText id="reference-email-id"
+								value="#{hrBean.reference.referenceEmailId}" required="true"
+								requiredMessage="Enter Reference Email Id"
+								placeholder="Reference Email Id"
+								validatorMessage="Please Enter Valid Email">
+								<f:validateRegex
+									pattern="[\w\.-]*[a-zA-Z0-9_]@[\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]" />
+							</p:inputText>
+							<p:message for="reference-email-id" />
+						</h:panelGrid>
+					</div>
+				</div>
+
+
+				<div class="ui-g">
+					<div class="ui-g-12 ui-md-12 ui-lg-12">
+						<h:panelGrid style="width:100%">
+							<p:outputLabel for="team-size" value="Team Size:" />
+							<p:inputText id="team-size" value="#{hrBean.reference.teamSize}"
+								required="true" requiredMessage="Enter Team Size"
+								placeholder="Team Size" />
+							<p:message for="team-size" />
+						</h:panelGrid>
+					</div>
+				</div>
+
+				<div class="ui-g">
+					<div class="ui-g-12 ui-md-12 ui-lg-12">
+						<h:panelGrid style="width:100%">
+							<p:outputLabel for="duration" value="Duration:" />
+							<p:inputText id="duration" value="#{hrBean.reference.duration}"
+								required="true" requiredMessage="Enter Duration"
+								placeholder="Duration" />
+							<p:message for="duration" />
+						</h:panelGrid>
+					</div>
+				</div>
+
+				<f:facet name="footer">
+					<div style="text-align: center">
+						<p:commandButton value="Save"
+							oncomplete="handleLoginRequest(xhr, status, args)"
+							actionListener="#{hrBean.addMoreReference()}"
+							update="add-reference-panelId,:reference-field-panel,:reference-followup-form" />
+					</div>
+				</f:facet>
+			</p:panel>
+		</p:dialog>
+	</h:form>
+
+
+
+
+
+	<h:form id="reference-form-edit">
+		<p:dialog header="Update Reference" id="dialog2"
+			widgetVar="editReferenceDlg" modal="true" showEffect="explode"
+			hideEffect="fade" width="800">
+
+			<p:panel style="margin-top:1%" id="edit-reference-panelId">
+				<f:facet name="header">Update Reference</f:facet>
+				<div class="ui-g">
+					<div class="ui-g-12 ui-md-12 ui-lg-12">
+						<h:panelGrid style="width:100%">
+							<p:outputLabel for="project-name" value="Project Name:" />
+							<p:inputText id="project-name"
+								value="#{hrBean.reference.projectName}" required="true"
+								requiredMessage="Enter Project Name" placeholder="Project Name" />
+							<p:message for="project-name" />
+						</h:panelGrid>
+					</div>
+				</div>
+
+				<div class="ui-g">
+					<div class="ui-g-12 ui-md-12 ui-lg-12">
+						<h:panelGrid style="width:100%">
+							<p:outputLabel for="project-location" value="Project Location:" />
+							<p:inputText id="project-location"
+								value="#{hrBean.reference.projectLocation}"
+								placeholder="Project Location" />
+							<p:message for="project-location" />
+						</h:panelGrid>
+					</div>
+				</div>
+
+				<div class="ui-g">
+					<div class="ui-g-12 ui-md-12 ui-lg-12">
+						<h:panelGrid style="width:100%">
+							<p:outputLabel for="reporting-manager-name"
+								value="Reporting Manager Name:" />
+							<p:inputText id="reporting-manager-name"
+								value="#{hrBean.reference.reportingManagerName}" required="true"
+								requiredMessage="Enter Reporting Manager Name"
+								placeholder="Reporting Manager Name" />
+							<p:message for="reporting-manager-name" />
+						</h:panelGrid>
+					</div>
+				</div>
+
+				<div class="ui-g">
+					<div class="ui-g-12 ui-md-12 ui-lg-12">
+						<h:panelGrid style="width:100%">
+							<p:outputLabel for="reference-name" value="Reference Name:" />
+							<p:inputText id="reference-name"
+								value="#{hrBean.reference.referenceName}"
+								placeholder="Reference Name" />
+							<p:message for="reference-name" />
+						</h:panelGrid>
+					</div>
+				</div>
+
+
+				<div class="ui-g">
+					<div class="ui-g-12 ui-md-12 ui-lg-12">
+						<h:panelGrid style="width:100%">
+							<p:outputLabel for="reference-phone-no"
+								value="Reference Phone No:" />
+							<p:inputText id="reference-phone-no"
+								value="#{hrBean.reference.referencePhoneNo}" required="true"
+								requiredMessage="Enter Reference Phone No"
+								validatorMessage="Please Enter Only Number"
+								placeholder="Reference Phone No">
+								<f:validateRegex pattern="[0-9]*" />
+							</p:inputText>
+							<p:message for="reference-phone-no" />
+						</h:panelGrid>
+					</div>
+				</div>
+
+				<div class="ui-g">
+					<div class="ui-g-12 ui-md-12 ui-lg-12">
+						<h:panelGrid style="width:100%">
+							<p:outputLabel for="reference-email-id"
+								value="Reference Email Id:" />
+							<p:inputText id="reference-email-id"
+								value="#{hrBean.reference.referenceEmailId}" required="true"
+								requiredMessage="Enter Reference Email Id"
+								placeholder="Reference Email Id"
+								validatorMessage="Please Enter Valid Email">
+								<f:validateRegex
+									pattern="[\w\.-]*[a-zA-Z0-9_]@[\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]" />
+							</p:inputText>
+							<p:message for="reference-email-id" />
+						</h:panelGrid>
+					</div>
+				</div>
+
+
+				<div class="ui-g">
+					<div class="ui-g-12 ui-md-12 ui-lg-12">
+						<h:panelGrid style="width:100%">
+							<p:outputLabel for="team-size" value="Team Size:" />
+							<p:inputText id="team-size" value="#{hrBean.reference.teamSize}"
+								required="true" requiredMessage="Enter Team Size"
+								placeholder="Team Size" />
+							<p:message for="team-size" />
+						</h:panelGrid>
+					</div>
+				</div>
+
+				<div class="ui-g">
+					<div class="ui-g-12 ui-md-12 ui-lg-12">
+						<h:panelGrid style="width:100%">
+							<p:outputLabel for="duration" value="Duration:" />
+							<p:inputText id="duration" value="#{hrBean.reference.duration}"
+								required="true" requiredMessage="Enter Duration"
+								placeholder="Duration" />
+							<p:message for="duration" />
+						</h:panelGrid>
+					</div>
+				</div>
+
+				<f:facet name="footer">
+					<div style="text-align: center">
+						<p:commandButton value="Save"
+							oncomplete="handleUpdateReference(xhr, status, args)"
+							actionListener="#{hrBean.addMoreReference()}"
+							update="edit-reference-panelId,:reference-field-panel,:reference-followup-form" />
+					</div>
+				</f:facet>
+			</p:panel>
+		</p:dialog>
+	</h:form>
+
+
+
+	<h:form id="reference-document-panel">
+		<p:panel style="margin-top:1%;">
+			<f:facet name="header">Reference Check Related Documents</f:facet>
+			<div class="ui-g" style="border: none;">
+				<div class="ui-g-12 ui-md-6 ui-lg-4" style="border: none;">
+					<span style="color: teal; padding-right: 2%"> Do You Want To
+						Genarate Reference Check Form? </span>
+
+					<p:commandButton value="YES" icon="fa fa-save"
+						update=":reference-document-panel,:reference-followup-form"
+						action="#{hrBean.generateReferenceForm()}"
+						styleClass="ui-priority-primary"
+						onclick="return confirm('Are you sure?')" />
+				</div>
+				<div class="ui-g-12 ui-md-6 ui-lg-5" style="border: none;">
+					<c:if test="${!empty hrBean.referenceCheckFileHandleUtil}">
+						<h:panelGrid id="generated-doc-panel" columns="2"
+							style="margin-top:1%;">
+							<span style="color: teal"> Genarated Document :</span>
+							<h:commandLink action="#{hrBean.openFile()}"
+								value="#{hrBean.referenceCheckFileHandleUtil.fileName}"
+								target="_blank" immediate="true">
+								<f:param name="filePath"
+									value="#{hrBean.referenceCheckFileHandleUtil.filePath}" />
+								<f:param name="extension"
+									value="#{hrBean.referenceCheckFileHandleUtil.fileExtension}" />
+								<f:param name="filename"
+									value="#{hrBean.referenceCheckFileHandleUtil.fileName}" />
+							</h:commandLink>
+						</h:panelGrid>
+					</c:if>
+				</div>
+				<div class="ui-g-12 ui-md-6 ui-lg-1"
+					style="border: none; margin-right: 8%">
+					<c:if test="${!empty hrBean.referenceCheckFileHandleUtil}">
+						<p:commandButton value="Send Mail" icon="fa fa-envelope-o"
+							action="#{hrBean.mailSendFormForReferenceCheckForm()}"
+							oncomplete="PF('mailDlg').show();" immediate="true"
+							update=":mail-Form" />
+					</c:if>
+				</div>
+			</div>
+
+
+			<div class="ui-g" style="border: none;">
+				<div class="ui-g-12 ui-md-12 ui-lg-12" style="border: none;">
+					<p:panel style="margin-top:1%;">
+						<f:facet name="header">Upload Reference Check Form</f:facet>
+
+						<div class="ui-g" style="border: none;">
+							<div class="ui-g-12 ui-md-6 ui-lg-12" style="border: none;">
+								<h:panelGrid columns="1" style="border:none;">
+									<p:fileUpload
+										fileUploadListener="#{hrBean.saveSendingReferenceCheck}"
+										update="file" mode="advanced" />
+								</h:panelGrid>
+							</div>
+							<div style="border: none">
+
+								<div class="ui-g-12 ui-md-6 ui-lg-12"
+									style="border: none !important;">
+									<h:panelGrid id="file" columns="2" cellpadding="0"
+										cellspacing="2"
+										style="margin-left:27.5%;border:none !important;">
+										<p:outputLabel value=" Uploaded Documents:"
+											rendered="#{hrBean.sendingReferenceFileName.size() > '0'}" />
+										<br></br>
+										<c:forEach items="${hrBean.sendingReferenceFileName}"
+											var="doc">
+											<p:outputLabel style="font-weight: bold;color:Teal"
+												value="#{doc}" />
+											<p:commandLink
+												actionListener="#{hrBean.sendingReferenceDelete}"
+												update="file" style="font-weight: bold;color:red"
+												value="delete">
+												<f:param name="deletefile" value="#{doc}" />
+											</p:commandLink>
+										</c:forEach>
+									</h:panelGrid>
+								</div>
+							</div>
+						</div>
+						<f:facet name="footer">
+							<p:commandButton value="Save"
+								actionListener="#{hrBean.saveSendingReferenceFormInDatabase()}"
+								update=":reference-document-panel,:reference-followup-form" />
+							<p:commandButton value="Cancel"
+								actionListener="#{hrBean.cancelSendingReferenceFileUpload()}"
+								update=":reference-document-panel" />
+						</f:facet>
+
+						<c:if test="${!empty hrBean.receivingReferenceFileHandleUtil}">
+							<p:panel id="sendingReferenceform-doc-panel"
+								style="margin-top:1%;">
+								<span style="color: teal">Upload Reference Check :</span>
+								<h:commandLink action="#{hrBean.openFile()}"
+									value="#{hrBean.receivingReferenceFileHandleUtil.fileName}"
+									target="_blank" immediate="true">
+									<f:param name="filePath"
+										value="#{hrBean.receivingReferenceFileHandleUtil.filePath}" />
+									<f:param name="extension"
+										value="#{hrBean.receivingReferenceFileHandleUtil.fileExtension}" />
+									<f:param name="filename"
+										value="#{hrBean.receivingReferenceFileHandleUtil.fileName}" />
+								</h:commandLink>
+							</p:panel>
+						</c:if>
+					</p:panel>
+				</div>
+			</div>
+
+
+
+		</p:panel>
+	</h:form>
+
+
+	<h:form id="reference-followup-form">
+		<p:panel id="reference-followup-panel" style="margin-top:1%">
+			<f:facet name="header">Follow Up</f:facet>
+			<h:panelGrid columns="8" layout="grid" style="border: none;">
+				<p:outputLabel for="follow-up"
+					style="font-size:16px;font-weight:bold" value="Follow Up:" />
+
+				<p:inputText id="follow-up"
+					value="#{hrBean.hrFollowup.followUpRemarks}" required="true"
+					requiredMessage="Enter Follow Up" placeholder="Follow Up"
+					size="100" />
+				<p:message for="follow-up" />
+
+
+				<p:outputLabel for="next-follow-up-date"
+					style="font-size:16px;font-weight:bold"
+					value="Next Follow Up Date:" />
+
+				<p:calendar id="next-follow-up-date"
+					value="#{hrBean.hrFollowup.nextFollowUpDate}"
+					placeholder="Next Follow Up Date" pattern="dd-MMMM-yyyy" />
+
+				<p:message for="next-follow-up-date" />
+
+
+				<p:commandButton value="Save"
+					action="#{hrBean.saveReferenceFollowup()}"
+					onclick="PF('statusDialog').show()"
+					oncomplete="PF('statusDialog').hide()"
+					update=":reference-followup-form" />
+
+			</h:panelGrid>
+		</p:panel>
+
+
+		<p:panel id="reference-followup-table-panel"
+			rendered="#{not empty hrBean.referenceFollowUpList}"
+			style="margin-top:1%">
+
+			<p:dataTable var="h" value="#{hrBean.referenceFollowUpList}"
+				paginator="true" rows="50" resizableColumns="true" resizeMode="true"
+				widgetVar="enrolladvanceSearch" sortBy="#{h.hrFollowUpId}"
+				sortOrder="descending"
+				paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
+				rowsPerPageTemplate="50,100,200,300,500" rowKey="#{h.hrFollowUpId}"
+				tableStyle="width:auto;table-layout:auto">
+
+
+				<f:facet name="header">Reference Check Related Follow Up</f:facet>
+
+				<p:column headerText="Remarks" sortBy="#{h.followUpRemarks}"
+					filterBy="#{h.followUpRemarks}" style="width:30%" styleClass="wrap">
+					<h:outputText style="font-size:14px;" value="#{h.followUpRemarks}" />
+				</p:column>
+
+				<p:column headerText="Follow Up Date" sortBy="#{h.followUpDate}"
+					filterBy="#{h.followUpDate}" style="width:10%">
+					<h:outputText value="#{h.followUpDate}">
+
+					</h:outputText>
+				</p:column>
+
+				<p:column headerText="Next Follow Up Date"
+					sortBy="#{h.nextFollowUpDate}" filterBy="#{h.nextFollowUpDate}"
+					style="text-align:center;width:10%">
+					<h:outputText value="#{h.nextFollowUpDate}">
+
+					</h:outputText>
+				</p:column>
+
+				<p:column headerText="User Name"
+					sortBy="#{h.userProfile.userFullName}"
+					filterBy="#{h.userProfile.userFullName}" style="width:10%">
+					<h:outputText value="#{h.userProfile.userFullName}" />
+				</p:column>
+
+			</p:dataTable>
+		</p:panel>
+
+
+		<p:panel id="all-followup-table-panel"
+			rendered="#{not empty hrBean.allHrFollowuList}" style="margin-top:1%">
+			<p:dataTable var="h" value="#{hrBean.allHrFollowuList}"
+				paginator="true" rows="50" resizableColumns="true" resizeMode="true"
+				widgetVar="alladvanceSearch" sortBy="#{h.hrFollowUpId}"
+				sortOrder="descending"
+				paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
+				rowsPerPageTemplate="50,100,200,300,500" rowKey="#{h.hrFollowUpId}"
+				tableStyle="width:auto;table-layout:auto">
+
+
+				<f:facet name="header">Follow Up Details</f:facet>
+
+				<p:column headerText="Remarks" sortBy="#{h.followUpRemarks}"
+					filterBy="#{h.followUpRemarks}" style="width:30%" styleClass="wrap">
+					<h:outputText style="font-size:14px;" value="#{h.followUpRemarks}" />
+				</p:column>
+
+				<p:column headerText="Follow Up Date" sortBy="#{h.followUpDate}"
+					filterBy="#{h.followUpDate}" style="width:10%">
+					<h:outputText value="#{h.followUpDate}">
+
+					</h:outputText>
+				</p:column>
+
+				<p:column headerText="Next Follow Up Date"
+					sortBy="#{h.nextFollowUpDate}" filterBy="#{h.nextFollowUpDate}"
+					style="width:10%">
+					<h:outputText value="#{h.nextFollowUpDate}">
+
+					</h:outputText>
+				</p:column>
+
+				<p:column headerText="User Name"
+					sortBy="#{h.userProfile.userFullName}"
+					filterBy="#{h.userProfile.userFullName}" style="width:10%">
+					<h:outputText value="#{h.userProfile.userFullName}" />
+				</p:column>
+
+			</p:dataTable>
+		</p:panel>
+	</h:form>
+
+
+
+	<h:form id="mail-Form">
+		<p:dialog header="Mail" id="dialog2" widgetVar="mailDlg" modal="true"
+			showEffect="explode" hideEffect="fade" width="1200" height="500"
+			responsive="true">
+
+			<p:panel style="margin-top:1%" id="mail-send-panel">
+				<f:facet name="header">Send Mail</f:facet>
+
+				<div class="ui-g" style="border: none">
+					<div class="ui-g-12 ui-md-12 ui-lg-12" style="border: none">
+						<h:panelGrid style="width:100%">
+							<p:outputLabel for="to" value="To" />
+							<p:inputText id="to" value="#{hrBean.mailDto.toEmail}"
+								readonly="true" />
+							<p:message for="to" />
+						</h:panelGrid>
+					</div>
+				</div>
+
+				<div class="ui-g" style="border: none">
+					<div class="ui-g-12 ui-md-12 ui-lg-12" style="border: none">
+						<h:panelGrid style="width:100%">
+							<p:outputLabel for="from" value="From" />
+							<p:inputText id="from" value="#{hrBean.mailDto.userName}"
+								readonly="true" />
+							<p:message for="from" />
+						</h:panelGrid>
+					</div>
+				</div>
+
+				<div class="ui-g" style="border: none">
+					<div class="ui-g-12 ui-md-12 ui-lg-12" style="border: none">
+						<h:panelGrid style="width:100%">
+							<p:outputLabel for="subject" value="Subject" />
+							<p:inputText id="subject" required="true"
+								value="#{hrBean.mailDto.subject}"
+								requiredMessage="Enter Mail Subject" placeholder="Mail Subject" />
+							<p:message for="subject" />
+						</h:panelGrid>
+					</div>
+				</div>
+
+
+				<div class="ui-g" style="border: none">
+					<div class="ui-g-12 ui-md-12 ui-lg-12" style="border: none">
+						<h:panelGrid style="width:100%">
+							<p:outputLabel for="body-content" value="Body Content:" />
+							<p:editor id="body-content" widgetVar="editorWidget"
+								value="#{hrBean.mailDto.mailMessage}" />
+							<p:message for="body-content" />
+						</h:panelGrid>
+					</div>
+				</div>
+
+				<div class="ui-g" style="border: none">
+					<div class="ui-g-12 ui-md-12 ui-lg-12" style="border: none">
+						<h:panelGrid style="width:100%">
+							<p:outputLabel for="body-content" value="Reference Check Form:"
+								style="color:Teal" />
+							<h:commandLink action="#{hrBean.openFile()}"
+								value="#{hrBean.referenceCheckFileHandleUtil.fileName}"
+								target="_blank" immediate="true">
+								<f:param name="filePath"
+									value="#{hrBean.referenceCheckFileHandleUtil.filePath}" />
+								<f:param name="extension"
+									value="#{hrBean.referenceCheckFileHandleUtil.fileExtension}" />
+								<f:param name="filename"
+									value="#{hrBean.referenceCheckFileHandleUtil.fileName}" />
+							</h:commandLink>
+							<p:message for="body-content" />
+						</h:panelGrid>
+					</div>
+				</div>
+
+				<f:facet name="footer">
+					<div style="text-align: center">
+						<p:commandButton value="Send"
+							action="#{hrBean.sendMailForReferenceCheck()}"
+							oncomplete="handleMail(xhr, status, args)"
+							update="mail-send-panel" />
+					</div>
+				</f:facet>
+			</p:panel>
+		</p:dialog>
+	</h:form>
+
+
+
+	<script type="text/javascript">
+    function handleLoginRequest(xhr, status, args) {
+        if(args.validationFailed) {
+            PF('addReferenceDlg').jq.effect("shake", {times:10}, 100);
+        }
+        else {
+            PF('addReferenceDlg').hide();
+        }
+    }
+
+
+    function handleUpdateReference(xhr, status, args) {
+        if(args.validationFailed) {
+            PF('editReferenceDlg').jq.effect("shake", {times:10}, 100);
+        }
+        else {
+            PF('editReferenceDlg').hide();
+        }
+    }
+
+
+    function handleMail(xhr, status, args) {
+        if(args.validationFailed) {
+            PF('mailDlg').jq.effect("shake", {times:10}, 100);
+        }
+        else {
+            PF('mailDlg').hide();
+        }
+    }
+  </script>
+
+
+</ui:composition>

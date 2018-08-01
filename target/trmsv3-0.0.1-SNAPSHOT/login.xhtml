@@ -1,0 +1,42 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui" xmlns:f="http://java.sun.com/jsf/core">
+
+<f:view contentType="text/html">
+	<h:head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<title>Login</title>
+		<h:outputStylesheet library="css" name="styles.css" />
+	</h:head>
+	<h:body style="background-color:Gray ">
+		<p:messages showDetail="true" showSummary="true" autoUpdate="true" closable="true" style="padding-top:160px;" />
+		<h:form id="login-form">
+			<p:panel header="Login" style="width:370px; margin:auto;">
+
+				<f:facet name="header">LOGIN</f:facet>
+
+				<h:panelGrid columns="2" cellpadding="5" footerClass="right-align">
+
+					<p:outputLabel for="username" value="Username:" />
+					<p:inputText id="username" value="#{loginBean.username}" required="true" placeholder="Username"
+						requiredMessage="Enter username" />
+
+					<p:outputLabel for="password" value="Password:" />
+					<p:password id="password" value="#{loginBean.password}" required="true" placeholder="Password"
+						requiredMessage="Enter password" />
+				</h:panelGrid>
+
+				<f:facet name="footer">
+					<p:commandButton value="Login" action="#{loginBean.login}" id="btn-id" onclick="PF('statusDialog').show()"
+						oncomplete="PF('statusDialog').hide()" icon="ui-icon-unlocked" />
+				</f:facet>
+			</p:panel>
+		</h:form>
+		<div>
+			<p:dialog widgetVar="statusDialog" modal="true" draggable="false" closable="false" resizable="false"
+				showHeader="false">
+				<p:graphicImage name="/assets/icon/Loading_throbber.png" />
+			</p:dialog>
+		</div>
+	</h:body>
+</f:view>
+</html>

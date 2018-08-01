@@ -1,0 +1,322 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+	<h:form>
+
+		<p:panel style="background-color:HoneyDew;">
+
+			<p:commandButton value="Enrollment" icon="fa fa-bar-chart"
+				update=":mainBody" action="#{hrBean.enrollmentReport()}"
+				styleClass="ui-priority-primary" process="@this" />
+
+			<p:commandButton value="Enrollment Form" icon="fa fa-bar-chart"
+				update=":mainBody" action="#{hrBean.enrollmentFormReport()}"
+				styleClass="ui-priority-primary" process="@this" />
+
+			<p:commandButton value="Payment" icon="fa fa-bar-chart"
+				update=":mainBody" action="#{hrBean.paymentReport()}"
+				styleClass="ui-priority-primary" process="@this" />
+
+			<p:commandButton value="Spot Incentive" icon="fa fa-bar-chart"
+				update=":mainBody" action="#{hrBean.sportIncentiveReport()}"
+				styleClass="ui-priority-primary" process="@this" />
+
+			<p:commandButton value="Incentive" icon="fa fa-bar-chart"
+				update=":mainBody" action="#{hrBean.incentiveReport()}"
+				styleClass="ui-priority-primary" process="@this" />
+
+			<p:commandButton value="Traning" icon="fa fa-bar-chart"
+				update=":mainBody" action="#{hrBean.traningReport()}"
+				styleClass="ui-priority-primary" process="@this" />
+
+			<p:commandButton value="Resume" icon="fa fa-bar-chart"
+				update=":mainBody" action="#{hrBean.resumeReport()}"
+				styleClass="ui-priority-primary" process="@this" />
+
+			<p:commandButton value="Mock" icon="fa fa-bar-chart"
+				update=":mainBody" action="#{hrBean.mockReport()}"
+				styleClass="ui-priority-primary" process="@this" />
+
+			<p:commandButton value="Reference" icon="fa fa-bar-chart"
+				update=":mainBody" action="#{hrBean.referenceReport()}"
+				styleClass="ui-priority-primary" process="@this" />
+
+			<p:commandButton value="Pre-Hotlist" icon="fa fa-bar-chart"
+				update=":mainBody" action="#{hrBean.prehotlistReport()}"
+				styleClass="ui-priority-primary" process="@this" />
+
+			<p:commandButton value="Hotlist" icon="fa fa-bar-chart"
+				update=":mainBody" action="#{hrBean.hotlistReport()}"
+				styleClass="ui-priority-primary" process="@this" />
+
+		</p:panel>
+	</h:form>
+	
+	
+	<h:form id="candidate-training-form">
+	    <p:panel rendered="#{not empty hrBean.trainingCandidate}">
+	          <p:dataTable var="can" value="#{hrBean.trainingCandidate}"
+				paginator="true" rows="10" resizableColumns="true" resizeMode="true"
+				widgetVar="trainingadvanceSearch" sortBy="#{can.candidateId}"
+				sortOrder="descending"
+				paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
+				rowsPerPageTemplate="10,50,100,200,300,500" rowKey="#{can.candidateId}"
+				tableStyle="width:auto;table-layout:auto">
+
+				<p:column headerText="Id" sortBy="#{can.candidateId}"
+					filterBy="#{can.candidateId}" style="text-align:center;width:10%">
+					<h:outputText value="#{can.candidateId}" />
+				</p:column>
+
+				<p:column headerText="Name" sortBy="#{can.candidateName}"
+					filterBy="#{can.candidateName}" style="text-align:center;width:10%">
+					<h:outputText value="#{can.candidateName}" />
+				</p:column>
+
+				<p:column headerText="Email" sortBy="#{can.emailId}"
+					filterBy="#{can.emailId}" style="text-align:center;width:10%">
+					<h:outputText value="#{can.emailId}" />
+				</p:column>
+
+				<p:column headerText="Contact No" sortBy="#{can.contactNo}"
+					filterBy="#{can.contactNo}" style="text-align:center;width:10%">
+					<h:outputText value="#{can.contactNo}" />
+				</p:column>
+
+				<p:column headerText="Service" sortBy="#{can.service}"
+					filterBy="#{can.service}" style="text-align:center;width:10%">
+					<h:outputText value="#{can.service}" />
+				</p:column>
+
+				<p:column headerText="Primary Skill" sortBy="#{can.primarySkill}"
+					filterBy="#{can.primarySkill}" style="text-align:center;width:10%">
+					<h:outputText value="#{can.primarySkill}" />
+				</p:column>
+				
+				<p:column headerText="Training Status" sortBy="#{can.trainingStatus}"
+					filterBy="#{can.trainingStatus}" style="text-align:center;width:10%">
+					<h:outputText value="#{can.trainingStatus}" />
+				</p:column>
+				
+				<p:column headerText="Enrollment Status" sortBy="#{can.enrollmentFormStatus}"
+					filterBy="#{can.enrollmentFormStatus}" style="text-align:center;width:10%">
+					<h:outputText value="#{can.enrollmentFormStatus}" />
+				</p:column>
+				
+				<p:column headerText="Resume Status" sortBy="#{can.resumePrepStatus}"
+					filterBy="#{can.resumePrepStatus}" style="text-align:center;width:10%">
+					<h:outputText value="#{can.resumePrepStatus}" />
+				</p:column>
+				
+			</p:dataTable>
+	          
+	    </p:panel>
+	</h:form>
+	
+	
+	<h:form id="traning-report-form">
+		<p:panel style="margin-top:1%;">
+			<f:facet name="header">Traning Report </f:facet>
+			<div class="ui-g" style="border: none;">
+				<div class="ui-g-6 ui-md-6 ui-lg-4" style="border: none;">
+					<p:panel style="border: none;">
+						<h:panelGrid columns="2" layout="grid"
+							style="border: none;margin-left:30%">
+							<p:outputLabel for="search-by"
+								style="font-size:16px;font-weight:bold" value="Search By:" />
+
+							<p:selectOneMenu id="search-by" value="#{hrBean.selectedOption}"
+								required="true" requiredMessage="Select Option"
+								validator="#{hrBean.checkTraningReportOptions}">
+								<f:selectItem itemLabel="----Select----" itemValue="" />
+								<f:selectItem itemLabel="Batch Wise" itemValue="Batch Wise" />
+								<f:selectItem itemLabel="Trainer Wise" itemValue="Trainer Wise" />
+								<f:selectItem itemLabel="Skill Wise" itemValue="Skill Wise" />
+								<f:selectItem itemLabel="Recruiter Wise"
+									itemValue="Recruiter Wise" />
+
+								<p:ajax event="change" update=":traning-report-form" />
+							</p:selectOneMenu>
+							<p:message for="search-by" />
+
+						</h:panelGrid>
+					</p:panel>
+				</div>
+
+
+
+				<div class="ui-g-6 ui-md-6 ui-lg-4" style="border: none;">
+
+					<p:panel id="skill-wise" style="border: none;"
+						rendered="#{hrBean.skillWise}">
+
+						<h:panelGrid columns="3" layout="grid" style="border: none;">
+
+							<p:outputLabel for="skill-search-value"
+								style="font-size:16px;font-weight:bold" value="Select Skill:" />
+
+							<p:selectOneMenu id="skill-search-value"
+								value="#{hrBean.optionValue}" required="true"
+								requiredMessage="Enter Serach Value">
+								<f:selectItem itemLabel="Select Skill" itemValue=""
+									noSelectionOption="true" />
+								<f:selectItems value="#{appDataBean.courseList}" var="c"
+									itemLabel="#{c}" itemValue="#{c}" />
+							</p:selectOneMenu>
+
+
+							<p:commandButton value="Search" style="margin-left:10%"
+								action="#{hrBean.searchForTrainingReport()}"
+								update=":traning-report-form" />
+
+						</h:panelGrid>
+						<p:message for="skill-search-value" style="width:62%" />
+					</p:panel>
+
+
+
+					<p:panel id="recruiter-wise" style="border: none;"
+						rendered="#{hrBean.recruiterWise}">
+
+						<h:panelGrid columns="3" layout="grid" style="border: none;">
+
+							<p:outputLabel for="recruiter-search-value"
+								style="font-size:16px;font-weight:bold"
+								value="Select Recruiter:" />
+
+							<p:selectOneMenu id="recruiter-search-value"
+								value="#{hrBean.optionValue}" required="true"
+								requiredMessage="Please Enter Value">
+								<f:selectItem itemLabel="Select Recruiter" itemValue=""
+									noSelectionOption="true" />
+								<f:selectItems value="#{appDataBean.userList}" var="u"
+									itemLabel="#{u}" itemValue="#{u}" />
+							</p:selectOneMenu>
+
+							<p:commandButton value="Search" style="margin-left:10%"
+								action="#{hrBean.searchForTrainingReport()}"
+								update=":traning-report-form" />
+
+						</h:panelGrid>
+						<p:message for="recruiter-search-value" style="width:62%" />
+					</p:panel>
+
+
+					<p:panel id="batchWise" style="border: none;"
+						rendered="#{hrBean.batchWise}">
+
+						<h:panelGrid columns="3" layout="grid" style="border: none;">
+
+							<p:outputLabel for="batch-search-value"
+								style="font-size:16px;font-weight:bold" value="Enter Value:" />
+
+							<p:inputText id="batch-search-value" required="true"
+								requiredMessage="Please Enter Value" placeholder="Enter Value"
+								value="#{hrBean.optionValue}" />
+
+							<p:commandButton value="Search" style="margin-left:5%"
+								action="#{hrBean.searchForTrainingReport()}"
+								update=":traning-report-form" />
+
+						</h:panelGrid>
+						<p:message for="batch-search-value" style="width:62%" />
+					</p:panel>
+
+				</div>
+			</div>
+		</p:panel>
+
+		<p:panel id="noDataPanel" style="margin-top:1%;"
+			rendered="#{empty hrBean.preHotlistCandidates}">
+			<h:outputText value="No Data Found"
+				style="font-size:25px;color:teal;margin-left:45%" />
+		</p:panel>
+
+		<p:panel id="dataPanel" style="margin-top:1%;"
+			rendered="#{not empty hrBean.preHotlistCandidates}">
+
+			<f:facet name="header">Candidate List</f:facet>
+
+			<p:dataTable var="can" value="#{hrBean.preHotlistCandidates}"
+				paginator="true" rows="50" resizableColumns="true" resizeMode="true"
+				widgetVar="advanceSearch" sortBy="#{can.candidateId}"
+				sortOrder="descending"
+				paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
+				rowsPerPageTemplate="50,100,200,300,500" rowKey="#{can.candidateId}"
+				tableStyle="width:auto;table-layout:auto">
+
+				<p:column headerText="Id" sortBy="#{can.candidateId}"
+					filterBy="#{can.candidateId}" style="text-align:center;width:10%">
+					<h:outputText value="#{can.candidateId}" />
+				</p:column>
+
+				<p:column headerText="Name" sortBy="#{can.candidateName}"
+					filterBy="#{can.candidateName}" style="text-align:center;width:10%">
+					<h:outputText value="#{can.candidateName}" />
+				</p:column>
+
+				<p:column headerText="Email" sortBy="#{can.emailId}"
+					filterBy="#{can.emailId}" style="text-align:center;width:10%">
+					<h:outputText value="#{can.emailId}" />
+				</p:column>
+
+				<p:column headerText="Contact No" sortBy="#{can.contactNo}"
+					filterBy="#{can.contactNo}" style="text-align:center;width:10%">
+					<h:outputText value="#{can.contactNo}" />
+				</p:column>
+
+				<p:column headerText="Service" sortBy="#{can.service}"
+					filterBy="#{can.service}" style="text-align:center;width:10%">
+					<h:outputText value="#{can.service}" />
+				</p:column>
+
+				<p:column headerText="Batch Code" sortBy="#{can.batchCode}"
+					filterBy="#{can.batchCode}" style="text-align:center;width:10%">
+					<h:outputText value="#{can.batchCode}" />
+				</p:column>
+
+				<p:column headerText="Trainer Name" sortBy="#{can.trainerName}"
+					filterBy="#{can.trainerName}" style="text-align:center;width:10%">
+					<h:outputText value="#{can.trainerName}" />
+				</p:column>
+
+
+				<p:column headerText="Traning Webex Account"
+					sortBy="#{can.trainingWebexAccount}"
+					filterBy="#{can.trainingWebexAccount}"
+					style="text-align:center;width:10%">
+					<h:outputText value="#{can.trainingWebexAccount}" />
+				</p:column>
+
+				<p:column headerText="Primary Skill" sortBy="#{can.primarySkill}"
+					filterBy="#{can.primarySkill}" style="text-align:center;width:10%">
+					<h:outputText value="#{can.primarySkill}" />
+				</p:column>
+				
+				
+				<p:column headerText="Enrollment Status" sortBy="#{can.enrollmentFormStatus}"
+					filterBy="#{can.enrollmentFormStatus}" style="text-align:center;width:10%">
+					<h:outputText value="#{can.enrollmentFormStatus}" />
+				</p:column>
+				
+				<p:column headerText="Resume Status" sortBy="#{can.resumePrepStatus}"
+					filterBy="#{can.resumePrepStatus}" style="text-align:center;width:10%">
+					<h:outputText value="#{can.resumePrepStatus}" />
+				</p:column>
+				
+				<p:column headerText="Training Status" sortBy="#{can.trainingStatus}"
+					filterBy="#{can.trainingStatus}" style="text-align:center;width:10%">
+					<h:outputText value="#{can.trainingStatus}" />
+				</p:column>
+
+
+			</p:dataTable>
+
+		</p:panel>
+	</h:form>
+
+</ui:composition>

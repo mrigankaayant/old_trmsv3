@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <property name="hibernate.bytecode.use_reflection_optimizer">false</property>
+        <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+        <property name="hibernate.connection.isolation">2</property>
+        
+        <!-- <property name="hibernate.connection.password">AyantAstra422</property>
+        <property name="hibernate.connection.url">jdbc:mysql://ayant.cnwlqalaomiq.us-east-2.rds.amazonaws.com:3306/trmsv2_hr_sales?useSSL=true</property>
+        <property name="hibernate.connection.username">ayant</property> -->
+            
+        <property name="hibernate.connection.password">ayantprodroot</property>
+        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/ayant_trmsv2</property>
+        <property name="hibernate.connection.username">root</property>
+        
+        <property name="hibernate.connection.verifyServerCertificate">false</property>
+        <property name="hibernate.connection.requireSSL">true</property>
+        <property name="hibernate.connection.autoReconnect">true</property>
+        
+        <property name="hibernate.dialect">org.hibernate.dialect.MySQL5InnoDBDialect</property>
+        <property name="hibernate.search.autoregister_listeners">true</property>
+        <property name="hibernate.validator.apply_to_ddl">false</property>
+        <mapping class="com.ayantsoft.trmsv3.hibernate.pojo.MailMessage" />
+        <mapping class="com.ayantsoft.trmsv3.hibernate.pojo.Course" />
+        <mapping class="com.ayantsoft.trmsv3.hibernate.pojo.EnrollmentFormNo" />
+        <mapping class="com.ayantsoft.trmsv3.hibernate.pojo.MailTemplate" />
+        <mapping class="com.ayantsoft.trmsv3.hibernate.pojo.ReSchedule" />
+        <mapping class="com.ayantsoft.trmsv3.hibernate.pojo.IncentiveStructure" />
+        <mapping class="com.ayantsoft.trmsv3.hibernate.pojo.Reference" />
+        <mapping class="com.ayantsoft.trmsv3.hibernate.pojo.Role" />
+        <mapping class="com.ayantsoft.trmsv3.hibernate.pojo.InterviewSchedule" />
+        <mapping class="com.ayantsoft.trmsv3.hibernate.pojo.Priority" />
+        <mapping class="com.ayantsoft.trmsv3.hibernate.pojo.UserProfile" />
+        <mapping class="com.ayantsoft.trmsv3.hibernate.pojo.HrFollowUp" />
+        <mapping class="com.ayantsoft.trmsv3.hibernate.pojo.Documents" />
+        <mapping class="com.ayantsoft.trmsv3.hibernate.pojo.MailDetails" />
+        <mapping class="com.ayantsoft.trmsv3.hibernate.pojo.SalesFollowUp" />
+        <mapping class="com.ayantsoft.trmsv3.hibernate.pojo.Visa" />
+        <mapping class="com.ayantsoft.trmsv3.hibernate.pojo.PaymentTransaction" />
+        <mapping class="com.ayantsoft.trmsv3.hibernate.pojo.Candidate" />
+    </session-factory>
+</hibernate-configuration>

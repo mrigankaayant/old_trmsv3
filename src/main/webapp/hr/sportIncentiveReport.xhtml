@@ -1,0 +1,173 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+
+	<h:form>
+		<p:panel style="background-color:HoneyDew;">
+
+			<p:commandButton value="Enrollment" icon="fa fa-bar-chart"
+				update=":mainBody" action="#{hrBean.enrollmentReport()}"
+				styleClass="ui-priority-primary" process="@this" />
+				
+			<p:commandButton value="Enrollment Form" icon="fa fa-bar-chart"
+				update=":mainBody" action="#{hrBean.enrollmentFormReport()}"
+				styleClass="ui-priority-primary" process="@this" />		
+				
+			<p:commandButton value="Payment" icon="fa fa-bar-chart"
+				update=":mainBody" action="#{hrBean.paymentReport()}"
+				styleClass="ui-priority-primary" process="@this" />		
+				
+			<p:commandButton value="Spot Incentive" icon="fa fa-bar-chart"
+				update=":mainBody" action="#{hrBean.sportIncentiveReport()}"
+				styleClass="ui-priority-primary" process="@this" />	
+				
+			<p:commandButton value="Incentive" icon="fa fa-bar-chart"
+				update=":mainBody" action="#{hrBean.incentiveReport()}"
+				styleClass="ui-priority-primary" process="@this" />		
+
+			<p:commandButton value="Traning" icon="fa fa-bar-chart"
+				update=":mainBody" action="#{hrBean.traningReport()}"
+				styleClass="ui-priority-primary" process="@this" />
+
+			<p:commandButton value="Resume" icon="fa fa-bar-chart"
+				update=":mainBody" action="#{hrBean.resumeReport()}"
+				styleClass="ui-priority-primary" process="@this" />
+
+			<p:commandButton value="Mock" icon="fa fa-bar-chart"
+				update=":mainBody" action="#{hrBean.mockReport()}"
+				styleClass="ui-priority-primary" process="@this" />
+
+			<p:commandButton value="Reference" icon="fa fa-bar-chart"
+				update=":mainBody" action="#{hrBean.referenceReport()}"
+				styleClass="ui-priority-primary" process="@this" />
+
+			<p:commandButton value="Pre-Hotlist" icon="fa fa-bar-chart"
+				update=":mainBody" action="#{hrBean.prehotlistReport()}"
+				styleClass="ui-priority-primary" process="@this" />
+
+			<p:commandButton value="Hotlist" icon="fa fa-bar-chart"
+				update=":mainBody" action="#{hrBean.hotlistReport()}"
+				styleClass="ui-priority-primary" process="@this" />			
+
+
+		</p:panel>
+	</h:form>
+
+	<h:form id="sport-incentive-from">
+
+		<p:panel style="margin-top:1%;">
+			<f:facet name="header">Sport Incentive Report</f:facet>
+			<div class="ui-g" style="border: none;">
+				<div class="ui-g-6 ui-md-6 ui-lg-3" style="border: none;">
+					<h:panelGrid columns="2" layout="grid"
+						style="border: none;margin-left:20%">
+						<p:outputLabel for="selectMonth"
+							style="font-size:16px;font-weight:bold" value="Select Month:" />
+
+						<p:calendar id="selectMonth" pattern="MMMM/yyyy"
+							placeholder="Select Month"
+							validator="#{hrBean.checkYearAndMonth}"
+							value="#{hrBean.searcingDate}">
+							<p:ajax event="dateSelect" update=":sport-incentive-from" />
+						</p:calendar>
+
+						<p:message for="selectMonth" />
+
+					</h:panelGrid>
+				</div>
+
+				<div class="ui-g-6 ui-md-6 ui-lg-4" style="border: none;">
+					<h:panelGrid columns="5" layout="grid" style="border: none;">
+						<p:outputLabel for="selectWeek"
+							style="font-size:16px;font-weight:bold" value="Select Week:" />
+
+						<p:selectOneMenu id="selectWeek" value="#{hrBean.optionValue}">
+							<f:selectItem itemLabel="Select Week" itemValue=" "
+								noSelectionOption="true" />
+							<f:selectItems value="#{hrBean.weeks}" var="w" itemLabel="#{w}"
+								itemValue="#{w}" />
+						</p:selectOneMenu>
+
+						<p:message for="selectWeek" />
+
+						<p:commandButton value="search"
+							action="#{hrBean.searchForSportIncentiveReport()}"
+							style="margin-left:15%" update=":sport-incentive-from" />
+
+					</h:panelGrid>
+				</div>
+
+			</div>
+		</p:panel>
+
+		<p:panel id="noDataPanel" style="margin-top:1%;"
+			rendered="#{empty hrBean.sportIncentiveCandidate}">
+			<h:outputText value="No Data Found"
+				style="font-size:25px;color:teal;margin-left:45%" />
+		</p:panel>
+
+		<p:panel style="margin-top:1%;"
+			rendered="#{not empty hrBean.sportIncentiveCandidate}">
+			<f:facet name="header">Sport Incentive</f:facet>
+			<p:dataTable var="can" value="#{hrBean.sportIncentiveCandidate}"
+				paginator="true" rows="50" resizableColumns="true" resizeMode="true"
+				widgetVar="advanceSearch" sortBy="#{can.recruiterName}"
+				paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
+				rowsPerPageTemplate="50,100,200,300,500"
+				rowKey="#{can.recruiterName}"
+				tableStyle="width:auto;table-layout:auto">
+
+
+				<p:column headerText="Id" sortBy="#{can.candidateId}"
+					filterBy="#{can.candidateId}" style="text-align:center;width:10%">
+					<h:outputText value="#{can.candidateId}" />
+				</p:column>
+
+				<p:column headerText="Name" sortBy="#{can.candidateName}"
+					filterBy="#{can.candidateName}" style="text-align:center;width:10%">
+					<h:outputText value="#{can.candidateName}" />
+				</p:column>
+
+				<p:column headerText="Enrollment Date"
+					sortBy="#{can.enrollmentDate}" filterBy="#{can.enrollmentDate}"
+					style="text-align:center;width:10%">
+					<h:outputText value="#{can.enrollmentDate}" />
+				</p:column>
+
+
+				<p:column headerText="Paid Amount" sortBy="#{can.amountPaid}"
+					filterBy="#{can.amountPaid}" style="text-align:center;width:10%">
+					<h:outputText value="#{can.amountPaid}" />
+				</p:column>
+
+				<p:column headerText="Skill" sortBy="#{can.primarySkill}"
+					filterBy="#{can.primarySkill}" style="text-align:center;width:10%">
+					<h:outputText value="#{can.primarySkill}" />
+				</p:column>
+
+
+				<p:column headerText="Recruiter Name" sortBy="#{can.recruiterName}"
+					filterBy="#{can.recruiterName}" style="text-align:center;width:10%">
+					<h:outputText value="#{can.recruiterName}" />
+				</p:column>
+
+				<p:summaryRow>
+					<p:column colspan="5" style="text-align:right">
+						<h:outputText value="Total Sport Incentive :" style="color:teal;" />
+					</p:column>
+					<p:column>
+						<h:outputText value="RS:  #{hrBean.calculateSportIncentive(can.recruiterName)}" style="color:teal;" />
+					</p:column>
+				</p:summaryRow>
+
+
+			</p:dataTable>
+
+		</p:panel>
+
+	</h:form>
+</ui:composition>

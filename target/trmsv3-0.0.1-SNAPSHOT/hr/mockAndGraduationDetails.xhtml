@@ -1,0 +1,1090 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+
+	<h:form id="graduation-mock-field-panel">
+		<p:panel style="background-color:HoneyDew;">
+			<p:commandButton value="Enrollment" icon="fa fa-pencil"
+				update=":mainBody" action="#{hrBean.enrollmentDetails()}"
+				onclick="PF('statusDialog').show()"
+				oncomplete="PF('statusDialog').hide()"
+				styleClass="ui-priority-primary" process="@this" />
+
+			<p:commandButton value="Training" icon="fa fa-slideshare"
+				update=":mainBody" action="#{hrBean.trainingDetails()}"
+				onclick="PF('statusDialog').show()"
+				oncomplete="PF('statusDialog').hide()"
+				styleClass="ui-priority-primary" process="@this" />
+
+			<p:commandButton value="Resume" icon="fa fa-file-text-o"
+				update=":mainBody" action="#{hrBean.resumeDetails()}"
+				onclick="PF('statusDialog').show()"
+				oncomplete="PF('statusDialog').hide()"
+				styleClass="ui-priority-primary" process="@this" />
+
+			<p:commandButton value="Mock-Graduation" icon="fa fa-bar-chart"
+				update=":mainBody" action="#{hrBean.mockAndGraduationDetails()}"
+				onclick="PF('statusDialog').show()"
+				oncomplete="PF('statusDialog').hide()"
+				styleClass="ui-priority-primary" process="@this" />
+
+			<p:commandButton value="Reference" icon="fa fa-street-view"
+				update=":mainBody" action="#{hrBean.referenceDetails()}"
+				onclick="PF('statusDialog').show()"
+				oncomplete="PF('statusDialog').hide()"
+				styleClass="ui-priority-primary" process="@this" />
+
+
+			<p:commandButton value="Pre-hotlist" icon="fa fa-list-ol"
+				update=":mainBody" action="#{hrBean.preHotlistDetails()}"
+				onclick="PF('statusDialog').show()"
+				oncomplete="PF('statusDialog').hide()"
+				styleClass="ui-priority-primary" process="@this" />
+
+			<p:commandButton value="Other Documents" icon="fa fa-file"
+				update=":mainBody" action="#{hrBean.documentsDetails()}"
+				onclick="PF('statusDialog').show()"
+				oncomplete="PF('statusDialog').hide()"
+				styleClass="ui-priority-primary" process="@this" />
+
+			<p:commandButton value="Mail Template" icon="fa fa-envelope"
+				update=":mainBody" action="#{hrBean.mailTemplateForm()}"
+				onclick="PF('statusDialog').show()"
+				oncomplete="PF('statusDialog').hide()"
+				styleClass="ui-priority-primary" process="@this" />
+
+			<p:commandButton value="Terminate" icon="fa fa-times"
+				update=":mainBody" action="#{hrBean.terminateForm()}"
+				onclick="PF('statusDialog').show()"
+				oncomplete="PF('statusDialog').hide()"
+				styleClass="ui-priority-primary" process="@this"
+				style="background-color:red" />
+
+		</p:panel>
+
+
+		<p:panel style="margin-top:0.5%;"
+			rendered="#{hrBean.mockAndGraduationLabelPanel}">
+			<f:facet name="header">
+					Mock And Graduation Related Information
+				</f:facet>
+			<div class="ui-g" style="border: none;">
+
+				<div class="ui-g-12 ui-md-6 ui-lg-4" style="border: none;">
+					<h:panelGrid style="border: none;" columns="2">
+						<p:outputLabel style="font-size:16px;color:teal" value="Name:" />
+						<c:if test="${empty hrBean.candidate.candidateName}">
+							<h:outputText style="font-size:16px" value="N/A" />
+						</c:if>
+						<c:if test="${!empty hrBean.candidate.candidateName}">
+							<h:outputText style="font-size:16px"
+								value="#{hrBean.candidate.candidateName}" />
+						</c:if>
+
+					</h:panelGrid>
+				</div>
+
+
+				<div class="ui-g-12 ui-md-6 ui-lg-4" style="border: none;">
+					<h:panelGrid style="border: none;" columns="2">
+						<p:outputLabel style="font-size:16px;color:teal"
+							value="Contact No:" />
+						<c:if test="${empty hrBean.candidate.contactNo}">
+							<h:outputText style="font-size:16px" value="N/A" />
+						</c:if>
+						<c:if test="${!empty hrBean.candidate.contactNo}">
+							<h:outputText style="font-size:16px"
+								value="#{hrBean.candidate.contactNo}" />
+						</c:if>
+
+					</h:panelGrid>
+				</div>
+
+
+				<div class="ui-g-12 ui-md-6 ui-lg-4" style="border: none;">
+					<h:panelGrid style="border: none;" columns="2">
+						<p:outputLabel style="font-size:16px;color:teal" value="Email Id:" />
+						<c:if test="${empty hrBean.candidate.emailId}">
+							<h:outputText style="font-size:16px" value="N/A" />
+						</c:if>
+						<c:if test="${!empty hrBean.candidate.emailId}">
+							<h:outputText style="font-size:16px"
+								value="#{hrBean.candidate.emailId}" />
+						</c:if>
+
+					</h:panelGrid>
+				</div>
+
+				<div class="ui-g-12 ui-md-6 ui-lg-4" style="border: none;">
+					<h:panelGrid style="border: none;" columns="2">
+						<p:outputLabel style="font-size:16px;color:teal"
+							value="Mock Schedule Date:" />
+						<c:if test="${empty hrBean.candidate.mockScheduleDate}">
+							<h:outputText style="font-size:16px" value="N/A" />
+						</c:if>
+						<c:if test="${!empty hrBean.candidate.mockScheduleDate}">
+							<h:outputText style="font-size:16px"
+								value="#{hrBean.candidate.mockScheduleDate}">
+								<f:convertDateTime pattern="dd-MMMM-yyyy" />
+							</h:outputText>
+						</c:if>
+
+					</h:panelGrid>
+				</div>
+
+				<div class="ui-g-12 ui-md-6 ui-lg-4" style="border: none;">
+					<h:panelGrid style="border: none;" columns="2">
+						<p:outputLabel style="font-size:16px;color:teal"
+							value="Mock End Date:" />
+						<c:if test="${empty hrBean.candidate.mockEndDate}">
+							<h:outputText style="font-size:16px" value="N/A" />
+						</c:if>
+						<c:if test="${!empty hrBean.candidate.mockEndDate}">
+							<h:outputText style="font-size:16px"
+								value="#{hrBean.candidate.mockEndDate}">
+								<f:convertDateTime pattern="dd-MMMM-yyyy" />
+							</h:outputText>
+						</c:if>
+					</h:panelGrid>
+				</div>
+
+				<div class="ui-g-12 ui-md-6 ui-lg-4" style="border: none;">
+					<h:panelGrid style="border: none;" columns="2">
+						<p:outputLabel style="font-size:16px;color:teal"
+							value="PSR Send Date:" />
+						<c:if test="${empty hrBean.candidate.psrSentDate}">
+							<h:outputText style="font-size:16px" value="N/A" />
+						</c:if>
+						<c:if test="${!empty hrBean.candidate.psrSentDate}">
+							<h:outputText style="font-size:16px"
+								value="#{hrBean.candidate.psrSentDate}">
+								<f:convertDateTime pattern="dd-MMMM-yyyy" />
+							</h:outputText>
+						</c:if>
+					</h:panelGrid>
+				</div>
+
+
+				<div class="ui-g-12 ui-md-6 ui-lg-4" style="border: none;">
+					<h:panelGrid style="border: none;" columns="2">
+						<p:outputLabel style="font-size:16px;color:teal"
+							value="PSR Received Date:" />
+
+						<c:if test="${empty hrBean.candidate.psrReceiveDate}">
+							<h:outputText style="font-size:16px" value="N/A" />
+						</c:if>
+						<c:if test="${!empty hrBean.candidate.psrReceiveDate}">
+							<h:outputText style="font-size:16px"
+								value="#{hrBean.candidate.psrReceiveDate}">
+								<f:convertDateTime pattern="dd-MMMM-yyyy" />
+							</h:outputText>
+						</c:if>
+					</h:panelGrid>
+				</div>
+
+				<div class="ui-g-12 ui-md-6 ui-lg-4" style="border: none;">
+					<h:panelGrid style="border: none;" columns="2">
+						<p:outputLabel style="font-size:16px;color:teal"
+							value="Questioner Send Date:" />
+
+						<c:if test="${empty hrBean.candidate.questionerSentDate}">
+							<h:outputText style="font-size:16px" value="N/A" />
+						</c:if>
+						<c:if test="${!empty hrBean.candidate.questionerSentDate}">
+							<h:outputText style="font-size:16px"
+								value="#{hrBean.candidate.questionerSentDate}">
+								<f:convertDateTime pattern="dd-MMMM-yyyy" />
+							</h:outputText>
+						</c:if>
+					</h:panelGrid>
+				</div>
+
+				<div class="ui-g-12 ui-md-6 ui-lg-4" style="border: none;">
+					<h:panelGrid style="border: none;" columns="2">
+						<p:outputLabel style="font-size:16px;color:teal"
+							value="Questioner Received Date:" />
+
+						<c:if test="${empty hrBean.candidate.questionerReceiveDate}">
+							<h:outputText style="font-size:16px" value="N/A" />
+						</c:if>
+						<c:if test="${!empty hrBean.candidate.questionerReceiveDate}">
+							<h:outputText style="font-size:16px"
+								value="#{hrBean.candidate.questionerReceiveDate}">
+								<f:convertDateTime pattern="dd-MMMM-yyyy" />
+							</h:outputText>
+						</c:if>
+					</h:panelGrid>
+				</div>
+
+
+				<div class="ui-g-12 ui-md-6 ui-lg-4" style="border: none;">
+					<h:panelGrid style="border: none;" columns="2">
+						<p:outputLabel style="font-size:16px;color:teal"
+							value="Graduation Schedule Date:" />
+
+						<c:if test="${empty hrBean.candidate.graduationScheduleDate}">
+							<h:outputText style="font-size:16px" value="N/A" />
+						</c:if>
+						<c:if test="${!empty hrBean.candidate.graduationScheduleDate}">
+							<h:outputText style="font-size:16px"
+								value="#{hrBean.candidate.graduationScheduleDate}">
+								<f:convertDateTime pattern="dd-MMMM-yyyy" />
+							</h:outputText>
+						</c:if>
+					</h:panelGrid>
+				</div>
+
+
+				<div class="ui-g-12 ui-md-6 ui-lg-4" style="border: none;">
+					<h:panelGrid style="border: none;" columns="2">
+						<p:outputLabel style="font-size:16px;color:teal"
+							value="Graduation End Date:" />
+
+						<c:if test="${empty hrBean.candidate.graduationEndDate}">
+							<h:outputText style="font-size:16px" value="N/A" />
+						</c:if>
+						<c:if test="${!empty hrBean.candidate.graduationEndDate}">
+							<h:outputText style="font-size:16px"
+								value="#{hrBean.candidate.graduationEndDate}">
+								<f:convertDateTime pattern="dd-MMMM-yyyy" />
+							</h:outputText>
+						</c:if>
+					</h:panelGrid>
+				</div>
+
+
+				<div class="ui-g-12 ui-md-6 ui-lg-4" style="border: none;">
+					<h:panelGrid style="border: none;" columns="2">
+						<p:outputLabel style="font-size:16px;color:teal"
+							value="Attendees:" />
+
+						<c:if test="${empty hrBean.candidate.attendees}">
+							<h:outputText style="font-size:16px" value="N/A" />
+						</c:if>
+						<c:if test="${!empty hrBean.candidate.attendees}">
+							<h:outputText style="font-size:16px"
+								value="#{hrBean.candidate.attendees}" />
+						</c:if>
+					</h:panelGrid>
+				</div>
+
+				<div class="ui-g-12 ui-md-6 ui-lg-4" style="border: none;">
+					<h:panelGrid style="border: none;" columns="2">
+						<p:outputLabel style="font-size:16px;color:teal"
+							value="Mock Status:" />
+
+						<c:if test="${empty hrBean.candidate.mockStatus}">
+							<h:outputText style="font-size:16px" value="N/A" />
+						</c:if>
+						<c:if test="${!empty hrBean.candidate.mockStatus}">
+							<h:outputText style="font-size:16px"
+								value="#{hrBean.candidate.mockStatus}" />
+						</c:if>
+					</h:panelGrid>
+				</div>
+
+				<div class="ui-g-12 ui-md-6 ui-lg-8" style="border: none;">
+					<h:panelGrid style="border: none;" columns="2">
+						<p:outputLabel style="font-size:16px;color:teal"
+							value="Action Required:" />
+
+						<c:if test="${empty hrBean.candidate.actionRequired}">
+							<h:outputText style="font-size:16px" value="N/A" />
+						</c:if>
+						<c:if test="${!empty hrBean.candidate.actionRequired}">
+							<h:outputText style="font-size:16px"
+								value="#{hrBean.candidate.actionRequired}" />
+						</c:if>
+					</h:panelGrid>
+				</div>
+
+			</div>
+
+			<div class="ui-g" style="border: none;">
+				<div class="ui-g-12 ui-md-8 ui-lg-8" style="border: none;">
+					<h:panelGrid style="border: none;" columns="2">
+						<p:outputLabel style="font-size:16px;color:teal" value="Feedback:" />
+
+						<c:if test="${empty hrBean.candidate.feedback}">
+							<h:outputText style="font-size:16px" value="N/A" />
+						</c:if>
+						<c:if test="${!empty hrBean.candidate.feedback}">
+							<h:outputText style="font-size:16px"
+								value="#{hrBean.candidate.feedback}" />
+						</c:if>
+					</h:panelGrid>
+				</div>
+			</div>
+
+			<f:facet name="footer">
+				<div style="text-align: center">
+					<p:commandButton value="Edit" icon="fa fa-fw fa-edit"
+						update=":graduation-mock-field-panel"
+						action="#{hrBean.editGraduationAndMockDetails()}"
+						onclick="PF('statusDialog').show()"
+						oncomplete="PF('statusDialog').hide()"
+						styleClass="ui-priority-primary" />
+				</div>
+			</f:facet>
+		</p:panel>
+
+
+
+
+
+
+
+
+		<p:panel style="margin-top:0.5%;"
+			rendered="#{hrBean.mockAndGraduationEditPanel}">
+			<f:facet name="header">Mock And Graduation Related Information</f:facet>
+
+			<div class="ui-g" style="border: none;">
+
+				<div class="ui-g-12 ui-md-6 ui-lg-4" style="border: none;">
+					<h:panelGrid style="width:100%;border: none;">
+						<p:outputLabel for="mock-schedule-date" style="font-size:16px"
+							value="Mock Schedule Date:" />
+						<p:calendar id="mock-schedule-date" pattern="dd-MMMM-yyyy"
+							value="#{hrBean.candidate.mockScheduleDate}"
+							placeholder="Mock Schedule Date" />
+					</h:panelGrid>
+					<p:message for="mock-schedule-date" />
+				</div>
+
+				<div class="ui-g-12 ui-md-6 ui-lg-4" style="border: none;">
+					<h:panelGrid style="width:100%;border: none;">
+						<p:outputLabel for="mock-end-date" style="font-size:16px"
+							value="Mock End Date:" />
+
+						<p:calendar id="mock-end-date" pattern="dd-MMMM-yyyy"
+							value="#{hrBean.candidate.mockEndDate}"
+							placeholder="Mock End Date" />
+
+
+					</h:panelGrid>
+					<p:message for="mock-end-date" />
+				</div>
+
+				<div class="ui-g-12 ui-md-6 ui-lg-4" style="border: none;">
+					<h:panelGrid style="width:100%;border: none;">
+						<p:outputLabel for="psr-send-date" style="font-size:16px"
+							value="PSR Send Date:" />
+
+						<p:calendar id="psr-send-date" pattern="dd-MMMM-yyyy"
+							value="#{hrBean.candidate.psrSentDate}"
+							placeholder="PSR Send Date" />
+
+					</h:panelGrid>
+					<p:message for="psr-send-date" />
+				</div>
+
+				<div class="ui-g-12 ui-md-6 ui-lg-4" style="border: none;">
+					<h:panelGrid style="width:100%;border: none;">
+						<p:outputLabel for="psr-receive-date" style="font-size:16px"
+							value="PSR Receive Date:" />
+
+						<p:calendar id="psr-receive-date" pattern="dd-MMMM-yyyy"
+							value="#{hrBean.candidate.psrReceiveDate}"
+							placeholder="PSR Receive Date" />
+
+					</h:panelGrid>
+					<p:message for="psr-receive-date" />
+				</div>
+
+
+				<div class="ui-g-12 ui-md-6 ui-lg-4" style="border: none;">
+					<h:panelGrid style="width:100%;border: none;">
+						<p:outputLabel for="questioner-send-date" style="font-size:16px"
+							value="Questioner Send Date:" />
+
+						<p:calendar id="questioner-send-date" pattern="dd-MMMM-yyyy"
+							placeholder="Questioner Send Date"
+							value="#{hrBean.candidate.questionerSentDate}" />
+
+					</h:panelGrid>
+					<p:message for="questioner-send-date" />
+				</div>
+
+				<div class="ui-g-12 ui-md-6 ui-lg-4" style="border: none;">
+					<h:panelGrid style="width:100%;border: none;">
+						<p:outputLabel for="questioner-receive-date"
+							style="font-size:16px" value="Questioner Received Date:" />
+
+						<p:calendar id="questioner-receive-date" pattern="dd-MMMM-yyyy"
+							placeholder="Questioner Received Date"
+							value="#{hrBean.candidate.questionerReceiveDate}" />
+
+					</h:panelGrid>
+					<p:message for="questioner-receive-date" />
+				</div>
+
+				<div class="ui-g-12 ui-md-6 ui-lg-4" style="border: none;">
+					<h:panelGrid style="width:100%;border: none;">
+						<p:outputLabel for="graduation-schedule-date"
+							style="font-size:16px" value="Graduation Schedule Date:" />
+
+						<p:calendar id="graduation-schedule-date" pattern="dd-MMMM-yyyy"
+							placeholder="Graduation Schedule Date"
+							value="#{hrBean.candidate.graduationScheduleDate}" />
+
+					</h:panelGrid>
+					<p:message for="graduation-schedule-date" />
+				</div>
+
+
+				<div class="ui-g-12 ui-md-6 ui-lg-4" style="border: none;">
+					<h:panelGrid style="width:100%;border: none;">
+						<p:outputLabel for="graduation-end-date" style="font-size:16px"
+							value="Graduation End Date:" />
+
+						<p:calendar id="graduation-end-date" pattern="dd-MMMM-yyyy"
+							placeholder="Graduation End Date"
+							value="#{hrBean.candidate.graduationEndDate}" />
+
+					</h:panelGrid>
+					<p:message for="graduation-end-date" />
+				</div>
+
+
+
+				<div class="ui-g-12 ui-md-6 ui-lg-4" style="border: none;">
+					<h:panelGrid style="width:100%;border: none;">
+						<p:outputLabel for="attendees" style="font-size:16px"
+							value="Attendees:" />
+
+						<p:selectOneMenu id="attendees"
+							value="#{hrBean.candidate.attendees}">
+							<f:selectItem itemLabel="----Select----" itemValue=" "
+								noSelectionOption="true" />
+							<f:selectItems value="#{appDataBean.userList}" var="u"
+								itemLabel="#{u}" itemValue="#{u}" />
+						</p:selectOneMenu>
+
+					</h:panelGrid>
+					<p:message for="attendees" />
+				</div>
+
+
+
+				<div class="ui-g-12 ui-md-6 ui-lg-4" style="border: none;">
+					<h:panelGrid style="width:100%;border: none;">
+						<p:outputLabel for="mock-status" style="font-size:16px"
+							value="Mock Status:" />
+
+						<p:selectOneMenu id="mock-status"
+							value="#{hrBean.candidate.mockStatus}"
+							style="width:93%!important" required="true"
+							requiredMessage="Select Mock Status"
+							validator="#{hrBean.referenceNotification}">
+							<f:selectItem itemLabel="----Select----" itemValue="" />
+							<f:selectItem itemLabel="On Mock" itemValue="ON MOCK" />
+							<f:selectItem itemLabel="Re-mock" itemValue="RE-MOCK" />
+							<f:selectItem itemLabel="Mock Completed"
+								itemValue="MOCK COMPLETED" />
+							<f:selectItem itemLabel="On Graduation" itemValue="ON GRADUATION" />
+							<f:selectItem itemLabel="Re-graduation" itemValue="RE-GRADUATION" />
+							<f:selectItem itemLabel="Graduation Completed"
+								itemValue="GRADUATION COMPLETED" />
+							<p:ajax event="change" />
+						</p:selectOneMenu>
+
+					</h:panelGrid>
+					<p:message for="mock-status" />
+				</div>
+
+
+				<div class="ui-g-12 ui-md-6 ui-lg-8" style="border: none;">
+					<h:panelGrid style="width:100%;border: none;">
+						<p:outputLabel for="action-required" style="font-size:16px"
+							value="Action Required:" />
+
+						<p:inputText id="action-required"
+							value="#{hrBean.candidate.actionRequired}"
+							placeholder="Action Required" />
+
+					</h:panelGrid>
+					<p:message for="action-required" />
+				</div>
+			</div>
+
+			<div class="ui-g" style="border: none;">
+				<div class="ui-g-12 ui-md-12 ui-lg-12" style="border: none;">
+					<h:panelGrid style="width:100%;border: none;">
+						<p:outputLabel for="feedback" style="font-size:16px"
+							value="Feedback:" />
+
+						<p:inputTextarea id="feedback"
+							value="#{hrBean.candidate.feedback}" placeholder="Feedback" />
+
+					</h:panelGrid>
+					<p:message for="action-required" />
+				</div>
+			</div>
+
+			<f:facet name="footer">
+				<div style="text-align: center">
+					<p:commandButton value="Save" icon="fa fa-save"
+						update=":graduation-mock-field-panel,:mockandgraduation-followup-form"
+						action="#{hrBean.saveMockAndGraduationDetails()}"
+						onclick="PF('statusDialog').show()"
+						oncomplete="PF('statusDialog').hide()"
+						styleClass="ui-priority-primary" />
+				</div>
+			</f:facet>
+		</p:panel>
+	</h:form>
+
+
+
+	<h:form id="mockAndGraduation-document-panel">
+		<p:panel style="margin-top:1%;">
+			<f:facet name="header">Mock And Graduation Related Documents</f:facet>
+
+
+			<div class="ui-g" style="border: none;">
+				<div class="ui-g-12 ui-md-6 ui-lg-3" style="border: none;">
+					<span style="color: teal; padding-right: 2%"> Do You Want To
+						Genarate PSR Form? </span>
+
+					<p:commandButton value="YES" icon="fa fa-check-square-o"
+						update=":mockAndGraduation-document-panel,:mockandgraduation-followup-form"
+						action="#{hrBean.generatePSRForm()}"
+						styleClass="ui-priority-primary"
+						onclick="return confirm('Are you sure?')" />
+				</div>
+				<div class="ui-g-12 ui-md-6 ui-lg-3" style="border: none;">
+					<c:if test="${!empty hrBean.psrFileHandleUtil}">
+						<h:panelGrid id="generated-doc-panel" columns="2"
+							style="margin-top:1%;">
+							<span style="color: teal"> Genarated PSR Document :</span>
+							<h:commandLink action="#{hrBean.openFile()}"
+								value="#{hrBean.psrFileHandleUtil.fileName}" target="_blank"
+								immediate="true">
+								<f:param name="filePath"
+									value="#{hrBean.psrFileHandleUtil.filePath}" />
+								<f:param name="extension"
+									value="#{hrBean.psrFileHandleUtil.fileExtension}" />
+								<f:param name="filename"
+									value="#{hrBean.psrFileHandleUtil.fileName}" />
+							</h:commandLink>
+						</h:panelGrid>
+					</c:if>
+				</div>
+
+				<div class="ui-g-12 ui-md-6 ui-lg-1"
+					style="border: none; margin-right: 8%">
+					<c:if test="${!empty hrBean.psrFileHandleUtil}">
+						<p:commandButton value="Send Mail" icon="fa fa-envelope-o"
+							action="#{hrBean.mailSendFormForPsrForm()}"
+							oncomplete="PF('mailDlg').show();" immediate="true"
+							update=":mail-Form" />
+					</c:if>
+				</div>
+			</div>
+
+
+
+			<div class="ui-g" style="border: none;">
+				<div class="ui-g-12 ui-md-6 ui-lg-3" style="border: none;">
+					<span style="color: teal; padding-right: 2%"> Do You Want To
+						Genarate Questioner Form? </span>
+
+					<p:commandButton value="YES" icon="fa fa-check-square-o"
+						update=":mockAndGraduation-document-panel,:mockandgraduation-followup-form"
+						action="#{hrBean.generateQuestionerForm()}"
+						styleClass="ui-priority-primary"
+						onclick="return confirm('Are you sure?')" />
+				</div>
+				<div class="ui-g-12 ui-md-6 ui-lg-3" style="border: none;">
+					<c:if test="${!empty hrBean.questionerFileHandleUtil}">
+						<h:panelGrid id="generated-question-panel" columns="2"
+							style="margin-top:1%;">
+							<span style="color: teal"> Genarated Questioner Document :</span>
+							<h:commandLink action="#{hrBean.openFile()}"
+								value="#{hrBean.questionerFileHandleUtil.fileName}"
+								target="_blank" immediate="true">
+								<f:param name="filePath"
+									value="#{hrBean.questionerFileHandleUtil.filePath}" />
+								<f:param name="extension"
+									value="#{hrBean.questionerFileHandleUtil.fileExtension}" />
+								<f:param name="filename"
+									value="#{hrBean.questionerFileHandleUtil.fileName}" />
+							</h:commandLink>
+						</h:panelGrid>
+					</c:if>
+				</div>
+				<div class="ui-g-12 ui-md-6 ui-lg-1"
+					style="border: none; margin-right: 8%">
+					<c:if test="${!empty hrBean.questionerFileHandleUtil}">
+						<p:commandButton value="Send Mail" icon="fa fa-envelope-o"
+							action="#{hrBean.mailSendFormForQuestionerForm()}"
+							oncomplete="PF('mail2Dlg').show();" immediate="true"
+							update=":mail2-Form" />
+					</c:if>
+				</div>
+			</div>
+
+
+
+			<div class="ui-g" style="border: none;">
+				<div class="ui-g-12 ui-md-6 ui-lg-6" style="border: none;">
+					<p:panel id="sending-doc-panel" style="margin-top:1%;">
+						<f:facet name="header">Receiving PSR Form Details</f:facet>
+						<div class="ui-g" style="border: none;">
+							<div class="ui-g-12 ui-md-6 ui-lg-12" style="border: none;">
+								<h:panelGrid columns="1" style="border:none;">
+									<p:fileUpload fileUploadListener="#{hrBean.saveSendingPSRForm}"
+										update="file" mode="advanced" />
+								</h:panelGrid>
+							</div>
+							<div style="border: none">
+
+								<div class="ui-g-12 ui-md-6 ui-lg-12"
+									style="border: none !important;">
+									<h:panelGrid id="file" columns="2" cellpadding="0"
+										cellspacing="2"
+										style="margin-left:27.5%;border:none !important;">
+										<p:outputLabel value=" Uploaded Documents:"
+											rendered="#{hrBean.sendingPSRFileName.size() > '0'}" />
+										<br></br>
+										<c:forEach items="${hrBean.sendingPSRFileName}" var="doc">
+											<p:outputLabel style="font-weight: bold;color:Teal"
+												value="#{doc}" />
+											<p:commandLink
+												actionListener="#{hrBean.sendingPSRFileDelete}"
+												update="file" style="font-weight: bold;color:red"
+												value="delete">
+												<f:param name="deletefile" value="#{doc}" />
+											</p:commandLink>
+										</c:forEach>
+									</h:panelGrid>
+								</div>
+							</div>
+						</div>
+						<f:facet name="footer">
+							<p:commandButton value="Save"
+								actionListener="#{hrBean.saveSendingPSRFormInDatabase()}"
+								update=":mockAndGraduation-document-panel,:mockandgraduation-followup-form" />
+							<p:commandButton value="Cancel"
+								actionListener="#{hrBean.cancelSendingPSRFileUpload()}"
+								update=":mockAndGraduation-document-panel" />
+						</f:facet>
+
+
+						<c:if test="${!empty hrBean.sendingPSRFileHandleUtil}">
+							<p:panel id="sendingenrollform-doc-panel" style="margin-top:1%;">
+								<span style="color: teal">Receiving PSR Form :</span>
+								<h:commandLink action="#{hrBean.openFile()}"
+									value="#{hrBean.sendingPSRFileHandleUtil.fileName}"
+									target="_blank" immediate="true">
+									<f:param name="filePath"
+										value="#{hrBean.sendingPSRFileHandleUtil.filePath}" />
+									<f:param name="extension"
+										value="#{hrBean.sendingPSRFileHandleUtil.fileExtension}" />
+									<f:param name="filename"
+										value="#{hrBean.sendingPSRFileHandleUtil.fileName}" />
+								</h:commandLink>
+							</p:panel>
+						</c:if>
+					</p:panel>
+				</div>
+
+
+
+				<div class="ui-g-12 ui-md-6 ui-lg-6" style="border: none;">
+					<p:panel id="receiving-doc-panel" style="margin-top:1%;">
+						<f:facet name="header">Receiving Questioner Form Details</f:facet>
+						<div class="ui-g" style="border: none;">
+							<div class="ui-g-12 ui-md-6 ui-lg-12" style="border: none;">
+								<h:panelGrid columns="1" style="border:none;">
+									<p:fileUpload
+										fileUploadListener="#{hrBean.saveReceivingQuestionerForm}"
+										update="file-receivingPSR" mode="advanced" />
+								</h:panelGrid>
+							</div>
+							<div style="border: none">
+
+								<div class="ui-g-12 ui-md-6 ui-lg-12"
+									style="border: none !important;">
+									<h:panelGrid id="file-receivingPSR" columns="2" cellpadding="0"
+										cellspacing="2"
+										style="margin-left:27.5%;border:none !important;">
+										<p:outputLabel value=" Uploaded Documents:"
+											rendered="#{hrBean.receivingQuestionFileName.size() > '0'}" />
+										<br></br>
+										<c:forEach items="${hrBean.receivingQuestionFileName}"
+											var="doc">
+											<p:outputLabel style="font-weight: bold;color:Teal"
+												value="#{doc}" />
+											<p:commandLink
+												actionListener="#{hrBean.receivingQuestionFileDelete}"
+												update="file-receivingPSR"
+												style="font-weight: bold;color:red" value="delete">
+												<f:param name="deletefile" value="#{doc}" />
+											</p:commandLink>
+										</c:forEach>
+									</h:panelGrid>
+								</div>
+							</div>
+						</div>
+						<f:facet name="footer">
+							<p:commandButton value="Save"
+								actionListener="#{hrBean.saveReceivingQuestionFormInDatabase()}"
+								update=":mockAndGraduation-document-panel,:mockandgraduation-followup-form" />
+							<p:commandButton value="Cancel"
+								actionListener="#{hrBean.cancelReceivingQuestionFileUpload()}"
+								update=":mockAndGraduation-document-panel" />
+						</f:facet>
+						<c:if test="${!empty hrBean.receivingQuestionFileHandleUtil}">
+							<p:panel id="receivingPSrform-doc-panel" style="margin-top:1%;">
+								<span style="color: teal">Receiving Questioner Form :</span>
+								<h:commandLink action="#{hrBean.openFile()}"
+									value="#{hrBean.receivingQuestionFileHandleUtil.fileName}"
+									target="_blank" immediate="true">
+									<f:param name="filePath"
+										value="#{hrBean.receivingQuestionFileHandleUtil.filePath}" />
+									<f:param name="extension"
+										value="#{hrBean.receivingQuestionFileHandleUtil.fileExtension}" />
+									<f:param name="filename"
+										value="#{hrBean.receivingQuestionFileHandleUtil.fileName}" />
+								</h:commandLink>
+							</p:panel>
+						</c:if>
+					</p:panel>
+				</div>
+
+			</div>
+		</p:panel>
+	</h:form>
+
+
+
+
+	<h:form id="mockandgraduation-followup-form">
+		<p:panel id="mockandgraduation-followup-panel" style="margin-top:1%">
+			<f:facet name="header">Follow Up</f:facet>
+			<h:panelGrid columns="8" layout="grid" style="border: none;">
+				<p:outputLabel for="follow-up"
+					style="font-size:16px;font-weight:bold" value="Follow Up:" />
+
+				<p:inputText id="follow-up"
+					value="#{hrBean.hrFollowup.followUpRemarks}" required="true"
+					requiredMessage="Enter Follow Up" placeholder="Follow Up"
+					size="100" />
+				<p:message for="follow-up" />
+
+
+				<p:outputLabel for="next-follow-up-date"
+					style="font-size:16px;font-weight:bold"
+					value="Next Follow Up Date:" />
+
+				<p:calendar id="next-follow-up-date" pattern="dd-MMMM-yyyy"
+					value="#{hrBean.hrFollowup.nextFollowUpDate}"
+					placeholder="Next Follow Up Date" />
+
+				<p:message for="next-follow-up-date" />
+
+
+				<p:commandButton value="Save"
+					action="#{hrBean.saveMockAndGraduationFollowup()}"
+					onclick="PF('statusDialog').show()"
+					oncomplete="PF('statusDialog').hide()"
+					update=":mockandgraduation-followup-form" />
+
+			</h:panelGrid>
+		</p:panel>
+
+
+		<p:panel id="mockAndGraduation-followup-table-panel"
+			rendered="#{not empty hrBean.mockAndGraduationFollowUpList}"
+			style="margin-top:1%">
+
+			<p:dataTable var="h" value="#{hrBean.mockAndGraduationFollowUpList}"
+				paginator="true" rows="50" resizableColumns="true" resizeMode="true"
+				widgetVar="mockadvanceSearch" sortBy="#{h.hrFollowUpId}"
+				sortOrder="descending"
+				paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
+				rowsPerPageTemplate="50,100,200,300,500" rowKey="#{h.hrFollowUpId}"
+				tableStyle="width:auto;table-layout:auto">
+
+
+				<f:facet name="header">Mock And Graduation Related Follow Up</f:facet>
+
+				<p:column headerText="Remarks" sortBy="#{h.followUpRemarks}"
+					filterBy="#{h.followUpRemarks}" style="width:30%" styleClass="wrap">
+					<h:outputText style="font-size:14px;" value="#{h.followUpRemarks}" />
+				</p:column>
+
+				<p:column headerText="Follow Up Date" sortBy="#{h.followUpDate}"
+					filterBy="#{h.followUpDate}" style="width:10%">
+					<h:outputText value="#{h.followUpDate}">
+					</h:outputText>
+				</p:column>
+
+				<p:column headerText="Next Follow Up Date"
+					sortBy="#{h.nextFollowUpDate}" filterBy="#{h.nextFollowUpDate}"
+					style="text-align:center;width:10%">
+					<h:outputText value="#{h.nextFollowUpDate}">
+					</h:outputText>
+				</p:column>
+
+				<p:column headerText="User Name"
+					sortBy="#{h.userProfile.userFullName}"
+					filterBy="#{h.userProfile.userFullName}" style="width:10%">
+					<h:outputText value="#{h.userProfile.userFullName}" />
+				</p:column>
+
+			</p:dataTable>
+		</p:panel>
+
+
+		<p:panel id="all-followup-table-panel"
+			rendered="#{not empty hrBean.allHrFollowuList}" style="margin-top:1%">
+			<p:dataTable var="h" value="#{hrBean.allHrFollowuList}"
+				paginator="true" rows="50" resizableColumns="true" resizeMode="true"
+				widgetVar="alladvanceSearch" sortBy="#{h.hrFollowUpId}"
+				sortOrder="descending"
+				paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
+				rowsPerPageTemplate="50,100,200,300,500" rowKey="#{h.hrFollowUpId}"
+				tableStyle="width:auto;table-layout:auto">
+
+
+				<f:facet name="header">Follow Up Details</f:facet>
+
+				<p:column headerText="Remarks" sortBy="#{h.followUpRemarks}"
+					filterBy="#{h.followUpRemarks}" style="width:30%" styleClass="wrap">
+					<h:outputText style="font-size:14px;" value="#{h.followUpRemarks}" />
+				</p:column>
+
+				<p:column headerText="Follow Up Date" sortBy="#{h.followUpDate}"
+					filterBy="#{h.followUpDate}" style="width:10%">
+					<h:outputText value="#{h.followUpDate}">
+					</h:outputText>
+				</p:column>
+
+				<p:column headerText="Next Follow Up Date"
+					sortBy="#{h.nextFollowUpDate}" filterBy="#{h.nextFollowUpDate}"
+					style="width:10%">
+					<h:outputText value="#{h.nextFollowUpDate}">
+					</h:outputText>
+				</p:column>
+
+				<p:column headerText="User Name"
+					sortBy="#{h.userProfile.userFullName}"
+					filterBy="#{h.userProfile.userFullName}" style="width:10%">
+					<h:outputText value="#{h.userProfile.userFullName}" />
+				</p:column>
+
+			</p:dataTable>
+		</p:panel>
+	</h:form>
+
+
+	<h:form id="mail-Form">
+		<p:dialog header="Mail" id="dialog2" widgetVar="mailDlg" modal="true"
+			showEffect="explode" hideEffect="fade" width="1200" height="500"
+			responsive="true">
+
+			<p:panel style="margin-top:1%" id="mail-send-panel">
+				<f:facet name="header">Send Mail</f:facet>
+
+				<div class="ui-g" style="border: none">
+					<div class="ui-g-12 ui-md-12 ui-lg-12" style="border: none">
+						<h:panelGrid style="width:100%">
+							<p:outputLabel for="to" value="To" />
+							<p:inputText id="to" value="#{hrBean.mailDto.toEmail}"
+								readonly="true" />
+							<p:message for="to" />
+						</h:panelGrid>
+					</div>
+				</div>
+
+				<div class="ui-g" style="border: none">
+					<div class="ui-g-12 ui-md-12 ui-lg-12" style="border: none">
+						<h:panelGrid style="width:100%">
+							<p:outputLabel for="from" value="From" />
+							<p:inputText id="from" value="#{hrBean.mailDto.userName}"
+								readonly="true" />
+							<p:message for="from" />
+						</h:panelGrid>
+					</div>
+				</div>
+
+				<div class="ui-g" style="border: none">
+					<div class="ui-g-12 ui-md-12 ui-lg-12" style="border: none">
+						<h:panelGrid style="width:100%">
+							<p:outputLabel for="subject" value="Subject" />
+							<p:inputText id="subject" required="true"
+								value="#{hrBean.mailDto.subject}"
+								requiredMessage="Enter Mail Subject" placeholder="Mail Subject" />
+							<p:message for="subject" />
+						</h:panelGrid>
+					</div>
+				</div>
+
+
+				<div class="ui-g" style="border: none">
+					<div class="ui-g-12 ui-md-12 ui-lg-12" style="border: none">
+						<h:panelGrid style="width:100%">
+							<p:outputLabel for="body-content" value="Body Content:" />
+							<p:editor id="body-content" widgetVar="editorWidget"
+								value="#{hrBean.mailDto.mailMessage}" />
+							<p:message for="body-content" />
+						</h:panelGrid>
+					</div>
+				</div>
+
+				<div class="ui-g" style="border: none">
+					<div class="ui-g-12 ui-md-12 ui-lg-12" style="border: none">
+						<h:panelGrid style="width:100%">
+							<p:outputLabel for="body-content" value="PSR FORM"
+								style="color:Teal" />
+							<h:commandLink action="#{hrBean.openFile()}"
+								value="#{hrBean.psrFileHandleUtil.fileName}" target="_blank"
+								immediate="true">
+								<f:param name="filePath"
+									value="#{hrBean.psrFileHandleUtil.filePath}" />
+								<f:param name="extension"
+									value="#{hrBean.psrFileHandleUtil.fileExtension}" />
+								<f:param name="filename"
+									value="#{hrBean.psrFileHandleUtil.fileName}" />
+							</h:commandLink>
+							<p:message for="body-content" />
+						</h:panelGrid>
+					</div>
+				</div>
+
+				<f:facet name="footer">
+					<div style="text-align: center">
+						<p:commandButton value="Send" action="#{hrBean.sendMailForPSR()}"
+							oncomplete="handleMail(xhr, status, args)"
+							update="mail-send-panel,:graduation-mock-field-panel" />
+					</div>
+				</f:facet>
+			</p:panel>
+		</p:dialog>
+	</h:form>
+
+
+
+	<h:form id="mail2-Form">
+		<p:dialog header="Mail" id="dialog3" widgetVar="mail2Dlg" modal="true"
+			showEffect="explode" hideEffect="fade" width="1200" height="500"
+			responsive="true">
+
+			<p:panel style="margin-top:1%" id="mail2-send-panel">
+				<f:facet name="header">Send Mail</f:facet>
+
+				<div class="ui-g" style="border: none">
+					<div class="ui-g-12 ui-md-12 ui-lg-12" style="border: none">
+						<h:panelGrid style="width:100%">
+							<p:outputLabel for="to" value="To" />
+							<p:inputText id="to" value="#{hrBean.mailDto.toEmail}"
+								readonly="true" />
+							<p:message for="to" />
+						</h:panelGrid>
+					</div>
+				</div>
+
+				<div class="ui-g" style="border: none">
+					<div class="ui-g-12 ui-md-12 ui-lg-12" style="border: none">
+						<h:panelGrid style="width:100%">
+							<p:outputLabel for="from" value="From" />
+							<p:inputText id="from" value="#{hrBean.mailDto.userName}"
+								readonly="true" />
+							<p:message for="from" />
+						</h:panelGrid>
+					</div>
+				</div>
+
+				<div class="ui-g" style="border: none">
+					<div class="ui-g-12 ui-md-12 ui-lg-12" style="border: none">
+						<h:panelGrid style="width:100%">
+							<p:outputLabel for="subject" value="Subject" />
+							<p:inputText id="subject" required="true"
+								value="#{hrBean.mailDto.subject}"
+								requiredMessage="Enter Mail Subject" placeholder="Mail Subject" />
+							<p:message for="subject" />
+						</h:panelGrid>
+					</div>
+				</div>
+
+
+				<div class="ui-g" style="border: none">
+					<div class="ui-g-12 ui-md-12 ui-lg-12" style="border: none">
+						<h:panelGrid style="width:100%">
+							<p:outputLabel for="body-content" value="Body Content:" />
+							<p:editor id="body-content" widgetVar="editorWidget"
+								value="#{hrBean.mailDto.mailMessage}" />
+							<p:message for="body-content" />
+						</h:panelGrid>
+					</div>
+				</div>
+
+				<div class="ui-g" style="border: none">
+					<div class="ui-g-12 ui-md-12 ui-lg-12" style="border: none">
+						<h:panelGrid style="width:100%">
+							<p:outputLabel for="body-content" value="Questioner Form:"
+								style="color:Teal" />
+							<h:commandLink action="#{hrBean.openFile()}"
+								value="#{hrBean.questionerFileHandleUtil.fileName}"
+								target="_blank" immediate="true">
+								<f:param name="filePath"
+									value="#{hrBean.questionerFileHandleUtil.filePath}" />
+								<f:param name="extension"
+									value="#{hrBean.questionerFileHandleUtil.fileExtension}" />
+								<f:param name="filename"
+									value="#{hrBean.questionerFileHandleUtil.fileName}" />
+							</h:commandLink>
+							<p:message for="body-content" />
+						</h:panelGrid>
+					</div>
+				</div>
+
+				<f:facet name="footer">
+					<div style="text-align: center">
+						<p:commandButton value="Send"
+							action="#{hrBean.sendMailForQuestioner()}"
+							oncomplete="handleMailQuestioner(xhr, status, args)"
+							update="mail2-send-panel,:graduation-mock-field-panel" />
+					</div>
+				</f:facet>
+			</p:panel>
+		</p:dialog>
+	</h:form>
+
+
+
+	<script type="text/javascript">
+
+
+
+    function handleMail(xhr, status, args) {
+        if(args.validationFailed) {
+            PF('mailDlg').jq.effect("shake", {times:10}, 100);
+        }
+        else {
+            PF('mailDlg').hide();
+        }
+    }
+
+
+    function handleMailQuestioner(xhr, status, args) {
+        if(args.validationFailed) {
+            PF('mail2Dlg').jq.effect("shake", {times:10}, 100);
+        }
+        else {
+            PF('mail2Dlg').hide();
+        }
+    }
+
+
+</script>
+
+
+</ui:composition>

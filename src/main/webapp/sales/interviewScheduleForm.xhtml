@@ -1,0 +1,231 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+	
+	
+	<h:form id="hotlist-button-form">
+		<p:panel style="background-color:HoneyDew;">
+			<p:commandButton value="List" icon="fa fa-info-circle"
+				update=":mainBody" action="#{salesBean.candidateDetails()}"
+				styleClass="ui-priority-primary" process="@this" />
+
+		</p:panel>
+	</h:form>
+
+
+	<h:form id="interview-schedule-form">
+
+		<p:panel style="margin-top:1%;">
+			<f:facet name="header">Create New Interview Schedule</f:facet>
+
+			<div class="ui-g" style="border: none;">
+				<div class="ui-g-12 ui-md-6 ui-lg-4" style="border: none;">
+					<h:panelGrid style="width:100%;border: none;">
+						<p:outputLabel for="vendor-name" style="font-size:16px"
+							value="Vendor Name:" />
+						<p:inputText id="vendor-name"
+							value="#{salesBean.interviewSchedule.vendorName}" required="true"
+							requiredMessage="Vendor Name" placeholder="Vendor Name" />
+					</h:panelGrid>
+					<p:message for="vendor-name" />
+				</div>
+
+
+				<div class="ui-g-12 ui-md-6 ui-lg-4" style="border: none;">
+					<h:panelGrid style="width:100%;border: none;">
+						<p:outputLabel for="vendor-contact-person-name"
+							style="font-size:16px" value="Vendor Contact Person Name:" />
+						<p:inputText id="vendor-contact-person-name"
+							value="#{salesBean.interviewSchedule.vendorContactPersonName}"
+							placeholder="Vendor Contact Person Name" />
+					</h:panelGrid>
+					<p:message for="vendor-contact-person-name" />
+				</div>
+
+				<div class="ui-g-12 ui-md-6 ui-lg-4" style="border: none;">
+					<h:panelGrid style="width:100%;border: none;">
+						<p:outputLabel for="vendor-contact-person-email"
+							style="font-size:16px" value="Vendor Contact Person Email:" />
+						<p:inputText id="vendor-contact-person-email"
+							value="#{salesBean.interviewSchedule.vendorContactPersonEmailid}"
+							placeholder="Vendor Contact Person Email" />
+					</h:panelGrid>
+					<p:message for="vendor-contact-person-email" />
+				</div>
+
+
+				<div class="ui-g-12 ui-md-6 ui-lg-4" style="border: none;">
+					<h:panelGrid style="width:100%;border: none;">
+						<p:outputLabel for="vendor-contact-person-phone"
+							style="font-size:16px" value="Vendor Contact Person Phone:" />
+						<p:inputText id="vendor-contact-person-phone"
+							value="#{salesBean.interviewSchedule.vendorContactPersonPhoneNo}"
+							placeholder="Vendor Contact Person Phone" />
+					</h:panelGrid>
+					<p:message for="vendor-contact-person-phone" />
+				</div>
+
+
+				<div class="ui-g-12 ui-md-6 ui-lg-4" style="border: none;">
+					<h:panelGrid style="width:100%;border: none;">
+						<p:outputLabel for="extension" style="font-size:16px"
+							value="Extension:" />
+						<p:inputText id="extension"
+							value="#{salesBean.interviewSchedule.extension}"
+							placeholder="Extension" />
+					</h:panelGrid>
+					<p:message for="extension" />
+				</div>
+
+
+				<div class="ui-g-12 ui-md-6 ui-lg-4" style="border: none;">
+					<h:panelGrid style="width:100%;border: none;">
+						<p:outputLabel for="interviewDate" style="font-size:16px"
+							value="Interview Date" />
+						<p:calendar id="interviewDate"
+							value="#{salesBean.interviewSchedule.interviewDate}"
+							pattern="dd-MMMM-yyyy" placeholder="Interview Date" />
+					</h:panelGrid>
+					<p:message for="interviewDate" />
+				</div>
+
+				<div class="ui-g-12 ui-md-6 ui-lg-4" style="border: none;">
+					<h:panelGrid style="width:100%;border: none;">
+						<p:outputLabel for="interview-time" style="font-size:16px"
+							value="Interview Time:" />
+						<p:inputText id="interview-time"
+							value="#{salesBean.interviewSchedule.interviewTime}"
+							placeholder="Interview Time" />
+					</h:panelGrid>
+					<p:message for="interview-time" />
+				</div>
+
+
+				<div class="ui-g-12 ui-md-6 ui-lg-4" style="border: none;">
+					<h:panelGrid style="width:100%">
+						<p:outputLabel for="interview-type" style="font-size:16px"
+							value="Interview Type:" />
+						<p:selectOneMenu id="interview-type"
+							value="#{salesBean.interviewSchedule.interviewType}">
+							<f:selectItem itemLabel="----Select----" itemValue="" />
+							<f:selectItem itemLabel="TELEPHONIC" itemValue="TELEPHONIC" />
+							<f:selectItem itemLabel="SKYPE" itemValue="SKYPE" />
+							<f:selectItem itemLabel="FACE TO FACE" itemValue="FACE TO FACE" />
+						</p:selectOneMenu>
+						<p:message for="interview-type" />
+					</h:panelGrid>
+				</div>
+				
+				
+				<div class="ui-g-12 ui-md-6 ui-lg-4" style="border: none;">
+					<h:panelGrid style="width:100%;border: none;">
+						<p:outputLabel for="interview-location" style="font-size:16px"
+							value="Interview Location:" />
+						<p:inputText id="interview-location"
+							value="#{salesBean.interviewSchedule.interviewLocation}"
+							placeholder="Interview Location" />
+					</h:panelGrid>
+					<p:message for="interview-location" />
+				</div>
+				
+				
+				<div class="ui-g-12 ui-md-6 ui-lg-4" style="border: none;">
+					<h:panelGrid style="width:100%;border: none;">
+						<p:outputLabel for="interview-expense-amount" style="font-size:16px"
+							value="Interview Expense Amount:" />
+						<p:inputText id="interview-expense-amount"
+							value="#{salesBean.interviewSchedule.interviewExpenseAmount}"
+							placeholder="Interview Expense Amount" />
+					</h:panelGrid>
+					<p:message for="interview-expense-amount" />
+				</div>
+				
+				<div class="ui-g-12 ui-md-6 ui-lg-4" style="border: none;">
+					<h:panelGrid style="width:100%;border: none;">
+						<p:outputLabel for="end-client" style="font-size:16px"
+							value="End Client:" />
+						<p:inputText id="end-client"
+							value="#{salesBean.interviewSchedule.endClient}"
+							placeholder="End Client" />
+					</h:panelGrid>
+					<p:message for="end-client" />
+				</div>
+				
+				
+				<div class="ui-g-12 ui-md-6 ui-lg-4" style="border: none;">
+					<h:panelGrid style="width:100%;border: none;">
+						<p:outputLabel for="position-id" style="font-size:16px"
+							value="Position Id:" />
+						<p:inputText id="position-id"
+							value="#{salesBean.interviewSchedule.positionId}"
+							placeholder="Position Id" />
+					</h:panelGrid>
+					<p:message for="position-id" />
+				</div>
+				
+				
+				<div class="ui-g-12 ui-md-6 ui-lg-4" style="border: none;">
+					<h:panelGrid style="width:100%;border: none;">
+						<p:outputLabel for="work-location" style="font-size:16px"
+							value="Work Location:" />
+						<p:inputText id="work-location"
+							value="#{salesBean.interviewSchedule.workLocation}"
+							placeholder="Work Location" />
+					</h:panelGrid>
+					<p:message for="work-location" />
+				</div>
+				
+				
+				<div class="ui-g-12 ui-md-6 ui-lg-4" style="border: none;">
+					<h:panelGrid style="width:100%;border: none;">
+						<p:outputLabel for="interview-round" style="font-size:16px"
+							value="Interview Round:" />
+						<p:inputText id="interview-round"
+							value="#{salesBean.interviewSchedule.interviewRound}"
+							placeholder="Interview Round" />
+					</h:panelGrid>
+					<p:message for="interview-round" />
+				</div>
+				
+				
+				<div class="ui-g-12 ui-md-6 ui-lg-4" style="border: none;">
+					<h:panelGrid style="width:100%;border: none;">
+						<p:outputLabel for="interviewId" style="font-size:16px"
+							value="Interview Id:" />
+						<p:inputText id="interviewId"
+							value="#{salesBean.interviewSchedule.interviewId}"
+							placeholder="Interview Id" />
+					</h:panelGrid>
+					<p:message for="interviewId" />
+				</div>
+				
+				
+				<div class="ui-g-12 ui-md-12 ui-lg-12" style="border: none;">
+					<h:panelGrid style="width:100%;border: none;">
+						<p:outputLabel for="feedback" style="font-size:16px"
+							value="Feedback:" />
+						<p:inputTextarea id="feedback" value="#{salesBean.interviewSchedule.feedback}" placeholder="Feedback" />
+					</h:panelGrid>
+					<p:message for="feedback" />
+				</div>
+				
+			</div>
+			
+			<f:facet name="footer">
+			
+			 <p:commandButton value="Back"
+							action="#{salesBean.backToCandidateDetails()}"
+							update=":mainBody" immediate="true" />
+			
+			    <p:commandButton value="Save"
+							action="#{salesBean.saveInterviewSchedule()}"
+							update=":mainBody" />
+			</f:facet>
+
+		</p:panel>
+
+	</h:form>
+</ui:composition>

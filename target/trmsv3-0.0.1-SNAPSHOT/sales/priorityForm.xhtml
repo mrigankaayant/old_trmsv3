@@ -1,0 +1,101 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+
+	<h:form id="priority-form">
+
+		<p:panel style="margin-top:1%;">
+			<f:facet name="header">User's Priority</f:facet>
+
+			<p:dataTable var="u" value="#{salesBean.users}">
+
+				<p:column headerText="Sales Person"
+					style="width:10%;text-align:center">
+					<h:outputText value="#{u.userFullName}" />
+				</p:column>
+
+				<p:column headerText="Priority" style="width:10%;text-align:center">
+					<h:outputText value="#{u.priority}" />
+				</p:column>
+
+				<p:column headerText="Edit" style="width:10%;text-align:center">
+
+					<p:commandLink action="#{salesBean.editUserPriority(u)}"
+						oncomplete="PF('resetPriorityDlg').show();"
+						update=":editPriority-Form">
+						<i class="fa fa-pencil"></i>
+					</p:commandLink>
+
+				</p:column>
+
+			</p:dataTable>
+
+		</p:panel>
+
+	</h:form>
+
+
+	<h:form id="editPriority-Form">
+		<p:dialog header="Reset Priority" id="resetPriorityDetails"
+			height="200" width="400" widgetVar="resetPriorityDlg" modal="true"
+			showEffect="explode" hideEffect="fade" responsive="true">
+
+			<p:panel style="margin-top:1%" id="edit-priority-Details">
+				<div class="ui-g" style="border: none">
+					<div class="ui-g-12 ui-md-12 ui-lg-12" style="border: none">
+						<h:panelGrid style="width:100%">
+							<p:outputLabel for="name" value="Sales Person Name:" />
+							<p:inputText id="name" value="#{salesBean.user.userFullName}"
+								required="true" requiredMessage="Enter Interview Date"
+								readonly="true" />
+							<p:message for="name" />
+						</h:panelGrid>
+					</div>
+				</div>
+
+				<div class="ui-g" style="border: none">
+					<div class="ui-g-12 ui-md-12 ui-lg-12" style="border: none;">
+						<h:panelGrid style="width:100%;border: none;">
+							<p:outputLabel for="priority" style="font-size:16px"
+								value="Priority:" />
+							<p:selectManyCheckbox id="priority"
+								value="#{salesBean.priorities}" layout="grid" columns="4">
+								<f:selectItems value="#{appDataBean.priorityList}" var="p"
+									itemValue="#{p.id}" itemLabel="#{p.priority}" />
+							</p:selectManyCheckbox>
+						</h:panelGrid>
+						<p:message for="priority" />
+					</div>
+				</div>
+
+
+				<f:facet name="footer">
+					<div style="text-align: center">
+						<p:commandButton value="reset"
+							action="#{salesBean.resetPriority()}" update=":mainBody"
+							oncomplete="handlePriorityEdit(xhr, status, args)" />
+					</div>
+				</f:facet>
+
+			</p:panel>
+
+		</p:dialog>
+	</h:form>
+
+
+	<script type="text/javascript">
+    function handlePriorityEdit(xhr, status, args) {
+        if(args.validationFailed) {
+            PF('resetPriorityDlg').jq.effect("shake", {times:10}, 100);
+        }
+        else {
+            PF('resetPriorityDlg').hide();
+        }
+    }
+    </script>
+
+</ui:composition>

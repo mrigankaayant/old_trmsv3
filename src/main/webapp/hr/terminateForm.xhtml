@@ -1,0 +1,191 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+
+	<h:form id="terminate-button">
+		<p:panel style="background-color:HoneyDew;">
+			<p:commandButton value="Enrollment" icon="fa fa-pencil"
+				update=":mainBody" action="#{hrBean.enrollmentDetails()}"
+				onclick="PF('statusDialog').show()"
+				oncomplete="PF('statusDialog').hide()"
+				styleClass="ui-priority-primary" process="@this" />
+
+			<p:commandButton value="Training" icon="fa fa-slideshare"
+				update=":mainBody" action="#{hrBean.trainingDetails()}"
+				onclick="PF('statusDialog').show()"
+				oncomplete="PF('statusDialog').hide()"
+				styleClass="ui-priority-primary" process="@this" />
+
+			<p:commandButton value="Resume" icon="fa fa-file-text-o"
+				update=":mainBody" action="#{hrBean.resumeDetails()}"
+				onclick="PF('statusDialog').show()"
+				oncomplete="PF('statusDialog').hide()"
+				styleClass="ui-priority-primary" process="@this" />
+
+			<p:commandButton value="Mock-Graduation" icon="fa fa-bar-chart"
+				update=":mainBody" action="#{hrBean.mockAndGraduationDetails()}"
+				onclick="PF('statusDialog').show()"
+				oncomplete="PF('statusDialog').hide()"
+				styleClass="ui-priority-primary" process="@this" />
+
+			<p:commandButton value="Reference" icon="fa fa-street-view"
+				update=":mainBody" action="#{hrBean.referenceDetails()}"
+				onclick="PF('statusDialog').show()"
+				oncomplete="PF('statusDialog').hide()"
+				styleClass="ui-priority-primary" process="@this" />
+
+
+			<p:commandButton value="Pre-hotlist" icon="fa fa-list-ol"
+				update=":mainBody" action="#{hrBean.preHotlistDetails()}"
+				onclick="PF('statusDialog').show()"
+				oncomplete="PF('statusDialog').hide()"
+				styleClass="ui-priority-primary" process="@this" />
+
+			<p:commandButton value="Other Documents" icon="fa fa-file"
+				update=":mainBody" action="#{hrBean.documentsDetails()}"
+				onclick="PF('statusDialog').show()"
+				oncomplete="PF('statusDialog').hide()"
+				styleClass="ui-priority-primary" process="@this" />
+
+			<p:commandButton value="Mail Template" icon="fa fa-envelope"
+				update=":mainBody" action="#{hrBean.mailTemplateForm()}"
+				onclick="PF('statusDialog').show()"
+				oncomplete="PF('statusDialog').hide()"
+				styleClass="ui-priority-primary" process="@this" />
+
+			<p:commandButton value="Terminate" icon="fa fa-times"
+				update=":mainBody" action="#{hrBean.terminateForm()}"
+				onclick="PF('statusDialog').show()"
+				oncomplete="PF('statusDialog').hide()"
+				styleClass="ui-priority-primary" process="@this"
+				style="background-color:red" />
+
+		</p:panel>
+	</h:form>
+
+	<h:form id="terminate-field-panel">
+
+		<p:panel style="margin-top:1%;">
+
+			<f:facet name="header">
+					Termination Related Information
+			</f:facet>
+
+			<div class="ui-g" style="border: none;">
+
+				<div class="ui-g-12 ui-md-6 ui-lg-4" style="border: none;">
+					<h:panelGrid style="border: none;" columns="2">
+						<p:outputLabel style="font-size:16px;color:teal" value="Name :" />
+						<h:outputText style="font-size:16px"
+							value="#{hrBean.candidate.candidateName}" />
+					</h:panelGrid>
+				</div>
+
+				<div class="ui-g-12 ui-md-6 ui-lg-4" style="border: none;">
+					<h:panelGrid style="border: none;" columns="2">
+						<p:outputLabel style="font-size:16px;color:teal"
+							value="Contact Number :" />
+						<h:outputText style="font-size:16px"
+							value="#{hrBean.candidate.contactNo}" />
+					</h:panelGrid>
+				</div>
+
+				<div class="ui-g-12 ui-md-6 ui-lg-4" style="border: none;">
+					<h:panelGrid style="border: none;" columns="2">
+						<p:outputLabel style="font-size:16px;color:teal"
+							value="Email ID :" />
+						<h:outputText style="font-size:16px"
+							value="#{hrBean.candidate.emailId}" />
+					</h:panelGrid>
+				</div>
+
+				<div class="ui-g-12 ui-md-6 ui-lg-4" style="border: none;">
+					<h:panelGrid style="border: none;" columns="2">
+						<p:outputLabel style="font-size:16px;color:teal"
+							value="Terminated Date:" />
+						<c:if test="${empty hrBean.candidate.treminationDate}">
+							<h:outputText style="font-size:16px" value="N/A" />
+						</c:if>
+						<c:if test="${!empty hrBean.candidate.treminationDate}">
+							<h:outputText style="font-size:16px"
+								value="#{hrBean.candidate.treminationDate}" />
+						</c:if>
+					</h:panelGrid>
+				</div>
+
+			</div>
+		</p:panel>
+
+		<p:panel style="margin-top:1%;">
+			<f:facet name="header">
+					Do You Want TO Terminate This Candidate?
+			</f:facet>
+
+			<div class="ui-g" style="border: none;">
+
+				<div class="ui-g-12 ui-md-12 ui-lg-12" style="border: none;">
+					<h:panelGrid style="width:100%;border: none;">
+						<p:outputLabel for="terminated-from" style="font-size:16px"
+							value="Terminated Form:" />
+
+						<p:selectOneRadio id="terminated-from"
+							value="#{hrBean.candidate.terminatedFrom}" required="true"
+							requiredMessage="Select Termonation Phase">
+							<f:selectItem itemLabel="Enrollment Phase"
+								itemValue="Enrollment Phase" />
+							<f:selectItem itemLabel="Training Phase"
+								itemValue="Training Phase" />
+							<f:selectItem itemLabel="Resume Phase" itemValue="Resume Phase" />
+							<f:selectItem itemLabel="Mock Phase" itemValue="Mock Phase" />
+							<f:selectItem itemLabel="Graduation Phase"
+								itemValue="Graduation Phase" />
+							<f:selectItem itemLabel="Reference Check Phase"
+								itemValue="Reference Check Phase" />
+							<f:selectItem itemLabel="Pre-hotlist Phase"
+								itemValue="Pre-hotlist Phase" />
+						</p:selectOneRadio>
+
+					</h:panelGrid>
+					<p:message for="terminated-from" />
+				</div>
+
+
+
+				<div class="ui-g-12 ui-md-12 ui-lg-12" style="border: none;">
+					<h:panelGrid style="width:100%;border: none;">
+						<p:outputLabel for="terminated-reason" style="font-size:16px"
+							value="Terminated Reason:" />
+
+						<p:editor id="terminated-reason" widgetVar="editorWidget"
+							height="400" value="#{hrBean.candidate.terminationReason}"
+							required="true" requiredMessage="Enter Terminated Reason" />
+
+					</h:panelGrid>
+					<p:message for="terminated-reason" />
+				</div>
+
+			</div>
+
+
+			<f:facet name="footer">
+				<div style="text-align: center">
+					<p:commandButton value="Terminate" icon="fa fa-times"
+						update=":terminate-field-panel"
+						action="#{hrBean.terminateCandidate()}"
+						styleClass="ui-priority-primary" process="@form"
+						onclick="return confirm('Are you sure?')" />
+				</div>
+			</f:facet>
+
+
+		</p:panel>
+
+
+	</h:form>
+
+
+</ui:composition>

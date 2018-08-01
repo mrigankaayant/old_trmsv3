@@ -1,0 +1,203 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+	<h:form id="others-documents-field-panel">
+		<p:panel style="background-color:HoneyDew;">
+			<p:commandButton value="Enrollment" icon="fa fa-pencil"
+				update=":mainBody" action="#{hrBean.enrollmentDetails()}"
+				onclick="PF('statusDialog').show()"
+				oncomplete="PF('statusDialog').hide()"
+				styleClass="ui-priority-primary" process="@this" />
+
+			<p:commandButton value="Training" icon="fa fa-slideshare"
+				update=":mainBody" action="#{hrBean.trainingDetails()}"
+				onclick="PF('statusDialog').show()"
+				oncomplete="PF('statusDialog').hide()"
+				styleClass="ui-priority-primary" process="@this" />
+
+			<p:commandButton value="Resume" icon="fa fa-file-text-o"
+				update=":mainBody" action="#{hrBean.resumeDetails()}"
+				onclick="PF('statusDialog').show()"
+				oncomplete="PF('statusDialog').hide()"
+				styleClass="ui-priority-primary" process="@this" />
+
+			<p:commandButton value="Mock-Graduation" icon="fa fa-bar-chart"
+				update=":mainBody" action="#{hrBean.mockAndGraduationDetails()}"
+				onclick="PF('statusDialog').show()"
+				oncomplete="PF('statusDialog').hide()"
+				styleClass="ui-priority-primary" process="@this" />
+
+			<p:commandButton value="Reference" icon="fa fa-street-view"
+				update=":mainBody" action="#{hrBean.referenceDetails()}"
+				onclick="PF('statusDialog').show()"
+				oncomplete="PF('statusDialog').hide()"
+				styleClass="ui-priority-primary" process="@this" />
+
+
+			<p:commandButton value="Pre-hotlist" icon="fa fa-list-ol"
+				update=":mainBody" action="#{hrBean.preHotlistDetails()}"
+				onclick="PF('statusDialog').show()"
+				oncomplete="PF('statusDialog').hide()"
+				styleClass="ui-priority-primary" process="@this" />
+
+			<p:commandButton value="Other Documents" icon="fa fa-file"
+				update=":mainBody" action="#{hrBean.documentsDetails()}"
+				onclick="PF('statusDialog').show()"
+				oncomplete="PF('statusDialog').hide()"
+				styleClass="ui-priority-primary" process="@this" />
+
+			<p:commandButton value="Mail Template" icon="fa fa-envelope"
+				update=":mainBody" action="#{hrBean.mailTemplateForm()}"
+				onclick="PF('statusDialog').show()"
+				oncomplete="PF('statusDialog').hide()"
+				styleClass="ui-priority-primary" process="@this" />
+
+			<p:commandButton value="Terminate" icon="fa fa-times"
+				update=":mainBody" action="#{hrBean.terminateForm()}"
+				onclick="PF('statusDialog').show()"
+				oncomplete="PF('statusDialog').hide()"
+				styleClass="ui-priority-primary" process="@this"
+				style="background-color:red" />
+
+		</p:panel>
+
+		<p:panel>
+
+			<div class="ui-g" style="border: none;">
+				<div class="ui-g-12 ui-md-6 ui-lg-3" style="border: none;">
+					<h:panelGrid columns="2" style="margin-top:6%;margin-right:10%">
+						<p:outputLabel for="fileName" style="font-size:16px"
+							value="File Name:" />
+						<p:selectOneMenu id="fileName" value="#{hrBean.fileDocumentsName}"
+							style="width:93%!important">
+							<f:selectItem itemLabel="----Select----" itemValue="" />
+							<f:selectItem itemLabel="Offter Letter" itemValue="Offter Letter" />
+							<f:selectItem itemLabel="Datasheet Form"
+								itemValue="Datasheet Form" />
+							<f:selectItem itemLabel="Passport" itemValue="Passport" />
+							<f:selectItem itemLabel="Voter Card" itemValue="Voter Card" />
+							<f:selectItem itemLabel="DRIVING LICENCE"
+								itemValue="Driving Licence" />
+							<f:selectItem itemLabel="SSN Form" itemValue="SSN Form" />
+							<f:selectItem itemLabel="OPT Letter" itemValue="OPT Letter" />
+							<f:selectItem itemLabel="CPT Letter" itemValue="CPT Letter" />
+							<f:selectItem itemLabel="I983 Form" itemValue="I983 Form" />
+							<f:selectItem itemLabel="Visa" itemValue="Visa" />
+							<f:selectItem itemLabel="I9 Form" itemValue="I9 Form" />
+							<f:selectItem itemLabel="W2 Form" itemValue="W2 Form" />
+							<f:selectItem itemLabel="W4 Form" itemValue="W4 Form" />
+							<f:selectItem itemLabel="Others" itemValue="Others" />
+						</p:selectOneMenu>
+					</h:panelGrid>
+				</div>
+			</div>
+
+
+			<div class="ui-g" style="border: none;">
+				<div class="ui-g-12 ui-md-6 ui-lg-6" style="border: none;">
+					<div class="ui-g" style="border: none;">
+						<div class="ui-g-12 ui-md-6 ui-lg-12" style="border: none;">
+							<h:panelGrid columns="1" style="border:none;">
+								<p:fileUpload fileUploadListener="#{hrBean.othersDocumentsList}"
+									update="file" mode="advanced" multiple="true" />
+							</h:panelGrid>
+						</div>
+						<div style="border: none">
+
+							<div class="ui-g-12 ui-md-6 ui-lg-12"
+								style="border: none !important;">
+								<h:panelGrid id="file" columns="2" cellpadding="0"
+									cellspacing="2"
+									style="margin-left:27.5%;border:none !important;">
+									<p:outputLabel value=" Uploaded Documents:"
+										rendered="#{hrBean.otherDocumentsFileName.size() > '0'}" />
+									<br></br>
+									<c:forEach items="${hrBean.otherDocumentsFileName}" var="doc">
+										<p:outputLabel style="font-weight: bold;color:Teal"
+											value="#{doc}" />
+										<p:commandLink
+											actionListener="#{hrBean.otherDocumentsFileDelete}"
+											update="file" style="font-weight: bold;color:red"
+											value="delete">
+											<f:param name="deletefile" value="#{doc}" />
+										</p:commandLink>
+									</c:forEach>
+								</h:panelGrid>
+							</div>
+						</div>
+					</div>
+					<f:facet name="footer">
+						<p:commandButton value="Save"
+							actionListener="#{hrBean.saveOthersDocumentsInDatabase()}"
+							update=":others-documents-field-panel"
+							onclick="PF('statusDialog').show()"
+							oncomplete="PF('statusDialog').hide()" />
+						<p:commandButton value="Cancel"
+							actionListener="#{hrBean.cancelOthersDocumentsInDatabase()}"
+							onclick="PF('statusDialog').show()"
+							oncomplete="PF('statusDialog').hide()"
+							update=":others-documents-field-panel" />
+					</f:facet>
+				</div>
+			</div>
+
+		</p:panel>
+
+
+		<p:panel rendered="#{not empty hrBean.documentsList}">
+			<p:dataTable var="d" value="#{hrBean.documentsList}"
+				resizableColumns="true" resizeMode="true"
+				widgetVar="alladvanceSearch"
+				tableStyle="width:auto;table-layout:auto">
+
+
+				<f:facet name="header">Submitted Documents</f:facet>
+
+				<p:column headerText="Document For"
+					style="width:10%;text-align:center">
+					<h:outputText value="#{d.docOtherName}" />
+				</p:column>
+
+				<p:column headerText="Name" style="width:10%;text-align:center">
+					<h:outputText value="#{d.fileName}" />
+				</p:column>
+
+				<p:column headerText="Created Date"
+					style="width:10%;text-align:center">
+					<h:outputText value="#{d.createdDate}">
+						<f:convertDateTime pattern="dd-MMMM-yyyy" />
+					</h:outputText>
+				</p:column>
+
+				<p:column headerText="Show Document"
+					style="width:10%;text-align:center">
+					<h:commandLink action="#{hrBean.openFile()}" target="_blank"
+						immediate="true" style="color:blue;">
+						<h:graphicImage value="/resources/assets/icon/check.png"></h:graphicImage>
+						<f:param name="filePath" value="#{d.filePath}" />
+						<f:param name="extension" value="#{d.extension}" />
+						<f:param name="filename" value="#{d.fileName}" />
+					</h:commandLink>
+				</p:column>
+
+
+				<p:column headerText="Download" style="width:10%;text-align:center">
+					<h:commandLink action="#{hrBean.openFile()}" target="_blank"
+						immediate="true" style="color:blue;">
+						<h:graphicImage value="/resources/assets/icon/download.png"></h:graphicImage>
+						<f:param name="filePath" value="#{d.filePath}" />
+						<f:param name="extension" value="#{d.extension}" />
+						<f:param name="filename" value="#{d.fileName}" />
+					</h:commandLink>
+				</p:column>
+			</p:dataTable>
+		</p:panel>
+
+	</h:form>
+
+
+</ui:composition>

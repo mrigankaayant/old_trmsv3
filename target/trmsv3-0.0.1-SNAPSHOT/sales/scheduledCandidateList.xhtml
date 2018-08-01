@@ -1,0 +1,212 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+
+	<h:form>
+
+
+		<p:dataTable id="sceduledCandidateTable" var="i" value="#{salesBean.scheduledCandidateLazyModel}"
+			paginator="true" rows="15" resizableColumns="true" resizeMode="true"
+			widgetVar="advanceSearch" sortBy="#{i.id}" sortOrder="descending"
+			paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
+			rowsPerPageTemplate="15,50,100,200,300,500,1000,2000,3000,4000,5000,20000"
+			selection="#{salesBean.selectedinterviewSchedules}" rowKey="#{i.id}"
+			lazy="true" tableStyle="width:auto;table-layout:auto">
+
+			<f:facet name="header">
+				<div align="left">
+					<h:commandLink id="download" style="color:blue;">
+						<i class="fa fa-download fa-1x"></i>
+						<p:dataExporter type="xls" target="sceduledCandidateTable"
+							fileName="interview_scheduled_candidate_list" pageOnly="true" />
+					</h:commandLink>
+					<p:tooltip for="download" value="Download Data"
+						trackMouse="true" style="font-size:20px" />
+
+					<h:outputText value="Hot List" style="padding-left:45%" />
+					
+					<p:commandLink id="referesh"
+						oncomplete="PF('advanceSearch').clearFilters()"
+						style="padding-left:47.3%;color:teal" process="@this">
+						<i class="fa fa-refresh fa-1x"></i>
+					</p:commandLink>
+					<p:tooltip for="referesh" value="Referesh Data Table"
+						trackMouse="true" style="font-size:20px" />
+						
+						
+				</div>
+			</f:facet>
+			
+			<p:column headerText="Doc" exportable="false">
+				<h:commandLink
+					action="#{salesBean.showAllDocumentsForScheduledCandidate(i.candidate)}"
+					immediate="true" style="color:blue;" update=":mainBody">
+					<h:graphicImage value="/resources/assets/icon/download.png"></h:graphicImage>
+				</h:commandLink>
+			</p:column>
+
+
+			<p:column headerText="Name" sortBy="#{i.candidate.hotlistCandidateName}"
+				filterBy="#{i.candidate.hotlistCandidateName}">
+				<h:commandLink action="#{salesBean.selectScheduledCandidate(i)}"
+					style="color:blue;" update=":mainBody">
+					    #{i.candidate.hotlistCandidateName}
+					</h:commandLink>
+					<h:outputText style="visibility:hidden;"  value="#{i.candidate.hotlistCandidateName}" />
+			</p:column>
+
+			<p:column headerText="Vendor Name" sortBy="#{i.vendorName}"
+				filterBy="#{i.vendorName}">
+				<h:outputText value="#{i.vendorName}" />
+			</p:column>
+
+			<p:column headerText="Contact Person"
+				sortBy="#{i.vendorContactPersonName}"
+				filterBy="#{i.vendorContactPersonName}">
+				<h:outputText value="#{i.vendorContactPersonName}" />
+			</p:column>
+
+
+			<p:column headerText="Contact Person Email"
+				sortBy="#{i.vendorContactPersonEmailid}"
+				filterBy="#{i.vendorContactPersonEmailid}">
+				<h:outputText value="#{i.vendorContactPersonEmailid}" />
+			</p:column>
+
+			<p:column headerText="Contact Person Phone"
+				sortBy="#{i.vendorContactPersonPhoneNo}"
+				filterBy="#{i.vendorContactPersonPhoneNo}">
+				<h:outputText value="#{i.vendorContactPersonPhoneNo}" />
+			</p:column>
+
+			<p:column headerText="Interview Date" sortBy="#{i.interviewDate}"
+				filterBy="#{i.interviewDate}">
+				<f:facet name="filter">
+					<p:calendar pattern="MM/dd/yyyy" showButtonPanel="true">
+						<p:ajax event="dateSelect"
+							oncomplete="PF('advanceSearch').filter()" />
+					</p:calendar>
+				</f:facet>
+				<h:outputText value="#{i.interviewDate}">
+					<f:convertDateTime pattern="MM/dd/yyyy" />
+				</h:outputText>
+			</p:column>
+
+			<p:column headerText="Interview Time" sortBy="#{i.interviewTime}"
+				filterBy="#{i.interviewTime}">
+				<h:outputText value="#{i.interviewTime}" />
+			</p:column>
+
+			<p:column headerText="Interview Type" sortBy="#{i.interviewType}"
+				filterBy="#{i.interviewType}">
+				<f:facet name="filter">
+					<p:selectOneMenu onchange="PF('advanceSearch').filter()">
+						<f:selectItem itemLabel="---Select Type---" itemValue=" "
+							noSelectionOption="true" />
+						<f:selectItem itemLabel="TELEPHONIC" itemValue="TELEPHONIC" />
+						<f:selectItem itemLabel="SKYPE" itemValue="SKYPE" />
+						<f:selectItem itemLabel="FACE TO FACE" itemValue="FACE TO FACE" />
+					</p:selectOneMenu>
+				</f:facet>
+				<h:outputText value="#{i.interviewType}" />
+			</p:column>
+
+			<p:column headerText="Interview Location"
+				sortBy="#{i.interviewLocation}" filterBy="#{i.interviewLocation}">
+				<h:outputText value="#{i.interviewLocation}" />
+			</p:column>
+
+
+			<p:column headerText="Interview Location"
+				sortBy="#{i.interviewLocation}" filterBy="#{i.interviewLocation}">
+				<h:outputText value="#{i.interviewLocation}" />
+			</p:column>
+
+			<p:column headerText="Work Location" sortBy="#{i.workLocation}"
+				filterBy="#{i.workLocation}">
+				<h:outputText value="#{i.workLocation}" />
+			</p:column>
+
+
+			<p:column headerText="Bill Rate" sortBy="#{i.candidate.billRate}"
+				filterBy="#{i.candidate.billRate}">
+				<h:outputText value="#{i.candidate.billRate}" />
+			</p:column>
+
+			<p:column headerText="Interview Round" sortBy="#{i.interviewRound}"
+				filterBy="#{i.interviewRound}">
+				<h:outputText value="#{i.interviewRound}" />
+			</p:column>
+
+			<p:column headerText="End Client" sortBy="#{i.endClient}"
+				filterBy="#{i.endClient}">
+				<h:outputText value="#{i.endClient}" />
+			</p:column>
+
+			<p:column headerText="Extension" sortBy="#{i.extension}"
+				filterBy="#{i.extension}">
+				<h:outputText value="#{i.extension}" />
+			</p:column>
+
+			<p:column headerText="Interview Expense Amount"
+				sortBy="#{i.interviewExpenseAmount}"
+				filterBy="#{i.interviewExpenseAmount}">
+				<h:outputText value="#{i.interviewExpenseAmount}" />
+			</p:column>
+
+			<p:column headerText="Position Id" sortBy="#{i.positionId}"
+				filterBy="#{i.positionId}">
+				<h:outputText value="#{i.positionId}" />
+			</p:column>
+
+			<p:column headerText="Interview Id" sortBy="#{i.interviewId}"
+				filterBy="#{i.interviewId}">
+				<h:outputText value="#{i.interviewId}" />
+			</p:column>
+
+			<p:column headerText="Sales Person"
+				sortBy="#{i.userProfile.userFullName}"
+				filterBy="#{i.userProfile.userFullName}">
+				<h:outputText value="#{i.userProfile.userFullName}" />
+			</p:column>
+
+			<p:column headerText="Feedback" exportable="false">
+				<p:commandButton update=":email-message-form"
+					oncomplete="PF('messageDialog').show()" icon="ui-icon-search"
+					title="Message"
+					action="#{salesBean.showScheduleFeedback(i.feedback)}">
+				</p:commandButton>
+				<h:outputText style="display:none"  value="#{i.feedback}" />
+			</p:column>
+			
+			
+			<p:column headerText="Feedback" style="display:none">
+				<h:outputText  value="#{i.feedback}" />
+			</p:column>
+
+		</p:dataTable>
+
+	</h:form>
+
+
+	<h:form id="email-message-form">
+
+		<div class="ui-g">
+			<div class="ui-g-12 ui-md-6 ui-lg-12">
+				<p:dialog header="Feedback" widgetVar="messageDialog" modal="true"
+					width="800" height="300" showEffect="fade" hideEffect="fade"
+					resizable="false">
+					<p:outputPanel id="messageDetail" style="text-align:center;">
+						<p:editor id="msg" value="#{salesBean.mailDetails.bodyContent}"
+							height="500" />
+					</p:outputPanel>
+				</p:dialog>
+			</div>
+		</div>
+
+	</h:form>
+
+</ui:composition>

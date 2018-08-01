@@ -1,0 +1,294 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+
+	<h:form>
+		<p:panel style="background-color:HoneyDew;">
+
+			<p:commandButton value="Enrollment" icon="fa fa-bar-chart"
+				update=":mainBody" action="#{hrBean.enrollmentReport()}"
+				styleClass="ui-priority-primary" process="@this" />
+
+			<p:commandButton value="Enrollment Form"
+				icon="fa fa-bar-chart" update=":mainBody"
+				action="#{hrBean.enrollmentFormReport()}"
+				styleClass="ui-priority-primary" process="@this" />
+
+			<p:commandButton value="Payment" icon="fa fa-bar-chart"
+				update=":mainBody" action="#{hrBean.paymentReport()}"
+				styleClass="ui-priority-primary" process="@this" />
+
+			<p:commandButton value="Spot Incentive"
+				icon="fa fa-bar-chart" update=":mainBody"
+				action="#{hrBean.sportIncentiveReport()}"
+				styleClass="ui-priority-primary" process="@this" />
+
+			<p:commandButton value="Incentive" icon="fa fa-bar-chart"
+				update=":mainBody" action="#{hrBean.incentiveReport()}"
+				styleClass="ui-priority-primary" process="@this" />
+
+			<p:commandButton value="Traning" icon="fa fa-bar-chart"
+				update=":mainBody" action="#{hrBean.traningReport()}"
+				styleClass="ui-priority-primary" process="@this" />
+
+			<p:commandButton value="Resume" icon="fa fa-bar-chart"
+				update=":mainBody" action="#{hrBean.resumeReport()}"
+				styleClass="ui-priority-primary" process="@this" />
+
+			<p:commandButton value="Mock" icon="fa fa-bar-chart"
+				update=":mainBody" action="#{hrBean.mockReport()}"
+				styleClass="ui-priority-primary" process="@this" />
+
+			<p:commandButton value="Reference" icon="fa fa-bar-chart"
+				update=":mainBody" action="#{hrBean.referenceReport()}"
+				styleClass="ui-priority-primary" process="@this" />
+
+			<p:commandButton value="Pre-Hotlist" icon="fa fa-bar-chart"
+				update=":mainBody" action="#{hrBean.prehotlistReport()}"
+				styleClass="ui-priority-primary" process="@this" />
+
+			<p:commandButton value="Hotlist" icon="fa fa-bar-chart"
+				update=":mainBody" action="#{hrBean.hotlistReport()}"
+				styleClass="ui-priority-primary" process="@this" />
+
+		</p:panel>
+	</h:form>
+
+	<h:form id="payment-report-form">
+		<p:panel style="margin-top:1%;">
+			<f:facet name="header">Payment Report</f:facet>
+
+			<div class="ui-g" style="border: none;">
+				<div class="ui-g-6 ui-md-6 ui-lg-4" style="border: none;">
+					<p:panel style="border: none;">
+						<h:panelGrid columns="2" layout="grid"
+							style="border: none;margin-left:30%">
+							<p:outputLabel for="search-by"
+								style="font-size:16px;font-weight:bold" value="Search By:" />
+
+							<p:selectOneMenu id="search-by" value="#{hrBean.selectedOption}"
+								required="true" requiredMessage="Select Option"
+								validator="#{hrBean.checkPaymentReportOptions}">
+								<f:selectItem itemLabel="----Select----" itemValue="" />
+								<f:selectItem itemLabel="Month Wise" itemValue="Month Wise" />
+								<f:selectItem itemLabel="Day Wise" itemValue="Day Wise" />
+								<f:selectItem itemLabel="Recruiter Wise"
+									itemValue="Recruiter Wise" />
+								<f:selectItem itemLabel="Skill Wise" itemValue="Skill Wise" />
+								<p:ajax event="change" update=":payment-report-form" />
+							</p:selectOneMenu>
+							<p:message for="search-by" />
+						</h:panelGrid>
+					</p:panel>
+				</div>
+
+				<div class="ui-g-6 ui-md-6 ui-lg-8" style="border: none;">
+					<p:panel id="skill-wise" style="border: none;"
+						rendered="#{hrBean.skillWise}">
+
+						<h:panelGrid columns="3" layout="grid" style="border: none;">
+
+							<p:outputLabel for="skill-search-value"
+								style="font-size:16px;font-weight:bold" value="Select Skill:" />
+
+							<p:selectOneMenu id="skill-search-value"
+								value="#{hrBean.optionValue}" required="true"
+								requiredMessage="Enter Serach Value">
+								<f:selectItem itemLabel="----Select----" itemValue="" />
+								<f:selectItem itemLabel="Java,J2EE" itemValue="Java,J2EE" />
+								<f:selectItem itemLabel="Business Analyst"
+									itemValue="Business Analyst" />
+								<f:selectItem itemLabel="SAS Analytics"
+									itemValue="SAS Analytics" />
+								<f:selectItem itemLabel="Microsoft.Net"
+									itemValue="Microsoft.Net" />
+								<f:selectItem itemLabel="Microsoft SQL"
+									itemValue="Microsoft SQL" />
+								<f:selectItem itemLabel="Front-End UI/UX"
+									itemValue="Front-End UI/UX" />
+								<f:selectItem itemLabel="Work Day" itemValue="Work Day" />
+								<f:selectItem itemLabel="MSBI" itemValue="MSBI" />
+								<f:selectItem itemLabel="Android" itemValue="Android" />
+							</p:selectOneMenu>
+
+
+
+							<p:commandButton value="Search" style="margin-left:10%"
+								action="#{hrBean.searchForPaymentReport()}"
+								update=":payment-report-form" />
+							<p:message for="skill-search-value" style="width:62%" />
+						</h:panelGrid>
+
+					</p:panel>
+
+
+					<p:panel id="recruiter-wise" style="border: none;"
+						rendered="#{hrBean.recruiterWise}">
+
+						<h:panelGrid columns="3" layout="grid" style="border: none;">
+
+							<p:outputLabel for="recruiter-search-value"
+								style="font-size:16px;font-weight:bold"
+								value="Select Recruiter:" />
+
+
+							<p:selectOneMenu id="recruiter-search-value"
+								value="#{hrBean.optionValue}" required="true" requiredMessage="Please Enter Value"  >
+								<f:selectItem itemLabel="Select Recruiter" itemValue=""
+									noSelectionOption="true" />
+								<f:selectItems value="#{appDataBean.userList}"
+									var="u" itemLabel="#{u}"
+									itemValue="#{u}" />
+							</p:selectOneMenu>
+
+							<p:commandButton value="Search" style="margin-left:10%"
+								action="#{hrBean.searchForPaymentReport()}"
+								update=":payment-report-form" />
+							<p:message for="recruiter-search-value" style="width:62%" />
+						</h:panelGrid>
+
+					</p:panel>
+
+					<p:panel id="month-wise" style="border: none;"
+						rendered="#{hrBean.monthWise}">
+
+						<h:panelGrid columns="4" layout="grid" style="border: none;">
+
+							<p:outputLabel for="month-search-value"
+								style="font-size:16px;font-weight:bold" value="Select Month:" />
+
+							<p:calendar id="month-search-value" pattern="dd/MMMM/yyyy"
+								placeholder="Select Month" value="#{hrBean.searcingDate}" />
+
+							<p:message for="month-search-value" />
+
+
+							<p:commandButton value="Search" style="margin-left:10%"
+								action="#{hrBean.searchForPaymentReport()}"
+								update=":payment-report-form" />
+
+						</h:panelGrid>
+					</p:panel>
+
+					<p:panel id="day-wise" style="border: none;"
+						rendered="#{hrBean.dayWise}">
+
+						<h:panelGrid columns="4" layout="grid" style="border: none;">
+
+							<p:outputLabel for="day-search-value"
+								style="font-size:16px;font-weight:bold" value="Select Day:" />
+
+							<p:calendar id="day-search-value" pattern="dd-MMMM-yyyy"
+								placeholder="Select Date" value="#{hrBean.searcingDate}" />
+
+							<p:message for="day-search-value" />
+
+
+							<p:commandButton value="Search" style="margin-left:10%"
+								action="#{hrBean.searchForPaymentReport()}"
+								update=":payment-report-form" />
+
+						</h:panelGrid>
+					</p:panel>
+				</div>
+			</div>
+
+		</p:panel>
+
+		<p:panel id="noDataPanel" style="margin-top:1%;"
+			rendered="#{empty hrBean.paymentDetails}">
+			<h:outputText value="No Data Found"
+				style="font-size:25px;color:teal;margin-left:45%" />
+		</p:panel>
+
+		<p:panel style="margin-top:1%;"
+			rendered="#{not empty hrBean.paymentDetails}">
+
+			<f:facet name="header">Details</f:facet>
+
+			<p:dataTable var="p" value="#{hrBean.paymentDetails}"
+				paginator="true" rows="50" resizableColumns="true" resizeMode="true"
+				widgetVar="advanceSearch" sortBy="#{p.candidate.candidateId}"
+				sortOrder="descending"
+				paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
+				rowsPerPageTemplate="50,100,200,300,500"
+				rowKey="#{p.candidate.candidateId}"
+				tableStyle="width:auto;table-layout:auto">
+
+				<p:column headerText="Id" sortBy="#{p.candidate.candidateId}"
+					filterBy="#{p.candidate.candidateId}"
+					style="text-align:center;width:10%">
+					<h:outputText value="#{p.candidate.candidateId}" />
+				</p:column>
+
+				<p:column headerText="Name" sortBy="#{p.candidate.candidateName}"
+					filterBy="#{p.candidate.candidateName}"
+					style="text-align:center;width:10%">
+					<h:outputText value="#{p.candidate.candidateName}" />
+				</p:column>
+
+				<p:column headerText="Email" sortBy="#{p.candidate.emailId}"
+					filterBy="#{p.candidate.emailId}"
+					style="text-align:center;width:10%">
+					<h:outputText value="#{p.candidate.emailId}" />
+				</p:column>
+
+				<p:column headerText="Phone No" sortBy="#{p.candidate.contactNo}"
+					filterBy="#{p.candidate.contactNo}"
+					style="text-align:center;width:10%">
+					<h:outputText value="#{p.candidate.contactNo}" />
+				</p:column>
+
+				<p:column headerText="Phone No" sortBy="#{p.candidate.contactNo}"
+					filterBy="#{p.candidate.contactNo}"
+					style="text-align:center;width:10%">
+					<h:outputText value="#{p.candidate.contactNo}" />
+				</p:column>
+				
+
+				<p:column headerText="Transaction Id" sortBy="#{p.transactionId}"
+					filterBy="#{p.transactionId}" style="text-align:center;width:10%">
+					<h:outputText value="#{p.transactionId}" />
+				</p:column>
+
+				<p:column headerText="Total Amount" sortBy="#{p.totalAmount}"
+					filterBy="#{p.totalAmount}" style="text-align:center;width:10%">
+					<h:outputText value="#{p.totalAmount}" />
+				</p:column>
+
+				<p:column headerText="Paid Amount" sortBy="#{p.paidAmount}"
+					filterBy="#{p.paidAmount}" style="text-align:center;width:10%">
+					<h:outputText value="#{p.paidAmount}" />
+				</p:column>
+
+				<p:column headerText="Payment Date" sortBy="#{p.paymentDate}"
+					filterBy="#{p.paymentDate}" style="text-align:center;width:10%">
+					<h:outputText value="#{p.paymentDate}" />
+				</p:column>
+
+				<p:column headerText="Due Date" sortBy="#{p.dueAmount}"
+					filterBy="#{p.dueAmount}" style="text-align:center;width:10%">
+					<h:outputText value="#{p.dueAmount}" />
+				</p:column>
+
+				<p:column headerText="Payment Mode" sortBy="#{p.paymentMode}"
+					filterBy="#{p.paymentMode}" style="text-align:center;width:10%">
+					<h:outputText value="#{p.paymentMode}" />
+				</p:column>
+
+				<p:column headerText="Recruiter Name"
+					sortBy="#{p.candidate.recruiterName}"
+					filterBy="#{p.candidate.recruiterName}"
+					style="text-align:center;width:10%">
+					<h:outputText value="#{p.candidate.recruiterName}" />
+				</p:column>
+
+
+			</p:dataTable>
+		</p:panel>
+	</h:form>
+</ui:composition>

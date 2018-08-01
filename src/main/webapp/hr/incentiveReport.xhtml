@@ -1,0 +1,274 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+
+	<h:form>
+		<p:panel style="background-color:HoneyDew;">
+
+			<p:commandButton value="Enrollment" icon="fa fa-bar-chart"
+				update=":mainBody" action="#{hrBean.enrollmentReport()}"
+				styleClass="ui-priority-primary" process="@this" />
+				
+			<p:commandButton value="Enrollment Form" icon="fa fa-bar-chart"
+				update=":mainBody" action="#{hrBean.enrollmentFormReport()}"
+				styleClass="ui-priority-primary" process="@this" />		
+				
+			<p:commandButton value="Payment" icon="fa fa-bar-chart"
+				update=":mainBody" action="#{hrBean.paymentReport()}"
+				styleClass="ui-priority-primary" process="@this" />		
+				
+			<p:commandButton value="Spot Incentive" icon="fa fa-bar-chart"
+				update=":mainBody" action="#{hrBean.sportIncentiveReport()}"
+				styleClass="ui-priority-primary" process="@this" />	
+				
+			<p:commandButton value="Incentive" icon="fa fa-bar-chart"
+				update=":mainBody" action="#{hrBean.incentiveReport()}"
+				styleClass="ui-priority-primary" process="@this" />		
+
+			<p:commandButton value="Traning" icon="fa fa-bar-chart"
+				update=":mainBody" action="#{hrBean.traningReport()}"
+				styleClass="ui-priority-primary" process="@this" />
+
+			<p:commandButton value="Resume" icon="fa fa-bar-chart"
+				update=":mainBody" action="#{hrBean.resumeReport()}"
+				styleClass="ui-priority-primary" process="@this" />
+
+			<p:commandButton value="Mock" icon="fa fa-bar-chart"
+				update=":mainBody" action="#{hrBean.mockReport()}"
+				styleClass="ui-priority-primary" process="@this" />
+
+			<p:commandButton value="Reference" icon="fa fa-bar-chart"
+				update=":mainBody" action="#{hrBean.referenceReport()}"
+				styleClass="ui-priority-primary" process="@this" />
+
+			<p:commandButton value="Pre-Hotlist" icon="fa fa-bar-chart"
+				update=":mainBody" action="#{hrBean.prehotlistReport()}"
+				styleClass="ui-priority-primary" process="@this" />
+
+			<p:commandButton value="Hotlist" icon="fa fa-bar-chart"
+				update=":mainBody" action="#{hrBean.hotlistReport()}"
+				styleClass="ui-priority-primary" process="@this" />	
+
+
+		</p:panel>
+	</h:form>
+
+	<h:form id="incentive-report-form">
+		<p:panel style="margin-top:1%;">
+			<f:facet name="header">Incentive Report</f:facet>
+
+			<div class="ui-g" style="border: none;">
+				<div class="ui-g-6 ui-md-6 ui-lg-5" style="border: none;">
+					<h:panelGrid columns="4" layout="grid"
+						style="border: none;margin-left:2%">
+						<p:outputLabel for="selectMonth"
+							style="font-size:16px;font-weight:bold" value="Select Month:" />
+
+						<p:calendar id="selectMonth" pattern="MMMM/yyyy"
+							placeholder="Select Month" value="#{hrBean.searcingDate}" />
+						<p:message for="selectMonth" />
+
+						<p:commandButton value="search"
+							action="#{hrBean.searchForIncentiveReport()}"
+							style="margin-left:15%" update=":incentive-report-form" />
+
+					</h:panelGrid>
+				</div>
+			</div>
+
+		</p:panel>
+
+
+		<p:panel id="noDataPanel" style="margin-top:1%;"
+			rendered="#{empty hrBean.paymentDetails}">
+			<f:facet name="header">Individual Incentive</f:facet>
+			<h:outputText value="No Data Found"
+				style="font-size:25px;color:teal;margin-left:45%" />
+		</p:panel>
+
+
+		<p:panel style="margin-top:1%;"
+			rendered="#{not empty hrBean.paymentDetails}">
+			<f:facet name="header">Individual Incentive</f:facet>
+			<p:dataTable var="p" value="#{hrBean.paymentDetails}"
+				paginator="true" rows="100" resizableColumns="true" resizeMode="true"
+				widgetVar="advanceSearch1" sortBy="#{p.candidate.recruiterName}"
+				paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
+				rowsPerPageTemplate="25,50,100,200,300,500"
+				rowKey="#{p.candidate.recruiterName}"
+				tableStyle="width:auto;table-layout:auto">
+
+
+				<p:column headerText="Id" sortBy="#{p.candidate.candidateId}"
+					filterBy="#{p.candidate.candidateId}" style="text-align:center;width:10%">
+					<h:outputText value="#{p.candidate.candidateId}" />
+				</p:column>
+
+				<p:column headerText="Name" sortBy="#{p.candidate.candidateName}"
+					filterBy="#{p.candidate.candidateName}" style="text-align:center;width:10%">
+					<h:outputText value="#{p.candidate.candidateName}" />
+				</p:column>
+				
+				<p:column headerText="Transaction Id" sortBy="#{p.transactionId}"
+					filterBy="#{p.transactionId}" style="text-align:center;width:10%">
+					<h:outputText value="#{p.transactionId}" />
+				</p:column>
+				
+				<p:column headerText="Total Amount" sortBy="#{p.totalAmount}"
+					filterBy="#{p.totalAmount}" style="text-align:center;width:10%">
+					<h:outputText value="#{p.totalAmount}" />
+				</p:column>
+				
+				<p:column headerText="Paid Amount" sortBy="#{p.paidAmount}"
+					filterBy="#{p.paidAmount}" style="text-align:center;width:10%">
+					<h:outputText value="#{p.paidAmount}" />
+				</p:column>
+				
+				<p:column headerText="Payment Date" sortBy="#{p.paymentDate}"
+					filterBy="#{p.paymentDate}" style="text-align:center;width:10%">
+					<h:outputText value="#{p.paymentDate}" />
+				</p:column>
+				
+				<p:column headerText="Payment Mode" sortBy="#{p.paymentMode}"
+					filterBy="#{p.paymentMode}" style="text-align:center;width:10%">
+					<h:outputText value="#{p.paymentMode}" />
+				</p:column>
+				
+				<p:column headerText="Due Amount" sortBy="#{p.dueAmount}"
+					filterBy="#{p.dueAmount}" style="text-align:center;width:10%">
+					<h:outputText value="#{p.dueAmount}" />
+				</p:column>
+				
+				<p:column headerText="Due Date" sortBy="#{p.dueDate}"
+					filterBy="#{p.dueDate}" style="text-align:center;width:10%">
+					<h:outputText value="#{p.dueDate}" />
+				</p:column>
+				
+				<p:column headerText="Recruiter Name" sortBy="#{p.candidate.recruiterName}"
+					filterBy="#{p.candidate.recruiterName}" style="text-align:center;width:10%">
+					<h:outputText value="#{p.candidate.recruiterName}" />
+				</p:column>
+				
+				<p:summaryRow>
+				<p:column colspan="8" style="text-align:right">
+					<h:outputText value="#{p.candidate.recruiterName}:" style="color:teal;"/>
+				</p:column>
+				<p:column>
+					<h:outputText value="#{hrBean.calculateTotalPaidAmountForIndividual(p.candidate.recruiterName)}" style="color:teal;">
+						<f:convertNumber type="currency" currencySymbol="$" />
+					</h:outputText>
+				</p:column>
+
+				<p:column>
+					<h:outputText
+						value="RS  #{hrBean.individualIncentiveCalculation(p.candidate.recruiterName)}" style="color:teal;" />
+				</p:column>
+
+			</p:summaryRow>
+
+			</p:dataTable>
+
+		</p:panel>
+		
+		
+		<p:panel id="noDataPanelTeamLeader" style="margin-top:1%;"
+			rendered="#{empty hrBean.paymentForTeamLeader}">
+			<f:facet name="header">Team Leader Incentive</f:facet>
+			<h:outputText value="No Data Found"
+				style="font-size:25px;color:teal;margin-left:45%" />
+		</p:panel>
+		
+		
+		<p:panel style="margin-top:1%;"
+			rendered="#{not empty hrBean.paymentForTeamLeader}">
+			<f:facet name="header">Team Leader Incentive</f:facet>
+			<p:dataTable var="p" value="#{hrBean.paymentForTeamLeader}"
+				paginator="true" rows="100" resizableColumns="true" resizeMode="true"
+				widgetVar="advanceSearch" sortBy="#{p.candidate.supervisorName}"
+				paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
+				rowsPerPageTemplate="25,50,100,200,300,500"
+				rowKey="#{p.candidate.supervisorName}"
+				tableStyle="width:auto;table-layout:auto">
+
+
+				<p:column headerText="Id" sortBy="#{p.candidate.candidateId}"
+					filterBy="#{p.candidate.candidateId}" style="text-align:center;width:10%">
+					<h:outputText value="#{p.candidate.candidateId}" />
+				</p:column>
+
+				<p:column headerText="Name" sortBy="#{p.candidate.candidateName}"
+					filterBy="#{p.candidate.candidateName}" style="text-align:center;width:10%">
+					<h:outputText value="#{p.candidate.candidateName}" />
+				</p:column>
+				
+				<p:column headerText="Transaction Id" sortBy="#{p.transactionId}"
+					filterBy="#{p.transactionId}" style="text-align:center;width:10%">
+					<h:outputText value="#{p.transactionId}" />
+				</p:column>
+				
+				<p:column headerText="Total Amount" sortBy="#{p.totalAmount}"
+					filterBy="#{p.totalAmount}" style="text-align:center;width:10%">
+					<h:outputText value="#{p.totalAmount}" />
+				</p:column>
+				
+				<p:column headerText="Paid Amount" sortBy="#{p.paidAmount}"
+					filterBy="#{p.paidAmount}" style="text-align:center;width:10%">
+					<h:outputText value="#{p.paidAmount}" />
+				</p:column>
+				
+				<p:column headerText="Payment Date" sortBy="#{p.paymentDate}"
+					filterBy="#{p.paymentDate}" style="text-align:center;width:10%">
+					<h:outputText value="#{p.paymentDate}" />
+				</p:column>
+				
+				<p:column headerText="Payment Mode" sortBy="#{p.paymentMode}"
+					filterBy="#{p.paymentMode}" style="text-align:center;width:10%">
+					<h:outputText value="#{p.paymentMode}" />
+				</p:column>
+				
+				<p:column headerText="Due Amount" sortBy="#{p.dueAmount}"
+					filterBy="#{p.dueAmount}" style="text-align:center;width:10%">
+					<h:outputText value="#{p.dueAmount}" />
+				</p:column>
+				
+				<p:column headerText="Due Date" sortBy="#{p.dueDate}"
+					filterBy="#{p.dueDate}" style="text-align:center;width:10%">
+					<h:outputText value="#{p.dueDate}" />
+				</p:column>
+				
+				<p:column headerText="Recruiter Name" sortBy="#{p.candidate.recruiterName}"
+					filterBy="#{p.candidate.recruiterName}" style="text-align:center;width:10%">
+					<h:outputText value="#{p.candidate.recruiterName}" />
+				</p:column>
+				
+				<p:column headerText="Team Leader Name" sortBy="#{p.candidate.supervisorName}"
+					filterBy="#{p.candidate.supervisorName}" style="text-align:center;width:10%">
+					<h:outputText value="#{p.candidate.supervisorName}" />
+				</p:column>
+				
+				<p:summaryRow>
+				<p:column colspan="9" style="text-align:right">
+					<h:outputText value="#{p.candidate.supervisorName}:" style="color:teal;"/>
+				</p:column>
+				<p:column>
+					<h:outputText value="#{hrBean.calculateTotalPaidAmountOfTeamLeader(p.candidate.supervisorName)}" style="color:teal;">
+						<f:convertNumber type="currency" currencySymbol="$" />
+					</h:outputText>
+				</p:column>
+
+				<p:column>
+					<h:outputText
+						value="RS  #{hrBean.individualIncentiveForTeamLeaderCalculation(p.candidate.supervisorName)}" style="color:teal;" />
+				</p:column>
+
+			</p:summaryRow>
+
+			</p:dataTable>
+
+		</p:panel>
+	</h:form>
+</ui:composition>

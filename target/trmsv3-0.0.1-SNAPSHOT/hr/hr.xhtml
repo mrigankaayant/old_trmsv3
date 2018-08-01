@@ -1,0 +1,125 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+<ui:composition template="/hr/hrTemplate.xhtml">
+	<ui:define name="content">
+		<h:panelGroup id="mainBody">
+			<c:choose>
+				
+				<c:when test="#{hrBean.action == 'IMPORTCANDIDATE'}">
+					<ui:include src="/hr/importCandidateForm.xhtml" />
+				</c:when>
+				
+				<c:when test="#{hrBean.action == 'LISTCANDIDATE'}">
+					<ui:include src="/hr/listCandidate.xhtml" />
+				</c:when>
+				
+				<c:when test="#{hrBean.action == 'CANDIDATEDETAILS'}">
+					<ui:include src="/hr/candidateDetails.xhtml" />
+				</c:when>
+				
+				<c:when test="#{hrBean.action == 'ENROLLMENTDETAILS'}">
+					<ui:include src="/hr/enrollmentDetails.xhtml" />
+				</c:when>
+				
+				<c:when test="#{hrBean.action == 'TRAININGDETAILS'}">
+					<ui:include src="/hr/trainingDetails.xhtml" />
+				</c:when>
+				
+				<c:when test="#{hrBean.action == 'RESUMEDETAILS'}">
+					<ui:include src="/hr/resumeDetails.xhtml" />
+				</c:when>
+				
+				<c:when test="#{hrBean.action == 'MOCKANDGRADUATIONDETAILS'}">
+					<ui:include src="/hr/mockAndGraduationDetails.xhtml" />
+				</c:when>
+				
+				<c:when test="#{hrBean.action == 'PREHOTLISTDETAILS'}">
+					<ui:include src="/hr/preHotlistDetails.xhtml" />
+				</c:when>
+				
+				<c:when test="#{hrBean.action == 'REFERENCEDETAILS'}">
+					<ui:include src="/hr/referenceDetails.xhtml" />
+				</c:when>
+				
+				<c:when test="#{hrBean.action == 'OTHERDOCUMENTSDETAILS'}">
+					<ui:include src="/hr/otherDocumentsDetails.xhtml" />
+				</c:when>
+				
+				<c:when test="#{hrBean.action == 'HRREPORT'}">
+					<ui:include src="/hr/hrReport.xhtml" />
+				</c:when>
+				
+				<c:when test="#{hrBean.action == 'PREHOTLISTREPORT'}">
+					<ui:include src="/hr/preHotlistreport.xhtml" />
+				</c:when>
+				
+				<c:when test="#{hrBean.action == 'HOTLISTREPORT'}">
+					<ui:include src="/hr/hotlistreport.xhtml" />
+				</c:when>
+				
+				<c:when test="#{hrBean.action == 'MOCKREPORT'}">
+					<ui:include src="/hr/mockreport.xhtml" />
+				</c:when>
+				
+				<c:when test="#{hrBean.action == 'REFERENCEREPORT'}">
+					<ui:include src="/hr/referenceReport.xhtml" />
+				</c:when>
+				
+				<c:when test="#{hrBean.action == 'RESUMEREPORT'}">
+					<ui:include src="/hr/resumeReport.xhtml" />
+				</c:when>
+				
+				<c:when test="#{hrBean.action == 'TRANINGREPORT'}">
+					<ui:include src="/hr/traningReport.xhtml" />
+				</c:when>
+				
+				<c:when test="#{hrBean.action == 'ENROLLMENTREPORT'}">
+					<ui:include src="/hr/enrollmentReport.xhtml" />
+				</c:when>
+				
+				<c:when test="#{hrBean.action == 'SPORTINCENTIVE'}">
+					<ui:include src="/hr/sportIncentiveReport.xhtml" />
+				</c:when>
+				
+				<c:when test="#{hrBean.action == 'PAYMENTREPORT'}">
+					<ui:include src="/hr/paymentReport.xhtml" />
+				</c:when>
+				
+				<c:when test="#{hrBean.action == 'ENROLLMENTFORMREPORT'}">
+					<ui:include src="/hr/enrollmentFormReport.xhtml" />
+				</c:when>
+				
+				<c:when test="#{hrBean.action == 'INCENTIVEREPORT'}">
+					<ui:include src="/hr/incentiveReport.xhtml" />
+				</c:when>
+				
+				<c:when test="#{hrBean.action == 'CANDIDATEREFERENCEDETAILSDETAILS'}">
+					<ui:include src="/hr/candidateReferenceDetails.xhtml" />
+				</c:when>
+				
+				<c:when test="#{hrBean.action == 'TERMINATEFORM'}">
+					<ui:include src="/hr/terminateForm.xhtml" />
+				</c:when>
+				
+				<c:when test="#{hrBean.action == 'MAILTEMPLATEFORM'}">
+					<ui:include src="/hr/mailTemplateForm.xhtml" />
+				</c:when>
+				
+				<c:when test="#{hrBean.action == 'TERMINATEDCANDIDATES'}">
+					<ui:include src="/hr/terminatedCandidateList.xhtml" />
+				</c:when>
+				
+				<c:when test="#{hrBean.action == 'ADDCONTENT'}">
+					<ui:include src="/hr/addContentForm.xhtml" />
+				</c:when>
+				
+			</c:choose>
+
+		</h:panelGroup>
+	</ui:define>
+</ui:composition>
+
+</html>

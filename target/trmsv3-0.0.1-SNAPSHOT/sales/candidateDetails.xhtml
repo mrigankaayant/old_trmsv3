@@ -1,0 +1,537 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+	<h:form id="hotlist-button-form">
+		<p:panel style="background-color:HoneyDew;">
+			<p:commandButton value="Create Schedule" icon="fa fa-plus-square" disabled="#{salesBean.selectedCandidate.isRemoveFromHotlist}"
+				update=":mainBody" action="#{salesBean.createinterviewSchedule()}"
+				styleClass="ui-priority-primary" process="@this" />
+
+		</p:panel>
+	</h:form>
+
+
+	<h:form id="hotlist-candidate-details-form">
+
+		<c:forEach items="#{salesBean.interviewScheduleList}" var="is">
+			<p:panel style="margin-top:1%;">
+				<f:facet name="header">Interview Schedule Of #{is.vendorName}</f:facet>
+				<div class="ui-g" style="border: none;">
+
+					<div class="ui-g-12 ui-md-6 ui-lg-4" style="border: none;">
+						<h:panelGrid style="border: none;" columns="2">
+							<p:outputLabel style="font-size:16px;color:teal"
+								value="Hotlist Name:" />
+							<c:if test="${empty is.candidate.hotlistCandidateName}">
+								<h:outputText style="font-size:16px" value="N/A" />
+							</c:if>
+							<c:if test="${!empty is.candidate.hotlistCandidateName}">
+								<h:outputText style="font-size:16px"
+									value="#{is.candidate.hotlistCandidateName}" />
+							</c:if>
+
+						</h:panelGrid>
+					</div>
+
+
+					<div class="ui-g-12 ui-md-6 ui-lg-4" style="border: none;">
+						<h:panelGrid style="border: none;" columns="2">
+							<p:outputLabel style="font-size:16px;color:teal"
+								value="Candidate Email:" />
+							<c:if test="${empty is.candidate.emailId}">
+								<h:outputText style="font-size:16px" value="N/A" />
+							</c:if>
+							<c:if test="${!empty is.candidate.emailId}">
+								<h:outputText style="font-size:16px"
+									value="#{is.candidate.emailId}" />
+							</c:if>
+
+						</h:panelGrid>
+					</div>
+
+
+
+					<div class="ui-g-12 ui-md-6 ui-lg-4" style="border: none;">
+						<h:panelGrid style="border: none;" columns="2">
+							<p:outputLabel style="font-size:16px;color:teal"
+								value="Phone No:" />
+							<c:if test="${empty is.candidate.contactNo}">
+								<h:outputText style="font-size:16px" value="N/A" />
+							</c:if>
+							<c:if test="${!empty is.candidate.contactNo}">
+								<h:outputText style="font-size:16px"
+									value="#{is.candidate.contactNo}" />
+							</c:if>
+						</h:panelGrid>
+					</div>
+
+
+					<div class="ui-g-12 ui-md-6 ui-lg-4" style="border: none;">
+						<h:panelGrid style="border: none;" columns="2">
+							<p:outputLabel style="font-size:16px;color:teal"
+								value="Vendor Name:" />
+							<c:if test="${empty is.vendorName}">
+								<h:outputText style="font-size:16px" value="N/A" />
+							</c:if>
+							<c:if test="${!empty is.vendorName}">
+								<h:outputText style="font-size:16px" value="#{is.vendorName}" />
+							</c:if>
+						</h:panelGrid>
+					</div>
+
+
+					<div class="ui-g-12 ui-md-6 ui-lg-4" style="border: none;">
+						<h:panelGrid style="border: none;" columns="2">
+							<p:outputLabel style="font-size:16px;color:teal"
+								value="Vendor Contact Person Name:" />
+							<c:if test="${empty is.vendorContactPersonName}">
+								<h:outputText style="font-size:16px" value="N/A" />
+							</c:if>
+							<c:if test="${!empty is.vendorContactPersonName}">
+								<h:outputText style="font-size:16px"
+									value="#{is.vendorContactPersonName}" />
+							</c:if>
+						</h:panelGrid>
+					</div>
+
+
+					<div class="ui-g-12 ui-md-6 ui-lg-4" style="border: none;">
+						<h:panelGrid style="border: none;" columns="2">
+							<p:outputLabel style="font-size:16px;color:teal"
+								value="Vendor Contact Person Email Id:" />
+							<c:if test="${empty is.vendorContactPersonEmailid}">
+								<h:outputText style="font-size:16px" value="N/A" />
+							</c:if>
+							<c:if test="${!empty is.vendorContactPersonEmailid}">
+								<h:outputText style="font-size:16px"
+									value="#{is.vendorContactPersonEmailid}" />
+							</c:if>
+						</h:panelGrid>
+					</div>
+
+
+					<div class="ui-g-12 ui-md-6 ui-lg-4" style="border: none;">
+						<h:panelGrid style="border: none;" columns="2">
+							<p:outputLabel style="font-size:16px;color:teal"
+								value="Vendor Contact Person Phone No.:" />
+							<c:if test="${empty is.vendorContactPersonPhoneNo}">
+								<h:outputText style="font-size:16px" value="N/A" />
+							</c:if>
+							<c:if test="${!empty is.vendorContactPersonPhoneNo}">
+								<h:outputText style="font-size:16px"
+									value="#{is.vendorContactPersonPhoneNo}" />
+							</c:if>
+						</h:panelGrid>
+					</div>
+
+					<div class="ui-g-12 ui-md-6 ui-lg-4" style="border: none;">
+						<h:panelGrid style="border: none;" columns="2">
+							<p:outputLabel style="font-size:16px;color:teal"
+								value="Extension:" />
+							<c:if test="${empty is.extension}">
+								<h:outputText style="font-size:16px" value="N/A" />
+							</c:if>
+							<c:if test="${!empty is.extension}">
+								<h:outputText style="font-size:16px" value="#{is.extension}" />
+							</c:if>
+						</h:panelGrid>
+					</div>
+
+
+					<div class="ui-g-12 ui-md-6 ui-lg-4" style="border: none;">
+						<h:panelGrid style="border: none;" columns="2">
+							<p:outputLabel style="font-size:16px;color:teal"
+								value="Interview Date:" />
+							<c:if test="${empty is.interviewDate}">
+								<h:outputText style="font-size:16px" value="N/A" />
+							</c:if>
+							<c:if test="${!empty is.interviewDate}">
+								<h:outputText style="font-size:16px" value="#{is.interviewDate}" />
+							</c:if>
+						</h:panelGrid>
+					</div>
+
+
+					<div class="ui-g-12 ui-md-6 ui-lg-4" style="border: none;">
+						<h:panelGrid style="border: none;" columns="2">
+							<p:outputLabel style="font-size:16px;color:teal"
+								value="Interview Time:" />
+							<c:if test="${empty is.interviewTime}">
+								<h:outputText style="font-size:16px" value="N/A" />
+							</c:if>
+							<c:if test="${!empty is.interviewTime}">
+								<h:outputText style="font-size:16px" value="#{is.interviewTime}" />
+							</c:if>
+						</h:panelGrid>
+					</div>
+
+
+					<div class="ui-g-12 ui-md-6 ui-lg-4" style="border: none;">
+						<h:panelGrid style="border: none;" columns="2">
+							<p:outputLabel style="font-size:16px;color:teal"
+								value="Interview Type:" />
+							<c:if test="${empty is.interviewType}">
+								<h:outputText style="font-size:16px" value="N/A" />
+							</c:if>
+							<c:if test="${!empty is.interviewType}">
+								<h:outputText style="font-size:16px" value="#{is.interviewType}" />
+							</c:if>
+						</h:panelGrid>
+					</div>
+
+					<div class="ui-g-12 ui-md-6 ui-lg-4" style="border: none;">
+						<h:panelGrid style="border: none;" columns="2">
+							<p:outputLabel style="font-size:16px;color:teal"
+								value="Interview Location:" />
+							<c:if test="${empty is.interviewLocation}">
+								<h:outputText style="font-size:16px" value="N/A" />
+							</c:if>
+							<c:if test="${!empty is.interviewLocation}">
+								<h:outputText style="font-size:16px"
+									value="#{is.interviewLocation}" />
+							</c:if>
+						</h:panelGrid>
+					</div>
+
+					<div class="ui-g-12 ui-md-6 ui-lg-4" style="border: none;">
+						<h:panelGrid style="border: none;" columns="2">
+							<p:outputLabel style="font-size:16px;color:teal"
+								value="Interview Expense Amount:" />
+							<c:if test="${empty is.interviewExpenseAmount}">
+								<h:outputText style="font-size:16px" value="N/A" />
+							</c:if>
+							<c:if test="${!empty is.interviewExpenseAmount}">
+								<h:outputText style="font-size:16px"
+									value="#{is.interviewExpenseAmount}" />
+							</c:if>
+						</h:panelGrid>
+					</div>
+
+
+					<div class="ui-g-12 ui-md-6 ui-lg-4" style="border: none;">
+						<h:panelGrid style="border: none;" columns="2">
+							<p:outputLabel style="font-size:16px;color:teal"
+								value="End Client:" />
+							<c:if test="${empty is.endClient}">
+								<h:outputText style="font-size:16px" value="N/A" />
+							</c:if>
+							<c:if test="${!empty is.endClient}">
+								<h:outputText style="font-size:16px" value="#{is.endClient}" />
+							</c:if>
+						</h:panelGrid>
+					</div>
+
+
+					<div class="ui-g-12 ui-md-6 ui-lg-4" style="border: none;">
+						<h:panelGrid style="border: none;" columns="2">
+							<p:outputLabel style="font-size:16px;color:teal"
+								value="Position Id:" />
+							<c:if test="${empty is.positionId}">
+								<h:outputText style="font-size:16px" value="N/A" />
+							</c:if>
+							<c:if test="${!empty is.positionId}">
+								<h:outputText style="font-size:16px" value="#{is.positionId}" />
+							</c:if>
+						</h:panelGrid>
+					</div>
+
+
+
+					<div class="ui-g-12 ui-md-6 ui-lg-4" style="border: none;">
+						<h:panelGrid style="border: none;" columns="2">
+							<p:outputLabel style="font-size:16px;color:teal"
+								value="Work Location:" />
+							<c:if test="${empty is.workLocation}">
+								<h:outputText style="font-size:16px" value="N/A" />
+							</c:if>
+							<c:if test="${!empty is.workLocation}">
+								<h:outputText style="font-size:16px" value="#{is.workLocation}" />
+							</c:if>
+						</h:panelGrid>
+					</div>
+
+
+					<div class="ui-g-12 ui-md-6 ui-lg-4" style="border: none;">
+						<h:panelGrid style="border: none;" columns="2">
+							<p:outputLabel style="font-size:16px;color:teal"
+								value="Interview Round:" />
+							<c:if test="${empty is.interviewRound}">
+								<h:outputText style="font-size:16px" value="N/A" />
+							</c:if>
+							<c:if test="${!empty is.interviewRound}">
+								<h:outputText style="font-size:16px"
+									value="#{is.interviewRound}" />
+							</c:if>
+						</h:panelGrid>
+					</div>
+
+
+					<div class="ui-g-12 ui-md-6 ui-lg-4" style="border: none;">
+						<h:panelGrid style="border: none;" columns="2">
+							<p:outputLabel style="font-size:16px;color:teal"
+								value="Interview Id:" />
+							<c:if test="${empty is.interviewId}">
+								<h:outputText style="font-size:16px" value="N/A" />
+							</c:if>
+							<c:if test="${!empty is.interviewId}">
+								<h:outputText style="font-size:16px" value="#{is.interviewId}" />
+							</c:if>
+						</h:panelGrid>
+					</div>
+
+
+				</div>
+
+				<div class="ui-g" style="border: none;">
+					<div class="ui-g-12 ui-md-12 ui-lg-12" style="border: none;">
+						<h:panelGrid style="border: none;" columns="2">
+							<p:outputLabel style="font-size:16px;color:teal"
+								value="Feedback:" />
+							<c:if test="${empty is.feedback}">
+								<h:outputText style="font-size:16px" value="N/A" />
+							</c:if>
+							<c:if test="${!empty is.feedback}">
+								<h:outputText style="font-size:16px" value="#{is.feedback}" />
+							</c:if>
+						</h:panelGrid>
+					</div>
+				</div>
+
+				<div class="ui-g" style="border: none;">
+					<div class="ui-g-12 ui-md-12 ui-lg-12" style="border: none;">
+						<h:panelGrid style="border: none;margin-left:86%" columns="2">
+							<p:commandButton value="Edit"
+								action="#{salesBean.editInterviewSchedule(is)}"
+								update=":mainBody" icon="fa fa-fw fa-edit"
+								style="background-color:Salmon" />
+							<p:commandButton value="Re-Schedule" immediate="true"
+								style="background-color:LightSeaGreen" icon="fa fa-repeat"
+								oncomplete="PF('rescheduleDlg').show();"
+								action="#{salesBean.rescheduleForm(is)}"
+								update=":reschedule-Form" styleClass="ui-priority-primary" />
+						</h:panelGrid>
+					</div>
+				</div>
+
+
+				<p:panel rendered="#{not empty is.reSchedules}" style="border:none;">
+
+					<p:dataTable id="reschedule" var="r" value="#{is.reSchedules}">
+
+						<p:column headerText="Interview Date"
+							style="width:10%;text-align:center">
+							<h:outputText value="#{r.interviewDate}" pattern="dd-MMMM-yyyy" />
+						</p:column>
+
+						<p:column headerText="Interview Time"
+							style="width:10%;text-align:center">
+							<h:outputText value="#{r.interviewTime}" />
+						</p:column>
+
+						<p:column headerText="Interview Type"
+							style="width:10%;text-align:center">
+							<h:outputText value="#{r.interviewType}" />
+						</p:column>
+
+						<p:column headerText="Interview Location"
+							style="width:10%;text-align:center">
+							<h:outputText value="#{r.interviewLocation}" />
+						</p:column>
+
+						<p:column headerText="Edit" style="width:10%;text-align:center">
+
+							<p:commandLink action="#{salesBean.editInterviewReshedule(r)}"
+								 oncomplete="PF('editRescheduleDlg').show();"
+								update=":editReschedule-Form">
+                            <i class="fa fa-pencil"></i>
+							</p:commandLink>
+
+						</p:column>
+
+					</p:dataTable>
+
+
+
+				</p:panel>
+			</p:panel>
+		</c:forEach>
+	</h:form>
+
+
+
+	<h:form id="reschedule-Form">
+		<p:dialog header="Re-Schedule Details" id="rescheduleDetails"
+			height="250" width="900" widgetVar="rescheduleDlg" modal="true"
+			showEffect="explode" hideEffect="fade" responsive="true">
+
+			<p:panel style="margin-top:1%" id="reshedule-Details">
+				<f:facet name="header">Re-Schedule Details</f:facet>
+
+				<div class="ui-g" style="border: none">
+					<div class="ui-g-6 ui-md-6 ui-lg-6" style="border: none">
+						<h:panelGrid style="width:100%">
+							<p:outputLabel for="interview-date" value="Interview Date:" />
+							<p:calendar id="interview-date"
+								value="#{salesBean.reSchedule.interviewDate}" required="true"
+								requiredMessage="Enter Interview Date" pattern="dd-MMMM-yyyy"
+								placeholder="Interview Date" />
+							<p:message for="interview-date" />
+						</h:panelGrid>
+					</div>
+
+					<div class="ui-g-6 ui-md-6 ui-lg-6" style="border: none">
+						<h:panelGrid style="width:100%">
+							<p:outputLabel for="interview-time" value="Interview Time:" />
+							<p:inputText id="interview-time"
+								value="#{salesBean.reSchedule.interviewTime}"
+								placeholder="Interview Time" />
+							<p:message for="interview-time" />
+						</h:panelGrid>
+					</div>
+				</div>
+
+				<div class="ui-g" style="border: none">
+
+					<div class="ui-g-6 ui-md-6 ui-lg-6" style="border: none">
+						<h:panelGrid style="width:100%">
+							<p:outputLabel for="interview-type" value="Interview Type:" />
+							<p:selectOneMenu id="interview-type"
+								value="#{salesBean.reSchedule.interviewType}" required="true"
+								requiredMessage="Select Interview Type"
+								style="width:93%!important">
+								<f:selectItem itemLabel="----Select----" itemValue="" />
+								<f:selectItem itemLabel="TELEPHONIC" itemValue="TELEPHONIC" />
+								<f:selectItem itemLabel="SKYPE" itemValue="SKYPE" />
+								<f:selectItem itemLabel="FACE TO FACE" itemValue="FACE TO FACE" />
+							</p:selectOneMenu>
+							<p:message for="interview-type" />
+						</h:panelGrid>
+					</div>
+
+					<div class="ui-g-6 ui-md-6 ui-lg-6" style="border: none">
+						<h:panelGrid style="width:100%">
+							<p:outputLabel for="interview-location"
+								value="Interview Location:" />
+							<p:inputText id="interview-location"
+								value="#{salesBean.reSchedule.interviewLocation}"
+								placeholder="Interview Location" />
+							<p:message for="interview-location" />
+						</h:panelGrid>
+					</div>
+				</div>
+
+				<f:facet name="footer">
+					<div style="text-align: center">
+						<p:commandButton value="Save"
+							action="#{salesBean.saveReschedule()}"
+							update=":hotlist-candidate-details-form,reshedule-Details"
+							oncomplete="handleRescheduleCreate(xhr, status, args)" />
+					</div>
+				</f:facet>
+			</p:panel>
+		</p:dialog>
+	</h:form>
+
+
+	<h:form id="editReschedule-Form">
+		<p:dialog header="Update Re-Schedule Details"
+			id="editRescheduleDetails" height="250" width="900"
+			widgetVar="editRescheduleDlg" modal="true" showEffect="explode"
+			hideEffect="fade" responsive="true">
+
+			<p:panel style="margin-top:1%" id="edit-payment-Details">
+				<f:facet name="header">Re-Schedule Details</f:facet>
+
+				<div class="ui-g" style="border: none">
+					<div class="ui-g-6 ui-md-6 ui-lg-6" style="border: none">
+						<h:panelGrid style="width:100%">
+							<p:outputLabel for="interview-date" value="Interview Date:" />
+							<p:calendar id="interview-date"
+								value="#{salesBean.reSchedule.interviewDate}" required="true"
+								requiredMessage="Enter Interview Date" pattern="dd-MMMM-yyyy"
+								placeholder="Interview Date" />
+							<p:message for="interview-date" />
+						</h:panelGrid>
+					</div>
+
+					<div class="ui-g-6 ui-md-6 ui-lg-6" style="border: none">
+						<h:panelGrid style="width:100%">
+							<p:outputLabel for="interview-time" value="Interview Time:" />
+							<p:inputText id="interview-time"
+								value="#{salesBean.reSchedule.interviewTime}"
+								placeholder="Interview Time" />
+							<p:message for="interview-time" />
+						</h:panelGrid>
+					</div>
+				</div>
+
+				<div class="ui-g" style="border: none">
+
+					<div class="ui-g-6 ui-md-6 ui-lg-6" style="border: none">
+						<h:panelGrid style="width:100%">
+							<p:outputLabel for="interview-type" value="Interview Type:" />
+							<p:selectOneMenu id="interview-type"
+								value="#{salesBean.reSchedule.interviewType}" required="true"
+								requiredMessage="Select Interview Type"
+								style="width:93%!important">
+								<f:selectItem itemLabel="----Select----" itemValue="" />
+								<f:selectItem itemLabel="TELEPHONIC" itemValue="TELEPHONIC" />
+								<f:selectItem itemLabel="SKYPE" itemValue="SKYPE" />
+								<f:selectItem itemLabel="FACE TO FACE" itemValue="FACE TO FACE" />
+							</p:selectOneMenu>
+							<p:message for="interview-type" />
+						</h:panelGrid>
+					</div>
+
+					<div class="ui-g-6 ui-md-6 ui-lg-6" style="border: none">
+						<h:panelGrid style="width:100%">
+							<p:outputLabel for="interview-location"
+								value="Interview Location:" />
+							<p:inputText id="interview-location"
+								value="#{salesBean.reSchedule.interviewLocation}"
+								placeholder="Interview Location" />
+							<p:message for="interview-location" />
+						</h:panelGrid>
+					</div>
+				</div>
+
+				<f:facet name="footer">
+					<div style="text-align: center">
+						<p:commandButton value="Save"
+							action="#{salesBean.saveReschedule()}"
+							update=":hotlist-candidate-details-form,edit-payment-Details"
+							oncomplete="handleRescheduleEdit(xhr, status, args)" />
+					</div>
+				</f:facet>
+			</p:panel>
+		</p:dialog>
+	</h:form>
+
+
+	<script type="text/javascript">
+    function handleRescheduleCreate(xhr, status, args) {
+        if(args.validationFailed) {
+            PF('rescheduleDlg').jq.effect("shake", {times:10}, 100);
+        }
+        else {
+            PF('rescheduleDlg').hide();
+        }
+    }
+
+
+    function handleRescheduleEdit(xhr, status, args) {
+        if(args.validationFailed) {
+            PF('editRescheduleDlg').jq.effect("shake", {times:10}, 100);
+        }
+        else {
+            PF('editRescheduleDlg').hide();
+        }
+    }
+
+    </script>
+
+</ui:composition>

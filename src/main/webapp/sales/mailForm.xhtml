@@ -1,0 +1,170 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+
+	<h:form id="form">
+
+		<p:panel style="margin-top:1%;">
+			<f:facet name="header">Write Mail</f:facet>
+
+
+			<div class="ui-g">
+				<div class="ui-g-12 ui-md-6 ui-lg-12">
+					<h:panelGrid style="width:100%">
+						<p:outputLabel for="to" value="TO:" />
+						<p:inputText id="to" value="#{salesBean.mailDto.toEmail}"
+							required="true" requiredMessage="Enter Subject" placeholder="To">
+						</p:inputText>
+						<p:message for="to" />
+					</h:panelGrid>
+				</div>
+			</div>
+
+			<div class="ui-g">
+				<div class="ui-g-12 ui-md-6 ui-lg-12">
+					<h:panelGrid style="width:100%">
+						<p:outputLabel for="template" value="Choose Template:" />
+						<p:selectOneRadio id="template"
+							value="#{salesBean.mailDto.template}" required="true"
+							requiredMessage="Choose Template"
+							validator="#{salesBean.chooseSubject}">
+							<f:selectItem itemLabel="Submit Without contact info and rate"
+								itemValue="Template 1" />
+							<f:selectItem itemLabel="Submit with contact details and rate"
+								itemValue="Template 2" />
+							<p:ajax update="subject" event="click" />
+						</p:selectOneRadio>
+						<p:message for="template" />
+					</h:panelGrid>
+				</div>
+			</div>
+
+			<div class="ui-g">
+				<div class="ui-g-12 ui-md-3 ui-lg-3">
+					<h:panelGrid style="width:100%">
+						<p:outputLabel for="from" value="From:" />
+						<p:inputText id="from" value="#{salesBean.mailDto.userName}"
+							required="true" requiredMessage="Enter Subject"
+							placeholder="From" readonly="true">
+						</p:inputText>
+						<p:message for="from" />
+					</h:panelGrid>
+				</div>
+
+				<div class="ui-g-12 ui-md-9 ui-lg-9">
+					<h:panelGrid style="width:100%">
+						<p:outputLabel for="subject" value="Subject:" />
+						<p:inputText id="subject" value="#{salesBean.mailDto.subject}"
+							required="true" requiredMessage="Enter Subject" readonly="true"
+							placeholder="Subject">
+						</p:inputText>
+						<p:message for="subject" />
+					</h:panelGrid>
+				</div>
+			</div>
+
+			<div class="ui-g">
+				<div class="ui-g-6 ui-md-6 ui-lg-6">
+					<h:panelGrid style="width:100%"
+						rendered="#{salesBean.mailDto.role eq 'SALES MANAGER'}">
+						<p:outputLabel for="doc" value="Select Document:" />
+						<p:selectManyCheckbox id="doc" layout="grid" columns="5"
+							value="#{salesBean.documents}">
+							<f:selectItem itemLabel="Resume" itemValue="Resume" />
+							<f:selectItem itemLabel="Visa" itemValue="Visa" />
+							<f:selectItem itemLabel="Enrollment Form"
+								itemValue="Enrollment Form" />
+							<f:selectItem itemLabel="Offer Letter" itemValue="Offter Letter" />
+							<f:selectItem itemLabel="Feedback Form"
+								itemValue="Training Feedback Form" />
+							<f:selectItem itemLabel="Datasheet" itemValue="Datasheet Form" />
+							<f:selectItem itemLabel="Reference Check"
+								itemValue="Reference Check form" />
+							<f:selectItem itemLabel="PSR Form" itemValue="PSR form" />
+							<f:selectItem itemLabel="Questioner Form"
+								itemValue="QUESTIONER form" />
+							<f:selectItem itemLabel="Passport" itemValue="Passport" />
+							<f:selectItem itemLabel="Voter Card" itemValue="Voter Card" />
+							<f:selectItem itemLabel="Driving Licence"
+								itemValue="Driving Licence" />
+							<f:selectItem itemLabel="SSN Form" itemValue="SSN Form" />
+							<f:selectItem itemLabel="OPT Letter" itemValue="OPT Letter" />
+							<f:selectItem itemLabel="CPT Letter" itemValue="CPT Letter" />
+							<f:selectItem itemLabel="I983 Form" itemValue="I983 Form" />
+							<f:selectItem itemLabel="I9 Form" itemValue="I9 Form" />
+							<f:selectItem itemLabel="W2 Form" itemValue="W2 Form" />
+							<f:selectItem itemLabel="W4 Form" itemValue="W4 Form" />
+						</p:selectManyCheckbox>
+						<p:message for="doc" />
+					</h:panelGrid>
+
+
+
+					<h:panelGrid style="width:100%"
+						rendered="#{salesBean.mailDto.role eq 'OTHERS'}">
+						<p:outputLabel for="doc2" value="Select Document:" />
+						<p:selectManyCheckbox id="doc2" layout="grid" columns="5"
+							value="#{salesBean.documents}">
+							<f:selectItem itemLabel="Resume" itemValue="Resume" />
+							<f:selectItem itemLabel="Visa" itemValue="Visa" />
+						</p:selectManyCheckbox>
+						<p:message for="doc2" />
+					</h:panelGrid>
+
+
+
+				</div>
+
+				<div class="ui-g-6 ui-md-6 ui-lg-6">
+					<div>
+						<h:panelGrid style="width:100%">
+							<p:outputLabel for="documents" value="Upload Documents" />
+							<p:fileUpload id="documents"
+								fileUploadListener="#{salesBean.mailDocumentsUpload}"
+								update="file" mode="advanced" multiple="true" />
+							<p:message for="documents" />
+						</h:panelGrid>
+					</div>
+
+					<div>
+						<h:panelGrid id="file" columns="2" cellpadding="0" cellspacing="2"
+							style="margin-left:27.5%;">
+							<p:outputLabel value=" Uploaded Documents:"
+								rendered="#{salesBean.mailFileName.size() > '0'}" />
+							<br></br>
+							<c:forEach items="${salesBean.mailFileName}" var="doc">
+								<p:outputLabel style="font-weight: bold;color:Teal"
+									value="#{doc}" />
+								<p:commandLink
+									actionListener="#{salesBean.mailAttachedFileDelete}"
+									update="file" style="font-weight: bold;color:red"
+									value="delete">
+									<f:param name="deletefile" value="#{doc}" />
+								</p:commandLink>
+							</c:forEach>
+						</h:panelGrid>
+					</div>
+
+				</div>
+			</div>
+
+
+			<f:facet name="footer">
+				<p:commandButton value="back" icon="fa fa-chevron-left"
+					update=":mainBody" action="#{salesBean.candidateDetails()}"
+					styleClass="ui-priority-primary" process="@this" />
+				<p:commandButton value="Preview" icon="fa fa-paper-plane"
+					action="#{salesBean.previewMessage()}"
+					style="background-color:Green" onclick="PF('statusDialog').show()"
+					oncomplete="PF('statusDialog').hide()" update=":mainBody" />
+			</f:facet>
+
+		</p:panel>
+
+	</h:form>
+
+</ui:composition>

@@ -1,0 +1,253 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+
+	<h:form>
+
+
+		<p:dataTable id="hotlistTable" var="can"
+			value="#{salesBean.hotlistCandidateLazyModel}" paginator="true"
+			rows="15" resizableColumns="true" resizeMode="true"
+			widgetVar="advanceSearch" sortBy="#{can.dateOnHotlist}"
+			sortOrder="descending"
+			paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
+			rowsPerPageTemplate="15,50,100,200,300,500,1000,2000,3000,4000,5000,20000"
+			selection="#{salesBean.selectedCandidates}"
+			rowKey="#{can.candidateId}" lazy="true"
+			tableStyle="width:auto;table-layout:auto">
+
+
+			<f:facet name="header">
+				<div align="left">
+					<p:commandLink id="mail" action="#{salesBean.mailForm}"
+						style="padding-right:1%;color:teal" update=":mainBody">
+						<i class="fa fa-envelope fa-1x"></i>
+					</p:commandLink>
+					<p:tooltip for="mail" value="Mail To Vendor" trackMouse="true"
+						style="font-size:20px" />
+
+					<p:commandLink id="remove" action="#{salesBean.reasonForm()}"
+						style="color:red;padding-right:1%;"
+						oncomplete="PF('reasonDlg').show();"
+						update=":candidate-remove-reason-form">
+						<i class="fa fa-times fa-1x"></i>
+					</p:commandLink>
+					<p:tooltip for="remove" value="Remove" trackMouse="true"
+						style="font-size:20px" />
+
+					<p:commandLink id="mail-candidate"
+						action="#{salesBean.mailFormForCandidate()}"
+						style="padding-right:1%;color:teal" update=":mainBody">
+						<i class="fa fa-envelope fa-1x"></i>
+					</p:commandLink>
+					<p:tooltip for="mail-candidate" value="Mail To Candidate"
+						trackMouse="true" style="font-size:20px" />
+
+					<h:commandLink id="download" style="color:blue;"
+						rendered="#{salesBean.loginBean.hasRole('SALES')}">
+						<i class="fa fa-download fa-1x"></i>
+						<p:dataExporter type="xls" target="hotlistTable"
+							fileName="hotlist_candidate_list" pageOnly="true" />
+					</h:commandLink>
+					<p:tooltip for="download" value="Download Data"
+						rendered="#{salesBean.loginBean.hasRole('SALES')}"
+						trackMouse="true" style="font-size:20px" />
+
+					<h:outputText value="Hot List" style="padding-left:40%" />
+
+					<p:commandLink id="referesh"
+						oncomplete="PF('advanceSearch').clearFilters()"
+						style="padding-left:47.3%;color:teal" process="@this">
+						<i class="fa fa-refresh fa-1x"></i>
+					</p:commandLink>
+					<p:tooltip for="referesh" value="Referesh Data Table"
+						trackMouse="true" style="font-size:20px" />
+
+				</div>
+			</f:facet>
+
+			<p:column selectionMode="multiple" exportable="false"
+				style="width:16px;text-align:center" />
+
+			<p:column headerText="Doc" exportable="false">
+				<h:commandLink action="#{salesBean.showAllDocuments(can)}"
+					immediate="true" style="color:blue;" update=":mainBody">
+					<h:graphicImage value="/resources/assets/icon/download.png"></h:graphicImage>
+				</h:commandLink>
+			</p:column>
+
+			<p:column headerText="Priority" sortBy="#{can.priority}"
+				filterBy="#{can.priority}">
+				<h:outputText value="#{can.priority}" />
+			</p:column>
+
+			<p:column headerText="Days">
+				<h:outputText value="#{salesBean.hotlistCounter(can)}" />
+			</p:column>
+
+
+			<p:column headerText="Name" sortBy="#{can.hotlistCandidateName}"
+				filterBy="#{can.hotlistCandidateName}">
+				<h:commandLink action="#{salesBean.selectCandidate(can)}"
+					style="color:blue;" update=":mainBody">
+					    #{can.hotlistCandidateName}
+					</h:commandLink>
+				<h:outputText style="visibility:hidden;"
+					value="#{can.hotlistCandidateName}" />
+			</p:column>
+
+			<p:column headerText="Email" sortBy="#{can.emailId}"
+				filterBy="#{can.emailId}">
+				<h:outputText value="#{can.emailId}" />
+			</p:column>
+
+			<p:column headerText="Con. No" sortBy="#{can.contactNo}"
+				filterBy="#{can.contactNo}">
+				<h:outputText value="#{can.contactNo}" />
+			</p:column>
+
+			<p:column headerText="Skill" sortBy="#{can.primarySkill}"
+				filterBy="#{can.primarySkill}">
+				<f:facet name="filter">
+					<p:selectOneMenu onchange="PF('advanceSearch').filter()">
+						<f:selectItem itemLabel="---Select Skill---" itemValue=" "
+							noSelectionOption="true" />
+						<f:selectItems value="#{appDataBean.courseList}" var="c"
+							itemLabel="#{c}" itemValue="#{c}" />
+					</p:selectOneMenu>
+				</f:facet>
+				<h:outputText value="#{can.primarySkill}" />
+			</p:column>
+
+			<p:column headerText="Exp" sortBy="#{can.yearsOfExperience}"
+				filterBy="#{can.yearsOfExperience}">
+				<h:outputText value="#{can.yearsOfExperience}" />
+			</p:column>
+
+			<p:column headerText="Rate" sortBy="#{can.billRate}"
+				filterBy="#{can.billRate}">
+				<h:outputText value="#{can.billRate}" />
+			</p:column>
+
+			<p:column headerText="Visa" sortBy="#{can.visaStatus}"
+				filterBy="#{can.visaStatus}">
+				<f:facet name="filter">
+					<p:selectOneMenu onchange="PF('advanceSearch').filter()">
+						<f:selectItem itemLabel="---Select Visa---" itemValue=" "
+							noSelectionOption="true" />
+						<f:selectItems value="#{appDataBean.visaList}" var="v"
+							itemLabel="#{v}" itemValue="#{v}" />
+					</p:selectOneMenu>
+				</f:facet>
+				<h:outputText value="#{can.visaStatus}" />
+			</p:column>
+
+
+			<p:column headerText="Curr Loc." sortBy="#{can.currentLoc}"
+				filterBy="#{can.currentLoc}">
+				<h:outputText value="#{can.currentLoc}" />
+			</p:column>
+
+			<p:column headerText="Pref Loc." sortBy="#{can.preferredLoc}"
+				filterBy="#{can.preferredLoc}">
+				<h:outputText value="#{can.preferredLoc}" />
+			</p:column>
+
+
+
+			<p:column headerText="Avaiability" sortBy="#{can.availability}"
+				filterBy="#{can.availability}">
+				<h:outputText value="#{can.availability}" />
+			</p:column>
+
+			<p:column headerText="Alt Email" sortBy="#{can.alternateEmailId}"
+				filterBy="#{can.alternateEmailId}">
+				<h:outputText value="#{can.alternateEmailId}" />
+			</p:column>
+
+			<p:column headerText="Alt Phone No" sortBy="#{can.alternativePhone}"
+				filterBy="#{can.alternativePhone}">
+				<h:outputText value="#{can.alternativePhone}" />
+			</p:column>
+
+			<p:column headerText="Domain" sortBy="#{can.domain}"
+				filterBy="#{can.domain}">
+				<h:outputText value="#{can.domain}" />
+			</p:column>
+
+			<p:column headerText="Date On Hotlist" sortBy="#{can.dateOnHotlist}"
+				filterBy="#{can.dateOnHotlist}" style="text-align:center;width:10%">
+				<f:facet name="filter">
+					<p:calendar pattern="MM/dd/yyyy" showButtonPanel="true">
+						<p:ajax event="dateSelect"
+							oncomplete="PF('advanceSearch').filter()" />
+					</p:calendar>
+				</f:facet>
+
+				<h:outputText value="#{can.dateOnHotlist}">
+					<f:convertDateTime pattern="MM/dd/yyyy" />
+				</h:outputText>
+			</p:column>
+			
+			
+			<p:column headerText="E Counter(Days)">
+				<h:outputText value="#{salesBean.enrollmentCounter(can)}" />
+			</p:column>
+
+
+		</p:dataTable>
+
+
+	</h:form>
+
+
+	<h:form id="candidate-remove-reason-form">
+		<p:dialog header="Reason For Remove" id="reasonDetails" height="250"
+			width="900" widgetVar="reasonDlg" modal="true" showEffect="explode"
+			hideEffect="fade" responsive="true">
+
+			<p:panel style="margin-top:1%" id="reason-Details">
+
+				<div class="ui-g" style="border: none">
+					<div class="ui-g-12 ui-md-12 ui-lg-12" style="border: none">
+						<h:panelGrid style="width:100%">
+							<p:outputLabel for="reason" value="Reason:" />
+							<p:inputTextarea id="reason" rows="9" value="#{salesBean.reason}"
+								required="true" requiredMessage="Enter Reason For Remove" />
+							<p:message for="reason" />
+						</h:panelGrid>
+					</div>
+
+				</div>
+
+				<f:facet name="footer">
+					<div style="text-align: center">
+						<p:commandButton value="Remove"
+							action="#{salesBean.removeCandidateFromHotlist()}"
+							update=":mainBody,reason-Details"
+							oncomplete="handleReason(xhr, status, args)" />
+					</div>
+				</f:facet>
+			</p:panel>
+		</p:dialog>
+	</h:form>
+
+
+
+	<script type="text/javascript">
+    function handleReason(xhr, status, args) {
+        if(args.validationFailed) {
+            PF('reasonDlg').jq.effect("shake", {times:10}, 100);
+        }
+        else {
+            PF('reasonDlg').hide();
+        }
+    }
+
+    </script>
+
+
+</ui:composition>

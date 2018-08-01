@@ -1,0 +1,181 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+	<h:form>
+		<p:panel style="background-color:HoneyDew;">
+
+			<p:commandButton value="Enrollment Report" icon="fa fa-bar-chart"
+				update=":mainBody" action="#{hrBean.enrollmentReport()}"
+				styleClass="ui-priority-primary" process="@this" />
+
+			<p:commandButton value="Enrollment Form Report"
+				icon="fa fa-bar-chart" update=":mainBody"
+				action="#{hrBean.enrollmentFormReport()}"
+				styleClass="ui-priority-primary" process="@this" />
+
+			<p:commandButton value="Payment Report" icon="fa fa-bar-chart"
+				update=":mainBody" action="#{hrBean.paymentReport()}"
+				styleClass="ui-priority-primary" process="@this" />
+
+			<p:commandButton value="Sport Incentive Report"
+				icon="fa fa-bar-chart" update=":mainBody"
+				action="#{hrBean.sportIncentiveReport()}"
+				styleClass="ui-priority-primary" process="@this" />
+
+			<p:commandButton value="Incentive Report" icon="fa fa-bar-chart"
+				update=":mainBody" action="#{hrBean.incentiveReport()}"
+				styleClass="ui-priority-primary" process="@this" />
+
+			<p:commandButton value="Traning Report" icon="fa fa-bar-chart"
+				update=":mainBody" action="#{hrBean.traningReport()}"
+				styleClass="ui-priority-primary" process="@this" />
+
+			<p:commandButton value="Resume Report" icon="fa fa-bar-chart"
+				update=":mainBody" action="#{hrBean.resumeReport()}"
+				styleClass="ui-priority-primary" process="@this" />
+
+			<p:commandButton value="Mock Report" icon="fa fa-bar-chart"
+				update=":mainBody" action="#{hrBean.mockReport()}"
+				styleClass="ui-priority-primary" process="@this" />
+
+			<p:commandButton value="Reference Report" icon="fa fa-bar-chart"
+				update=":mainBody" action="#{hrBean.referenceReport()}"
+				styleClass="ui-priority-primary" process="@this" />
+
+			<p:commandButton value="Pre-Hotlist Report" icon="fa fa-bar-chart"
+				update=":mainBody" action="#{hrBean.prehotlistReport()}"
+				styleClass="ui-priority-primary" process="@this" />
+
+			<p:commandButton value="Hotlist Report" icon="fa fa-bar-chart"
+				update=":mainBody" action="#{hrBean.hotlistReport()}"
+				styleClass="ui-priority-primary" process="@this" />
+
+		</p:panel>
+
+		<p:panel style="margin-top:1%;" id="referenceReportPanel">
+			<f:facet name="header">Refernce Details</f:facet>
+
+			<c:forEach items="#{hrBean.references}" var="r">
+			
+			<div class="ui-g">
+
+				<div class="ui-g-12 ui-md-6 ui-lg-4" style="border: none;">
+					<h:panelGrid style="border: none;" columns="2">
+						<p:outputLabel style="font-size:16px;color:teal" value="Project Name:" />
+						<c:if test="${empty r.projectName}">
+							<h:outputText style="font-size:16px" value="N/A" />
+						</c:if>
+						<c:if test="${!empty r.projectName}">
+							<h:outputText style="font-size:16px"
+								value="#{r.projectName}" />
+						</c:if>
+					</h:panelGrid>
+				</div>
+				
+				
+				<div class="ui-g-12 ui-md-6 ui-lg-4" style="border: none;">
+					<h:panelGrid style="border: none;" columns="2">
+						<p:outputLabel style="font-size:16px;color:teal" value="Project Location:" />
+						<c:if test="${empty r.projectLocation}">
+							<h:outputText style="font-size:16px" value="N/A" />
+						</c:if>
+						<c:if test="${!empty r.projectLocation}">
+							<h:outputText style="font-size:16px"
+								value="#{r.projectLocation}" />
+						</c:if>
+					</h:panelGrid>
+				</div>
+				
+				
+				<div class="ui-g-12 ui-md-6 ui-lg-4" style="border: none;">
+					<h:panelGrid style="border: none;" columns="2">
+						<p:outputLabel style="font-size:16px;color:teal" value="Project Manager Name:" />
+						<c:if test="${empty r.reportingManagerName}">
+							<h:outputText style="font-size:16px" value="N/A" />
+						</c:if>
+						<c:if test="${!empty r.reportingManagerName}">
+							<h:outputText style="font-size:16px"
+								value="#{r.reportingManagerName}" />
+						</c:if>
+					</h:panelGrid>
+				</div>
+				
+				
+				<div class="ui-g-12 ui-md-6 ui-lg-4" style="border: none;">
+					<h:panelGrid style="border: none;" columns="2">
+						<p:outputLabel style="font-size:16px;color:teal" value="Reference Name:" />
+						<c:if test="${empty r.referenceName}">
+							<h:outputText style="font-size:16px" value="N/A" />
+						</c:if>
+						<c:if test="${!empty r.referenceName}">
+							<h:outputText style="font-size:16px"
+								value="#{r.referenceName}" />
+						</c:if>
+					</h:panelGrid>
+				</div>
+				
+				<div class="ui-g-12 ui-md-6 ui-lg-4" style="border: none;">
+					<h:panelGrid style="border: none;" columns="2">
+						<p:outputLabel style="font-size:16px;color:teal" value="Reference Phone No:" />
+						<c:if test="${empty r.referencePhoneNo}">
+							<h:outputText style="font-size:16px" value="N/A" />
+						</c:if>
+						<c:if test="${!empty r.referencePhoneNo}">
+							<h:outputText style="font-size:16px"
+								value="#{r.referencePhoneNo}" />
+						</c:if>
+					</h:panelGrid>
+				</div>
+				
+				
+				<div class="ui-g-12 ui-md-6 ui-lg-4" style="border: none;">
+					<h:panelGrid style="border: none;" columns="2">
+						<p:outputLabel style="font-size:16px;color:teal" value="Reference Email Id:" />
+						<c:if test="${empty r.referenceEmailId}">
+							<h:outputText style="font-size:16px" value="N/A" />
+						</c:if>
+						<c:if test="${!empty r.referenceEmailId}">
+							<h:outputText style="font-size:16px"
+								value="#{r.referenceEmailId}" />
+						</c:if>
+					</h:panelGrid>
+				</div>
+				
+				<div class="ui-g-12 ui-md-6 ui-lg-4" style="border: none;">
+					<h:panelGrid style="border: none;" columns="2">
+						<p:outputLabel style="font-size:16px;color:teal" value="Team Size:" />
+						<c:if test="${empty r.teamSize}">
+							<h:outputText style="font-size:16px" value="N/A" />
+						</c:if>
+						<c:if test="${!empty r.teamSize}">
+							<h:outputText style="font-size:16px"
+								value="#{r.teamSize}" />
+						</c:if>
+					</h:panelGrid>
+				</div>
+				
+				
+				<div class="ui-g-12 ui-md-6 ui-lg-4" style="border: none;">
+					<h:panelGrid style="border: none;" columns="2">
+						<p:outputLabel style="font-size:16px;color:teal" value="Duration:" />
+						<c:if test="${empty r.duration}">
+							<h:outputText style="font-size:16px" value="N/A" />
+						</c:if>
+						<c:if test="${!empty r.duration}">
+							<h:outputText style="font-size:16px"
+								value="#{r.duration}" />
+						</c:if>
+					</h:panelGrid>
+				</div>
+				
+				</div>
+				
+			</c:forEach>
+		</p:panel>
+	</h:form>
+
+</ui:composition>

@@ -1,0 +1,1278 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+
+	<h:form id="enrollment-field-panel">
+		<p:panel style="background-color:HoneyDew;">
+			<p:commandButton value="Enrollment" icon="fa fa-pencil"
+				update=":mainBody" action="#{hrBean.enrollmentDetails()}"
+				onclick="PF('statusDialog').show()"
+				oncomplete="PF('statusDialog').hide()"
+				styleClass="ui-priority-primary" process="@this" />
+
+			<p:commandButton value="Training" icon="fa fa-slideshare"
+				update=":mainBody" action="#{hrBean.trainingDetails()}"
+				onclick="PF('statusDialog').show()"
+				oncomplete="PF('statusDialog').hide()"
+				styleClass="ui-priority-primary" process="@this" />
+
+			<p:commandButton value="Resume" icon="fa fa-file-text-o"
+				update=":mainBody" action="#{hrBean.resumeDetails()}"
+				onclick="PF('statusDialog').show()"
+				oncomplete="PF('statusDialog').hide()"
+				styleClass="ui-priority-primary" process="@this" />
+
+			<p:commandButton value="Mock-Graduation" icon="fa fa-bar-chart"
+				update=":mainBody" action="#{hrBean.mockAndGraduationDetails()}"
+				onclick="PF('statusDialog').show()"
+				oncomplete="PF('statusDialog').hide()"
+				styleClass="ui-priority-primary" process="@this" />
+
+			<p:commandButton value="Reference" icon="fa fa-street-view"
+				update=":mainBody" action="#{hrBean.referenceDetails()}"
+				onclick="PF('statusDialog').show()"
+				oncomplete="PF('statusDialog').hide()"
+				styleClass="ui-priority-primary" process="@this" />
+
+
+			<p:commandButton value="Pre-hotlist" icon="fa fa-list-ol"
+				update=":mainBody" action="#{hrBean.preHotlistDetails()}"
+				onclick="PF('statusDialog').show()"
+				oncomplete="PF('statusDialog').hide()"
+				styleClass="ui-priority-primary" process="@this" />
+
+			<p:commandButton value="Other Documents" icon="fa fa-file"
+				update=":mainBody" action="#{hrBean.documentsDetails()}"
+				onclick="PF('statusDialog').show()"
+				oncomplete="PF('statusDialog').hide()"
+				styleClass="ui-priority-primary" process="@this" />
+
+			<p:commandButton value="Mail Template" icon="fa fa-envelope"
+				update=":mainBody" action="#{hrBean.mailTemplateForm()}"
+				onclick="PF('statusDialog').show()"
+				oncomplete="PF('statusDialog').hide()"
+				styleClass="ui-priority-primary" process="@this" />
+
+			<p:commandButton value="Terminate" icon="fa fa-times"
+				update=":mainBody" action="#{hrBean.terminateForm()}"
+				onclick="PF('statusDialog').show()"
+				oncomplete="PF('statusDialog').hide()"
+				styleClass="ui-priority-primary" process="@this"
+				style="background-color:red" />
+
+		</p:panel>
+
+		<p:panel style="margin-top:0.5%;"
+			rendered="#{hrBean.enrollmentLabelPanel}">
+			<f:facet name="header">
+					Enrolment Related Information
+				</f:facet>
+			<div class="ui-g" style="border: none;">
+
+				<div class="ui-g-12 ui-md-6 ui-lg-4" style="border: none;">
+					<h:panelGrid style="border: none;" columns="2">
+						<p:outputLabel style="font-size:16px;color:teal" value="Name :" />
+						<h:outputText style="font-size:16px"
+							value="#{hrBean.candidate.candidateName}" />
+					</h:panelGrid>
+				</div>
+
+				<div class="ui-g-12 ui-md-6 ui-lg-4" style="border: none;">
+					<h:panelGrid style="border: none;" columns="2">
+						<p:outputLabel style="font-size:16px;color:teal"
+							value="Contact Number :" />
+						<h:outputText style="font-size:16px"
+							value="#{hrBean.candidate.contactNo}" />
+					</h:panelGrid>
+				</div>
+
+				<div class="ui-g-12 ui-md-6 ui-lg-4" style="border: none;">
+					<h:panelGrid style="border: none;" columns="2">
+						<p:outputLabel style="font-size:16px;color:teal"
+							value="Email ID :" />
+						<h:outputText style="font-size:16px"
+							value="#{hrBean.candidate.emailId}" />
+					</h:panelGrid>
+				</div>
+
+				<div class="ui-g-12 ui-md-6 ui-lg-4" style="border: none;">
+					<h:panelGrid style="border: none;" columns="2">
+						<p:outputLabel style="font-size:16px;color:teal" value="Service :" />
+						<c:if test="${empty hrBean.candidate.service}">
+							<h:outputText style="font-size:16px" value="N/A" />
+						</c:if>
+						<c:if test="${!empty hrBean.candidate.service}">
+							<h:outputText style="font-size:16px"
+								value="#{hrBean.candidate.service}" />
+						</c:if>
+
+					</h:panelGrid>
+				</div>
+
+				<div class="ui-g-12 ui-md-6 ui-lg-4" style="border: none;">
+					<h:panelGrid style="border: none;" columns="2">
+						<p:outputLabel style="font-size:16px;color:teal"
+							value="Primary Skill:" />
+						<c:if test="${empty hrBean.candidate.primarySkill}">
+							<h:outputText style="font-size:16px" value="N/A" />
+						</c:if>
+						<c:if test="${!empty hrBean.candidate.primarySkill}">
+							<h:outputText style="font-size:16px"
+								value="#{hrBean.candidate.primarySkill}" />
+						</c:if>
+					</h:panelGrid>
+				</div>
+
+				<div class="ui-g-12 ui-md-6 ui-lg-4" style="border: none;">
+					<h:panelGrid style="border: none;" columns="2">
+						<p:outputLabel style="font-size:16px;color:teal"
+							value="Enrollment Date :" />
+						<c:if test="${empty hrBean.candidate.enrollmentDate}">
+							<h:outputText style="font-size:16px" value="N/A" />
+						</c:if>
+						<c:if test="${!empty hrBean.candidate.enrollmentDate}">
+							<h:outputText style="font-size:16px"
+								value="#{hrBean.candidate.enrollmentDate}">
+								<f:convertDateTime pattern="dd-MMMM-yyyy" />
+							</h:outputText>
+						</c:if>
+
+					</h:panelGrid>
+				</div>
+
+				<div class="ui-g-12 ui-md-6 ui-lg-4" style="border: none;">
+					<h:panelGrid style="border: none;" columns="2">
+						<p:outputLabel style="font-size:16px;color:teal"
+							value="Enrollment Status:" />
+						<c:if test="${empty hrBean.candidate.enrollmentFormStatus}">
+							<h:outputText style="font-size:16px" value="N/A" />
+						</c:if>
+						<c:if test="${!empty hrBean.candidate.enrollmentFormStatus}">
+							<h:outputText style="font-size:16px"
+								value="#{hrBean.candidate.enrollmentFormStatus}" />
+						</c:if>
+					</h:panelGrid>
+				</div>
+
+
+				<div class="ui-g-12 ui-md-6 ui-lg-4" style="border: none;">
+					<h:panelGrid style="border: none;" columns="2">
+						<p:outputLabel style="font-size:16px;color:teal"
+							value="Offer Letter Send Date:" />
+
+						<c:if test="${empty hrBean.candidate.offeretterSendDate}">
+							<h:outputText style="font-size:16px" value="N/A" />
+						</c:if>
+						<c:if test="${!empty hrBean.candidate.offeretterSendDate}">
+							<h:outputText style="font-size:16px"
+								value="#{hrBean.candidate.offeretterSendDate}">
+								<f:convertDateTime pattern="dd-MMMM-yyyy" />
+							</h:outputText>
+						</c:if>
+
+
+					</h:panelGrid>
+				</div>
+
+
+				<div class="ui-g-12 ui-md-6 ui-lg-4" style="border: none;">
+					<h:panelGrid style="border: none;" columns="2">
+						<p:outputLabel style="font-size:16px;color:teal"
+							value="Emergancy Contact Detail:" />
+
+						<c:if test="${empty hrBean.candidate.emergencyContactDetails}">
+							<h:outputText style="font-size:16px" value="N/A" />
+						</c:if>
+						<c:if test="${!empty hrBean.candidate.emergencyContactDetails}">
+							<h:outputText style="font-size:16px"
+								value="#{hrBean.candidate.emergencyContactDetails}" />
+						</c:if>
+
+					</h:panelGrid>
+				</div>
+
+				<div class="ui-g-12 ui-md-6 ui-lg-4" style="border: none;">
+					<h:panelGrid style="border: none;" columns="2">
+						<p:outputLabel style="font-size:16px;color:teal"
+							value="Tentative Traning Start Date:" />
+
+						<c:if test="${empty hrBean.candidate.tentativeTrainingStartDate}">
+							<h:outputText style="font-size:16px" value="N/A" />
+						</c:if>
+						<c:if test="${!empty hrBean.candidate.tentativeTrainingStartDate}">
+							<h:outputText style="font-size:16px"
+								value="#{hrBean.candidate.tentativeTrainingStartDate}">
+								<f:convertDateTime pattern="dd-MMMM-yyyy" />
+							</h:outputText>
+						</c:if>
+
+					</h:panelGrid>
+				</div>
+
+				<div class="ui-g-12 ui-md-6 ui-lg-4" style="border: none;">
+					<h:panelGrid style="border: none;" columns="2">
+						<p:outputLabel style="font-size:16px;color:teal"
+							value="Enrollment Form No:" />
+
+						<c:if test="${empty hrBean.candidate.referenceFormNo}">
+							<h:outputText style="font-size:16px" value="N/A" />
+						</c:if>
+						<c:if test="${!empty hrBean.candidate.referenceFormNo}">
+							<h:outputText style="font-size:16px"
+								value="#{hrBean.candidate.referenceFormNo}" />
+						</c:if>
+
+					</h:panelGrid>
+				</div>
+
+
+				<div class="ui-g-12 ui-md-6 ui-lg-4" style="border: none;">
+					<h:panelGrid style="border: none;" columns="2">
+						<p:outputLabel style="font-size:16px;color:teal"
+							value="Sending Enrollment Date:" />
+
+						<c:if test="${empty hrBean.candidate.sendingEnrollmentDate}">
+							<h:outputText style="font-size:16px" value="N/A" />
+						</c:if>
+						<c:if test="${!empty hrBean.candidate.sendingEnrollmentDate}">
+							<h:outputText style="font-size:16px"
+								value="#{hrBean.candidate.sendingEnrollmentDate}">
+								<f:convertDateTime pattern="dd-MMMM-yyyy" />
+							</h:outputText>
+						</c:if>
+
+					</h:panelGrid>
+				</div>
+
+
+				<div class="ui-g-12 ui-md-6 ui-lg-4" style="border: none;">
+					<h:panelGrid style="border: none;" columns="2">
+						<p:outputLabel style="font-size:16px;color:teal"
+							value="Receiving Enrollment Date:" />
+
+						<c:if test="${empty hrBean.candidate.receivingEnrollmentDate}">
+							<h:outputText style="font-size:16px" value="N/A" />
+						</c:if>
+						<c:if test="${!empty hrBean.candidate.receivingEnrollmentDate}">
+							<h:outputText style="font-size:16px"
+								value="#{hrBean.candidate.receivingEnrollmentDate}">
+								<f:convertDateTime pattern="dd-MMMM-yyyy" />
+							</h:outputText>
+						</c:if>
+
+					</h:panelGrid>
+				</div>
+
+
+				<div class="ui-g-12 ui-md-6 ui-lg-4" style="border: none;">
+					<h:panelGrid style="border: none;" columns="2">
+						<p:outputLabel style="font-size:16px;color:teal"
+							value="Employment Letter Start Date:" />
+
+						<c:if test="${empty hrBean.candidate.employmentLetterStartDate}">
+							<h:outputText style="font-size:16px" value="N/A" />
+						</c:if>
+						<c:if test="${!empty hrBean.candidate.employmentLetterStartDate}">
+							<h:outputText style="font-size:16px"
+								value="#{hrBean.candidate.employmentLetterStartDate}">
+								<f:convertDateTime pattern="dd-MMMM-yyyy" />
+							</h:outputText>
+						</c:if>
+
+					</h:panelGrid>
+				</div>
+
+
+				<div class="ui-g-12 ui-md-6 ui-lg-4" style="border: none;">
+					<h:panelGrid style="border: none;" columns="2">
+						<p:outputLabel style="font-size:16px;color:teal"
+							value="Recruiter Name:" />
+
+						<c:if test="${empty hrBean.candidate.recruiterName}">
+							<h:outputText style="font-size:16px" value="N/A" />
+						</c:if>
+						<c:if test="${!empty hrBean.candidate.recruiterName}">
+							<h:outputText style="font-size:16px"
+								value="#{hrBean.candidate.recruiterName}" />
+						</c:if>
+					</h:panelGrid>
+				</div>
+
+				<div class="ui-g-12 ui-md-6 ui-lg-4" style="border: none;">
+					<h:panelGrid style="border: none;" columns="2">
+						<p:outputLabel style="font-size:16px;color:teal"
+							value="Supervisor Name:" />
+
+						<c:if test="${empty hrBean.candidate.supervisorName}">
+							<h:outputText style="font-size:16px" value="N/A" />
+						</c:if>
+						<c:if test="${!empty hrBean.candidate.supervisorName}">
+							<h:outputText style="font-size:16px"
+								value="#{hrBean.candidate.supervisorName}" />
+						</c:if>
+					</h:panelGrid>
+				</div>
+
+				<div class="ui-g-12 ui-md-6 ui-lg-4" style="border: none;">
+					<h:panelGrid style="border: none;" columns="2">
+						<p:outputLabel style="font-size:16px;color:teal"
+							value="Incentive Paid Status:" />
+
+						<c:if test="${empty hrBean.candidate.incentivePaidStatus}">
+							<h:outputText style="font-size:16px" value="N/A" />
+						</c:if>
+						<c:if test="${!empty hrBean.candidate.incentivePaidStatus}">
+							<h:outputText style="font-size:16px"
+								value="#{hrBean.candidate.incentivePaidStatus}" />
+						</c:if>
+					</h:panelGrid>
+				</div>
+
+
+			</div>
+			<f:facet name="footer">
+				<div style="text-align: center">
+					<p:commandButton value="Edit" icon="fa fa-fw fa-edit"
+						update=":enrollment-field-panel"
+						action="#{hrBean.editEmrollmentDetails()}"
+						onclick="PF('statusDialog').show()"
+						oncomplete="PF('statusDialog').hide()"
+						styleClass="ui-priority-primary" />
+
+					<p:commandButton value="Add Payment" immediate="true"
+						oncomplete="PF('paymentDlg').show();"
+						action="#{hrBean.paymentForm()}" update=":payment-Form"
+						styleClass="ui-priority-primary" />
+
+				</div>
+			</f:facet>
+		</p:panel>
+
+		<p:panel style="margin-top:0.5%;"
+			rendered="#{hrBean.enrollmentEditPanel}">
+			<f:facet name="header">Enrolment Related Information</f:facet>
+
+			<div class="ui-g" style="border: none;">
+
+				<div class="ui-g-12 ui-md-6 ui-lg-4" style="border: none;">
+					<h:panelGrid style="width:100%;border: none;">
+						<p:outputLabel for="name" style="font-size:16px" value="Name:" />
+						<p:inputText id="name" value="#{hrBean.candidate.candidateName}"
+							required="true" requiredMessage="Enter Name" placeholder="Name" />
+					</h:panelGrid>
+					<p:message for="name" />
+				</div>
+
+				<div class="ui-g-12 ui-md-6 ui-lg-4" style="border: none;">
+					<h:panelGrid style="width:100%;border: none;">
+						<p:outputLabel for="contactNumber" style="font-size:16px"
+							value="Contact Number:" />
+
+						<p:inputText id="contactNumber"
+							value="#{hrBean.candidate.contactNo}" required="true"
+							requiredMessage="Enter Contact Number"
+							placeholder="Contact Number"
+							validatorMessage="Please Enter Only Number">
+							<f:validateRegex pattern="[0-9]*" />
+						</p:inputText>
+
+					</h:panelGrid>
+					<p:message for="contactNumber" />
+				</div>
+
+				<div class="ui-g-12 ui-md-6 ui-lg-4" style="border: none;">
+					<h:panelGrid style="width:100%;border: none;">
+						<p:outputLabel for="emailID" style="font-size:16px"
+							value="Email ID:" />
+
+						<p:inputText id="emailID" value="#{hrBean.candidate.emailId}"
+							required="true" requiredMessage="Enter Email ID"
+							placeholder="Email ID"
+							validatorMessage="Please Enter Valid Email">
+							<f:validateRegex
+								pattern="[\w\.-]*[a-zA-Z0-9_]@[\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]" />
+						</p:inputText>
+
+					</h:panelGrid>
+					<p:message for="emailID" />
+				</div>
+
+				<div class="ui-g-12 ui-md-6 ui-lg-4" style="border: none;">
+					<h:panelGrid style="width:100%;border: none;">
+						<p:outputLabel for="service" style="font-size:16px"
+							value="Service:" />
+
+						<p:selectOneMenu id="service" value="#{hrBean.candidate.service}"
+							style="width:93%!important" required="true"
+							requiredMessage="Select Service"
+							validator="#{hrBean.resumeNotificationByServiceWise}">
+							<f:selectItem itemLabel="----Select----" itemValue="" />
+							<f:selectItem itemLabel="Traning" itemValue="TRAINING" />
+							<f:selectItem itemLabel="Direct Marketing"
+								itemValue="DIRECT MARKETING" />
+							<f:selectItem itemLabel="Both" itemValue="BOTH" />
+							<p:ajax event="change" />
+						</p:selectOneMenu>
+
+					</h:panelGrid>
+					<p:message for="service" />
+				</div>
+
+
+				<div class="ui-g-12 ui-md-6 ui-lg-4" style="border: none;">
+					<h:panelGrid style="width:100%;border: none;">
+						<p:outputLabel for="skill" style="font-size:16px"
+							value="Primary Skill:" />
+						<p:selectOneMenu id="skill"
+							value="#{hrBean.candidate.primarySkill}">
+							<f:selectItem itemLabel="Select Skill" itemValue=""
+								noSelectionOption="true" />
+							<f:selectItems value="#{appDataBean.courseList}" var="c"
+								itemLabel="#{c}" itemValue="#{c}" />
+						</p:selectOneMenu>
+					</h:panelGrid>
+					<p:message for="skill" />
+				</div>
+
+				<div class="ui-g-12 ui-md-6 ui-lg-4" style="border: none;">
+					<h:panelGrid style="width:100%;border: none;">
+						<p:outputLabel for="enrollmentDate" style="font-size:16px"
+							value="Enrollment Date:" />
+						<p:calendar id="enrollmentDate" pattern="dd-MMMM-yyyy"
+							value="#{hrBean.candidate.enrollmentDate}"
+							placeholder="Enrollment Date" />
+					</h:panelGrid>
+
+					<p:message for="enrollmentDate" />
+				</div>
+
+				<div class="ui-g-12 ui-md-6 ui-lg-4" style="border: none;">
+					<h:panelGrid style="width:100%;border: none;">
+						<p:outputLabel for="offerLetterSendDate" style="font-size:16px"
+							value="Offer Letter Send Date:" />
+						<p:calendar id="offerLetterSendDate"
+							value="#{hrBean.candidate.offeretterSendDate}"
+							pattern="dd-MMMM-yyyy" placeholder="Offer Latter Send Date" />
+					</h:panelGrid>
+
+					<p:message for="offerLetterSendDate" />
+				</div>
+
+
+				<div class="ui-g-12 ui-md-6 ui-lg-4" style="border: none;">
+					<h:panelGrid style="width:100%;border: none;">
+						<p:outputLabel for="emegancyContactDetail" style="font-size:16px"
+							value="Emergancy Contact Detail:" />
+						<p:inputText id="emegancyContactDetail"
+							value="#{hrBean.candidate.emergencyContactDetails}"
+							placeholder="Emergancy Contact Detail"
+							validatorMessage="Please Enter Only Number">
+							<f:validateRegex pattern="[0-9]*" />
+						</p:inputText>
+					</h:panelGrid>
+					<p:message for="emegancyContactDetail" />
+				</div>
+
+				<div class="ui-g-12 ui-md-6 ui-lg-4" style="border: none;">
+					<h:panelGrid style="width:100%;border: none;">
+						<p:outputLabel for="tentativeTraningDate" style="font-size:16px"
+							value="Tentative Traning Date:" />
+						<p:calendar id="tentativeTraningDate"
+							value="#{hrBean.candidate.tentativeTrainingStartDate}"
+							pattern="dd-MMMM-yyyy" placeholder="Tentative Traning Date" />
+					</h:panelGrid>
+					<p:message for="tentativeTraningDate" />
+				</div>
+
+
+				<div class="ui-g-12 ui-md-6 ui-lg-4" style="border: none;">
+					<h:panelGrid style="width:100%;border: none;">
+						<p:outputLabel for="employment-letter-start-date"
+							style="font-size:16px" value="Employment Letter Start Date:" />
+						<p:calendar id="employment-letter-start-date"
+							value="#{hrBean.candidate.employmentLetterStartDate}"
+							pattern="dd-MMMM-yyyy" placeholder="Employment Letter Start Date" />
+					</h:panelGrid>
+					<p:message for="employment-letter-start-date" />
+				</div>
+
+
+
+				<div class="ui-g-12 ui-md-6 ui-lg-4" style="border: none;">
+					<h:panelGrid style="width:100%;border: none;">
+						<p:outputLabel for="reference-form-no" style="font-size:16px"
+							value="Enrollment Form No:" />
+						<p:inputText id="reference-form-no"
+							value="#{hrBean.candidate.referenceFormNo}"
+							placeholder="Enrollment Form No" />
+					</h:panelGrid>
+					<p:message for="reference-form-no" />
+				</div>
+
+
+				<div class="ui-g-12 ui-md-6 ui-lg-4" style="border: none;">
+					<h:panelGrid style="width:100%;border: none;">
+						<p:outputLabel for="incentive-paid-status" style="font-size:16px"
+							value="Incentive Paid Status:" />
+
+						<p:selectOneMenu id="incentive-paid-status"
+							value="#{hrBean.candidate.incentivePaidStatus}">
+							<f:selectItem itemLabel="----Select----" itemValue="" />
+							<f:selectItem itemLabel="Paid" itemValue="PAID" />
+							<f:selectItem itemLabel="Not Paid" itemValue="NOT PAID" />
+							<f:selectItem itemLabel="Not Applicable"
+								itemValue="NOT APPLICABLE" />
+							<f:selectItem itemLabel="Decision Pending"
+								itemValue="DECISION PENDING" />
+						</p:selectOneMenu>
+					</h:panelGrid>
+					<p:message for="skill" />
+				</div>
+
+				<div class="ui-g-12 ui-md-6 ui-lg-4" style="border: none;">
+					<h:panelGrid style="width:100%;border: none;">
+						<p:outputLabel for="recruiter-name" style="font-size:16px"
+							value="Recruiter Name:" />
+
+						<p:selectOneMenu id="recruiter-name"
+							value="#{hrBean.candidate.recruiterName}" required="true"
+							requiredMessage="Please Select Value">
+							<f:selectItem itemLabel="Select Recruiter" itemValue=""
+								noSelectionOption="true" />
+							<f:selectItems value="#{appDataBean.userList}" var="u"
+								itemLabel="#{u}" itemValue="#{u}" />
+						</p:selectOneMenu>
+					</h:panelGrid>
+					<p:message for="recruiter-name" />
+				</div>
+
+				<div class="ui-g-12 ui-md-6 ui-lg-4" style="border: none;">
+					<h:panelGrid style="width:100%;border: none;">
+						<p:outputLabel for="supervisor-name" style="font-size:16px"
+							value="Supervisor Name:" />
+
+						<p:selectOneMenu id="supervisor-name"
+							value="#{hrBean.candidate.supervisorName}">
+							<f:selectItem itemLabel="Select Supervisor" itemValue=""
+								noSelectionOption="true" />
+							<f:selectItems value="#{appDataBean.userList}" var="u"
+								itemLabel="#{u}" itemValue="#{u}" />
+						</p:selectOneMenu>
+
+					</h:panelGrid>
+					<p:message for="supervisor-name" />
+				</div>
+
+
+			</div>
+
+
+			<f:facet name="footer">
+				<div style="text-align: center">
+					<p:commandButton value="Save" icon="fa fa-save"
+						update=":enrollment-field-panel,:enrollment-followup-form"
+						action="#{hrBean.saveEmrollmentDetails()}"
+						onclick="PF('statusDialog').show()"
+						oncomplete="PF('statusDialog').hide()"
+						styleClass="ui-priority-primary" />
+				</div>
+			</f:facet>
+		</p:panel>
+
+
+		<p:panel style="margin-top:1%;"
+			rendered="#{not empty hrBean.paymentTransactionList}">
+			<f:facet name="header">Payment Details</f:facet>
+			<p:dataTable id="payment-tableid" var="pt"
+				value="#{hrBean.paymentTransactionList}">
+
+				<p:column headerText="Transaction Id"
+					style="width:10%;text-align:center">
+					<h:outputText value="#{pt.transactionId}" />
+				</p:column>
+
+				<p:column headerText="Total Amount"
+					style="width:10%;text-align:center">
+					<h:outputText value="#{pt.totalAmount}" />
+				</p:column>
+
+				<p:column headerText="Paid Amount"
+					style="width:10%;text-align:center">
+					<h:outputText value="#{pt.paidAmount}" />
+				</p:column>
+
+				<p:column headerText="Payment Date"
+					style="width:10%;text-align:center">
+					<h:outputText value="#{pt.paymentDate}" pattern="dd-MMMM-yyyy" />
+				</p:column>
+
+				<p:column headerText="Due Amount"
+					style="width:10%;text-align:center">
+					<h:outputText value="#{pt.dueAmount}" />
+				</p:column>
+
+				<p:column headerText="Payment Mode"
+					style="width:10%;text-align:center">
+					<h:outputText value="#{pt.paymentMode}" />
+				</p:column>
+
+				<p:column headerText="Due Date" style="width:10%;text-align:center">
+					<h:outputText value="#{pt.dueDate}" pattern="dd-MMMM-yyyy" />
+				</p:column>
+
+				<p:column headerText="Edit" style="width:10%;text-align:center">
+
+					<p:commandLink action="#{hrBean.editPaymentForm(pt)}"
+						oncomplete="PF('editPaymentDlg').show();" immediate="true"
+						update=":payment-form-edit">
+						<i class="fa fa-pencil"></i>
+					</p:commandLink>
+
+				</p:column>
+
+			</p:dataTable>
+		</p:panel>
+
+
+	</h:form>
+
+
+	<h:form id="enrollment-document-panel">
+		<p:panel style="margin-top:1%;">
+			<f:facet name="header">Enrollment Related Documents</f:facet>
+			<div class="ui-g" style="border: none;">
+				<div class="ui-g-12 ui-md-6 ui-lg-3" style="border: none;">
+					<span style="color: teal; padding-right: 2%"> Do You Want To
+						Genarate Enrollment Form? </span>
+
+					<p:commandButton value="YES" icon="fa fa-check-square-o"
+						update=":enrollment-document-panel,:enrollment-followup-form,:enrollment-field-panel"
+						action="#{hrBean.generateEnrollmentForm()}"
+						styleClass="ui-priority-primary"
+						onclick="return confirm('Are you sure?')" />
+				</div>
+				<div class="ui-g-12 ui-md-6 ui-lg-5" style="border: none;">
+					<c:if test="${!empty hrBean.enrollmentFileHandleUtil}">
+						<h:panelGrid id="generated-doc-panel" columns="2"
+							style="margin-top:1%;">
+							<span style="color: teal"> Genarated Document :</span>
+							<h:commandLink action="#{hrBean.openFile()}"
+								value="#{hrBean.enrollmentFileHandleUtil.fileName}"
+								target="_blank" immediate="true">
+								<f:param name="filePath"
+									value="#{hrBean.enrollmentFileHandleUtil.filePath}" />
+								<f:param name="extension"
+									value="#{hrBean.enrollmentFileHandleUtil.fileExtension}" />
+								<f:param name="filename"
+									value="#{hrBean.enrollmentFileHandleUtil.fileName}" />
+							</h:commandLink>
+						</h:panelGrid>
+					</c:if>
+				</div>
+				<div class="ui-g-12 ui-md-6 ui-lg-2"
+					style="border: none; margin-right: 8%">
+					<c:if test="${!empty hrBean.enrollmentFileHandleUtil}">
+						<p:commandButton value="Send Mail"
+							action="#{hrBean.mailSendFormForEnrollmentForm()}"
+							icon="fa fa-envelope-o" oncomplete="PF('mailDlg').show();"
+							immediate="true" update=":mail-Form" />
+					</c:if>
+				</div>
+			</div>
+
+			<div class="ui-g" style="border: none;">
+				<div class="ui-g-12 ui-md-6 ui-lg-6" style="border: none;">
+					<p:panel id="sending-doc-panel" style="margin-top:1%;">
+						<f:facet name="header">Sending Enrollment Form Details</f:facet>
+						<div class="ui-g" style="border: none;">
+							<div class="ui-g-12 ui-md-6 ui-lg-12" style="border: none;">
+								<h:panelGrid columns="1" style="border:none;">
+									<p:fileUpload
+										fileUploadListener="#{hrBean.saveSendingEnrollmentForm}"
+										update="file" mode="advanced" />
+								</h:panelGrid>
+							</div>
+							<div style="border: none">
+
+								<div class="ui-g-12 ui-md-6 ui-lg-12"
+									style="border: none !important;">
+									<h:panelGrid id="file" columns="2" cellpadding="0"
+										cellspacing="2"
+										style="margin-left:27.5%;border:none !important;">
+										<p:outputLabel value=" Uploaded Documents:"
+											rendered="#{hrBean.sendingEnrollmentFileName.size() > '0'}" />
+										<br></br>
+										<c:forEach items="${hrBean.sendingEnrollmentFileName}"
+											var="doc">
+											<p:outputLabel style="font-weight: bold;color:Teal"
+												value="#{doc}" />
+											<p:commandLink
+												actionListener="#{hrBean.sendingEnrollmentFileDelete}"
+												update="file" style="font-weight: bold;color:red"
+												value="delete">
+												<f:param name="deletefile" value="#{doc}" />
+											</p:commandLink>
+										</c:forEach>
+									</h:panelGrid>
+								</div>
+							</div>
+						</div>
+						<f:facet name="footer">
+							<p:commandButton value="Save"
+								actionListener="#{hrBean.saveSendingEnrollmentFormInDatabase()}"
+								update=":enrollment-document-panel,:enrollment-followup-form" />
+							<p:commandButton value="Cancel"
+								actionListener="#{hrBean.cancelSendingEnrollmentFileUpload()}"
+								update=":enrollment-document-panel" />
+						</f:facet>
+
+
+						<c:if test="${!empty hrBean.sendingEnrollmentFileHandleUtil}">
+							<p:panel id="sendingenrollform-doc-panel" style="margin-top:1%;">
+								<span style="color: teal">Sending Enrollment Form :</span>
+								<h:commandLink action="#{hrBean.openFile()}"
+									value="#{hrBean.sendingEnrollmentFileHandleUtil.fileName}"
+									target="_blank" immediate="true">
+									<f:param name="filePath"
+										value="#{hrBean.sendingEnrollmentFileHandleUtil.filePath}" />
+									<f:param name="extension"
+										value="#{hrBean.sendingEnrollmentFileHandleUtil.fileExtension}" />
+									<f:param name="filename"
+										value="#{hrBean.sendingEnrollmentFileHandleUtil.fileName}" />
+								</h:commandLink>
+							</p:panel>
+						</c:if>
+					</p:panel>
+				</div>
+
+				<div class="ui-g-12 ui-md-6 ui-lg-6" style="border: none;">
+					<p:panel id="receiving-doc-panel" style="margin-top:1%;">
+						<f:facet name="header">Receiving Enrollment Form Details</f:facet>
+						<div class="ui-g" style="border: none;">
+							<div class="ui-g-12 ui-md-6 ui-lg-12" style="border: none;">
+								<h:panelGrid columns="1">
+									<p:fileUpload
+										fileUploadListener="#{hrBean.saveReceivingEnrollmentForm}"
+										update="file-ref" mode="advanced" />
+								</h:panelGrid>
+							</div>
+							<div style="border: none">
+								<div class="ui-g-12 ui-md-6 ui-lg-12"
+									style="border: none !important;">
+									<h:panelGrid id="file-ref" columns="2" cellpadding="0"
+										cellspacing="2" style="margin-left:27.5%;">
+										<p:outputLabel value=" Uploaded Documents:"
+											rendered="#{hrBean.receivingEnrollmentFileName.size() > '0'}" />
+										<br></br>
+										<c:forEach items="${hrBean.receivingEnrollmentFileName}"
+											var="doc">
+											<p:outputLabel style="font-weight: bold;color:Teal"
+												value="#{doc}" />
+											<p:commandLink
+												actionListener="#{hrBean.receivingEnrollmentFileDelete}"
+												update="file-ref" style="font-weight: bold;color:red"
+												value="delete">
+												<f:param name="deletefile" value="#{doc}" />
+											</p:commandLink>
+										</c:forEach>
+									</h:panelGrid>
+								</div>
+							</div>
+						</div>
+						<f:facet name="footer">
+							<p:commandButton value="Save"
+								actionListener="#{hrBean.saveReceivingEnrollmentFormInDatabase()}"
+								update=":enrollment-document-panel,:enrollment-followup-form,:enrollment-field-panel" />
+							<p:commandButton value="Cancel"
+								actionListener="#{hrBean.cancelReceivingEnrollmentFileUpload()}"
+								update=":enrollment-document-panel" />
+						</f:facet>
+
+
+						<c:if test="${!empty hrBean.receivingEnrollmentFileHandleUtil}">
+							<p:panel id="receivingenrollform-doc-panel"
+								style="margin-top:1%;">
+								<span style="color: teal"> Receiving Enrollment Form :</span>
+								<h:commandLink action="#{hrBean.openFile()}"
+									value="#{hrBean.receivingEnrollmentFileHandleUtil.fileName}"
+									target="_blank" immediate="true">
+									<f:param name="filePath"
+										value="#{hrBean.receivingEnrollmentFileHandleUtil.filePath}" />
+									<f:param name="extension"
+										value="#{hrBean.receivingEnrollmentFileHandleUtil.fileExtension}" />
+									<f:param name="filename"
+										value="#{hrBean.receivingEnrollmentFileHandleUtil.fileName}" />
+								</h:commandLink>
+							</p:panel>
+
+						</c:if>
+					</p:panel>
+				</div>
+			</div>
+		</p:panel>
+	</h:form>
+
+
+
+
+	<h:form id="enrollment-followup-form">
+		<p:panel id="enrollment-followup-panel" style="margin-top:1%">
+			<f:facet name="header">Follow Up</f:facet>
+			<h:panelGrid columns="8" layout="grid" style="border: none;">
+				<p:outputLabel for="follow-up"
+					style="font-size:16px;font-weight:bold" value="Follow Up:" />
+
+				<p:inputText id="follow-up"
+					value="#{hrBean.hrFollowup.followUpRemarks}" required="true"
+					requiredMessage="Enter Follow Up" placeholder="Follow Up"
+					size="100" />
+				<p:message for="follow-up" />
+
+
+				<p:outputLabel for="next-follow-up-date"
+					style="font-size:16px;font-weight:bold"
+					value="Next Follow Up Date:" />
+
+				<p:calendar id="next-follow-up-date"
+					value="#{hrBean.hrFollowup.nextFollowUpDate}"
+					placeholder="Next Follow Up Date" pattern="dd-MMMM-yyyy">
+				</p:calendar>
+
+				<p:message for="next-follow-up-date" />
+
+
+				<p:commandButton value="Save"
+					action="#{hrBean.saveEnrollmentFollowup()}"
+					update=":enrollment-followup-form"
+					onclick="PF('statusDialog').show()"
+					oncomplete="PF('statusDialog').hide()" />
+
+			</h:panelGrid>
+		</p:panel>
+
+		<p:panel id="enrollment-followup-table-panel"
+			rendered="#{not empty hrBean.enrollmentFollowUpList}"
+			style="margin-top:1%">
+
+			<p:dataTable var="h" value="#{hrBean.enrollmentFollowUpList}"
+				paginator="true" rows="50" resizableColumns="true" resizeMode="true"
+				widgetVar="enrolladvanceSearch" sortBy="#{h.hrFollowUpId}"
+				sortOrder="descending"
+				paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
+				rowsPerPageTemplate="50,100,200,300,500" rowKey="#{h.hrFollowUpId}"
+				tableStyle="width:auto;table-layout:auto">
+
+
+				<f:facet name="header">Enrollment Related Follow Up</f:facet>
+
+				<p:column headerText="Remarks" sortBy="#{h.followUpRemarks}"
+					filterBy="#{h.followUpRemarks}" style="width:30%" styleClass="wrap">
+					<h:outputText style="font-size:14px;" value="#{h.followUpRemarks}" />
+				</p:column>
+
+				<p:column headerText="Follow Up Date" sortBy="#{h.followUpDate}"
+					filterBy="#{h.followUpDate}" style="width:10%">
+					<h:outputText value="#{h.followUpDate}">
+					</h:outputText>
+				</p:column>
+
+				<p:column headerText="Next Follow Up Date"
+					sortBy="#{h.nextFollowUpDate}" filterBy="#{h.nextFollowUpDate}"
+					style="text-align:center;width:10%">
+					<h:outputText value="#{h.nextFollowUpDate}">
+					</h:outputText>
+				</p:column>
+
+				<p:column headerText="User Name"
+					sortBy="#{h.userProfile.userFullName}"
+					filterBy="#{h.userProfile.userFullName}" style="width:10%">
+					<h:outputText value="#{h.userProfile.userFullName}" />
+				</p:column>
+
+			</p:dataTable>
+
+		</p:panel>
+
+
+		<p:panel id="all-followup-table-panel"
+			rendered="#{not empty hrBean.allHrFollowuList}" style="margin-top:1%">
+			<p:dataTable var="h" value="#{hrBean.allHrFollowuList}"
+				paginator="true" rows="50" resizableColumns="true" resizeMode="true"
+				widgetVar="alladvanceSearch" sortBy="#{h.hrFollowUpId}"
+				sortOrder="descending"
+				paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
+				rowsPerPageTemplate="50,100,200,300,500" rowKey="#{h.hrFollowUpId}"
+				tableStyle="width:auto;table-layout:auto">
+
+
+				<f:facet name="header">Follow Up Details</f:facet>
+
+				<p:column headerText="Remarks" sortBy="#{h.followUpRemarks}"
+					filterBy="#{h.followUpRemarks}" style="width:30%" styleClass="wrap">
+					<h:outputText style="font-size:14px;" value="#{h.followUpRemarks}" />
+				</p:column>
+
+				<p:column headerText="Follow Up Date" sortBy="#{h.followUpDate}"
+					filterBy="#{h.followUpDate}" style="width:10%">
+					<h:outputText value="#{h.followUpDate}">
+					</h:outputText>
+				</p:column>
+
+				<p:column headerText="Next Follow Up Date"
+					sortBy="#{h.nextFollowUpDate}" filterBy="#{h.nextFollowUpDate}"
+					style="width:10%">
+					<h:outputText value="#{h.nextFollowUpDate}">
+					</h:outputText>
+				</p:column>
+
+				<p:column headerText="User Name"
+					sortBy="#{h.userProfile.userFullName}"
+					filterBy="#{h.userProfile.userFullName}" style="width:10%">
+					<h:outputText value="#{h.userProfile.userFullName}" />
+				</p:column>
+
+			</p:dataTable>
+		</p:panel>
+	</h:form>
+
+
+
+	<h:form id="mail-Form">
+		<p:dialog header="Mail" id="dialog2" widgetVar="mailDlg" modal="true"
+			showEffect="explode" hideEffect="fade" width="1200" height="500"
+			responsive="true">
+
+			<p:panel style="margin-top:1%" id="mail-send-panel">
+				<f:facet name="header">Send Mail</f:facet>
+
+				<div class="ui-g" style="border: none">
+					<div class="ui-g-12 ui-md-12 ui-lg-12" style="border: none">
+						<h:panelGrid style="width:100%">
+							<p:outputLabel for="to" value="To" />
+							<p:inputText id="to" value="#{hrBean.mailDto.toEmail}"
+								readonly="true" />
+							<p:message for="to" />
+						</h:panelGrid>
+					</div>
+				</div>
+
+				<div class="ui-g" style="border: none">
+					<div class="ui-g-12 ui-md-12 ui-lg-12" style="border: none">
+						<h:panelGrid style="width:100%">
+							<p:outputLabel for="from" value="From" />
+							<p:inputText id="from" value="#{hrBean.mailDto.userName}"
+								readonly="true" />
+							<p:message for="from" />
+						</h:panelGrid>
+					</div>
+				</div>
+
+				<div class="ui-g" style="border: none">
+					<div class="ui-g-12 ui-md-12 ui-lg-12" style="border: none">
+						<h:panelGrid style="width:100%">
+							<p:outputLabel for="subject" value="Subject" />
+							<p:inputText id="subject" required="true"
+								value="#{hrBean.mailDto.subject}"
+								requiredMessage="Enter Mail Subject" placeholder="Mail Subject" />
+							<p:message for="subject" />
+						</h:panelGrid>
+					</div>
+				</div>
+
+
+				<div class="ui-g" style="border: none">
+					<div class="ui-g-12 ui-md-12 ui-lg-12" style="border: none">
+						<h:panelGrid style="width:100%">
+							<p:outputLabel for="body-content" value="Body Content:" />
+							<p:editor id="body-content" widgetVar="editorWidget"
+								value="#{hrBean.mailDto.mailMessage}" />
+							<p:message for="body-content" />
+						</h:panelGrid>
+					</div>
+				</div>
+
+				<div class="ui-g" style="border: none">
+					<div class="ui-g-12 ui-md-12 ui-lg-12" style="border: none">
+						<h:panelGrid style="width:100%">
+							<p:outputLabel for="body-content" value="Enrollment Form"
+								style="color:Teal" />
+							<h:commandLink action="#{hrBean.openFile()}"
+								value="#{hrBean.enrollmentFileHandleUtil.fileName}"
+								target="_blank" immediate="true">
+								<f:param name="filePath"
+									value="#{hrBean.enrollmentFileHandleUtil.filePath}" />
+								<f:param name="extension"
+									value="#{hrBean.enrollmentFileHandleUtil.fileExtension}" />
+								<f:param name="filename"
+									value="#{hrBean.enrollmentFileHandleUtil.fileName}" />
+							</h:commandLink>
+							<p:message for="body-content" />
+						</h:panelGrid>
+					</div>
+				</div>
+
+				<f:facet name="footer">
+					<div style="text-align: center">
+						<p:commandButton value="Send" action="#{hrBean.sendMail()}"
+							oncomplete="handleMail(xhr, status, args)"
+							update="mail-send-panel,:enrollment-field-panel" />
+					</div>
+				</f:facet>
+			</p:panel>
+		</p:dialog>
+	</h:form>
+
+
+	<h:form id="payment-Form">
+		<p:dialog header="Payment Details" id="paymentDetails" height="350"
+			width="900" widgetVar="paymentDlg" modal="true" showEffect="explode"
+			hideEffect="fade" responsive="true">
+
+			<p:panel style="margin-top:1%" id="payment-Details">
+				<f:facet name="header">Payment Details</f:facet>
+
+				<div class="ui-g" style="border: none">
+					<div class="ui-g-6 ui-md-6 ui-lg-6" style="border: none">
+						<h:panelGrid style="width:100%">
+							<p:outputLabel for="txnId" value="Transaction Id:" />
+							<p:inputText id="txnId"
+								value="#{hrBean.paymentTransaction.transactionId}"
+								required="true" requiredMessage="Enter Transaction Id"
+								placeholder="Transaction Id" />
+							<p:message for="txnId" />
+						</h:panelGrid>
+					</div>
+
+					<div class="ui-g-6 ui-md-6 ui-lg-6" style="border: none">
+						<h:panelGrid style="width:100%">
+							<p:outputLabel for="totalAmount" value="Total Amount:" />
+							<p:inputText id="totalAmount"
+								value="#{hrBean.paymentTransaction.totalAmount}" required="true"
+								requiredMessage="Enter Total Amount" placeholder="Total Amount" />
+							<p:message for="totalAmount" />
+						</h:panelGrid>
+					</div>
+				</div>
+
+				<div class="ui-g" style="border: none">
+
+					<div class="ui-g-6 ui-md-6 ui-lg-6" style="border: none">
+						<h:panelGrid style="width:100%">
+							<p:outputLabel for="paidAmount" value="Paid Amount:" />
+							<p:inputText id="paidAmount"
+								value="#{hrBean.paymentTransaction.paidAmount}" required="true"
+								requiredMessage="Enter Paid Amount" placeholder="Paid Amount" />
+							<p:message for="paidAmount" />
+						</h:panelGrid>
+					</div>
+
+					<div class="ui-g-6 ui-md-6 ui-lg-6" style="border: none">
+						<h:panelGrid style="width:100%">
+							<p:outputLabel for="dueAmount" value="Due Amount:" />
+							<p:inputText id="dueAmount"
+								value="#{hrBean.paymentTransaction.dueAmount}"
+								placeholder="Due Amount" />
+							<p:message for="dueAmount" />
+						</h:panelGrid>
+					</div>
+				</div>
+
+				<div class="ui-g" style="border: none">
+					<div class="ui-g-6 ui-md-6 ui-lg-6" style="border: none">
+						<h:panelGrid style="width:100%">
+							<p:outputLabel for="paymentMode" value="Payment Mode:" />
+							<p:selectOneMenu id="paymentMode"
+								value="#{hrBean.paymentTransaction.paymentMode}" required="true"
+								requiredMessage="Enter Payment Mode" style="width:93%!important">
+								<f:selectItem itemLabel="----Select----" itemValue="" />
+								<f:selectItem itemLabel="Paypal" itemValue="PAYPAL" />
+								<f:selectItem itemLabel="Bank" itemValue="Bank" />
+							</p:selectOneMenu>
+							<p:message for="paymentMode" />
+						</h:panelGrid>
+					</div>
+
+					<div class="ui-g-6 ui-md-6 ui-lg-6" style="border: none">
+						<h:panelGrid style="width:100%">
+							<p:outputLabel for="paymentDate" value="Payment Date:" />
+							<p:calendar id="paymentDate"
+								value="#{hrBean.paymentTransaction.paymentDate}" required="true"
+								requiredMessage="Enter Payment Date" pattern="dd-MMMM-yyyy"
+								placeholder="Payment Date" />
+							<p:message for="paymentDate" />
+						</h:panelGrid>
+					</div>
+				</div>
+
+				<div class="ui-g" style="border: none">
+
+					<div class="ui-g-6 ui-md-6 ui-lg-6" style="border: none">
+						<h:panelGrid style="width:100%">
+							<p:outputLabel for="dueDate" value="Due Date:" />
+							<p:calendar id="dueDate"
+								value="#{hrBean.paymentTransaction.dueDate}"
+								pattern="dd-MMMM-yyyy" placeholder="Due Date" />
+							<p:message for="dueDate" />
+						</h:panelGrid>
+					</div>
+				</div>
+
+				<f:facet name="footer">
+					<div style="text-align: center">
+						<p:commandButton value="Save" action="#{hrBean.savePayment()}"
+							update="payment-Details,:enrollment-field-panel,:enrollment-followup-form"
+							oncomplete="handlePaymentDetails(xhr, status, args)" />
+					</div>
+				</f:facet>
+			</p:panel>
+		</p:dialog>
+	</h:form>
+
+
+
+	<h:form id="payment-form-edit">
+		<p:dialog header="Payment Details" id="paymentDetailsEdit"
+			height="350" width="900" widgetVar="editPaymentDlg" modal="true"
+			showEffect="explode" hideEffect="fade" responsive="true">
+
+			<p:panel style="margin-top:1%" id="payment-Details-edit">
+				<f:facet name="header">Payment Update</f:facet>
+
+				<div class="ui-g" style="border: none">
+					<div class="ui-g-6 ui-md-6 ui-lg-6" style="border: none">
+						<h:panelGrid style="width:100%">
+							<p:outputLabel for="txnId" value="Transaction Id:" />
+							<p:inputText id="txnId"
+								value="#{hrBean.paymentTransaction.transactionId}"
+								required="true" requiredMessage="Enter Transaction Id"
+								placeholder="Transaction Id" />
+							<p:message for="txnId" />
+						</h:panelGrid>
+					</div>
+
+					<div class="ui-g-6 ui-md-6 ui-lg-6" style="border: none">
+						<h:panelGrid style="width:100%">
+							<p:outputLabel for="totalAmount" value="Total Amount:" />
+							<p:inputText id="totalAmount"
+								value="#{hrBean.paymentTransaction.totalAmount}" required="true"
+								requiredMessage="Enter Total Amount" placeholder="Total Amount" />
+							<p:message for="totalAmount" />
+						</h:panelGrid>
+					</div>
+				</div>
+
+				<div class="ui-g" style="border: none">
+
+					<div class="ui-g-6 ui-md-6 ui-lg-6" style="border: none">
+						<h:panelGrid style="width:100%">
+							<p:outputLabel for="paidAmount" value="Paid Amount:" />
+							<p:inputText id="paidAmount"
+								value="#{hrBean.paymentTransaction.paidAmount}" required="true"
+								requiredMessage="Enter Paid Amount" placeholder="Paid Amount" />
+							<p:message for="paidAmount" />
+						</h:panelGrid>
+					</div>
+
+					<div class="ui-g-6 ui-md-6 ui-lg-6" style="border: none">
+						<h:panelGrid style="width:100%">
+							<p:outputLabel for="dueAmount" value="Due Amount:" />
+							<p:inputText id="dueAmount"
+								value="#{hrBean.paymentTransaction.dueAmount}"
+								placeholder="Due Amount" />
+							<p:message for="dueAmount" />
+						</h:panelGrid>
+					</div>
+
+				</div>
+
+				<div class="ui-g" style="border: none">
+					<div class="ui-g-6 ui-md-6 ui-lg-6" style="border: none">
+						<h:panelGrid style="width:100%">
+							<p:outputLabel for="paymentMode" value="Payment Mode:" />
+							<p:selectOneMenu id="paymentMode"
+								value="#{hrBean.paymentTransaction.paymentMode}" required="true"
+								requiredMessage="Enter Payment Mode" style="width:93%!important">
+								<f:selectItem itemLabel="----Select----" itemValue="" />
+								<f:selectItem itemLabel="Paypal" itemValue="PAYPAL" />
+								<f:selectItem itemLabel="Bank" itemValue="Bank" />
+							</p:selectOneMenu>
+							<p:message for="paymentMode" />
+						</h:panelGrid>
+					</div>
+
+					<div class="ui-g-6 ui-md-6 ui-lg-6" style="border: none">
+						<h:panelGrid style="width:100%">
+							<p:outputLabel for="paymentDate" value="Payment Date:" />
+							<p:calendar id="paymentDate"
+								value="#{hrBean.paymentTransaction.paymentDate}" required="true"
+								requiredMessage="Enter Payment Date" pattern="dd-MMMM-yyyy"
+								placeholder="Payment Date" />
+							<p:message for="paymentDate" />
+						</h:panelGrid>
+					</div>
+				</div>
+
+				<div class="ui-g" style="border: none">
+
+					<div class="ui-g-6 ui-md-6 ui-lg-6" style="border: none">
+						<h:panelGrid style="width:100%">
+							<p:outputLabel for="dueDate" value="Due Date:" />
+							<p:calendar id="dueDate"
+								value="#{hrBean.paymentTransaction.dueDate}"
+								pattern="dd-MMMM-yyyy" placeholder="Due Date" />
+							<p:message for="dueDate" />
+						</h:panelGrid>
+					</div>
+				</div>
+
+				<f:facet name="footer">
+					<div style="text-align: center">
+						<p:commandButton value="Save" action="#{hrBean.savePayment()}"
+							update="payment-Details-edit,:enrollment-field-panel,:enrollment-followup-form"
+							oncomplete="handlePaymentDetailsEdit(xhr, status, args)" />
+					</div>
+				</f:facet>
+			</p:panel>
+		</p:dialog>
+	</h:form>
+
+
+	<script type="text/javascript">
+    function handleMail(xhr, status, args) {
+        if(args.validationFailed) {
+            PF('mailDlg').jq.effect("shake", {times:10}, 100);
+        }
+        else {
+            PF('mailDlg').hide();
+        }
+    }
+
+
+    function handlePaymentDetails(xhr, status, args) {
+        if(args.validationFailed) {
+            PF('paymentDlg').jq.effect("shake", {times:10}, 100);
+        }
+        else {
+            PF('paymentDlg').hide();
+        }
+    }
+
+
+
+    function handlePaymentDetailsEdit(xhr, status, args) {
+        if(args.validationFailed) {
+            PF('editPaymentDlg').jq.effect("shake", {times:10}, 100);
+        }
+        else {
+            PF('editPaymentDlg').hide();
+        }
+    }
+    
+  </script>
+
+
+</ui:composition>

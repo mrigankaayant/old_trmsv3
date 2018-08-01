@@ -1,0 +1,42 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<h:form id="addContentForm">
+		<p:panel style="margin-top:1%">
+			<f:facet name="header">Add Content In Master Table</f:facet>
+			<h:panelGrid columns="11" layout="grid" style="border: none;margin-left:30%">
+				<p:outputLabel for="option"
+					style="font-size:16px;font-weight:bold" value="Choose Option:" />
+
+				<p:selectOneMenu id="option"
+					value="#{hrBean.contentOption}" required="true"
+					requiredMessage="Choose Option">
+					<f:selectItem itemLabel="----Select----" itemValue="" />
+					<f:selectItem itemLabel="Add Visa" itemValue="visa" />
+					<f:selectItem itemLabel="Add Course" itemValue="course" />
+				</p:selectOneMenu>
+				<p:message for="option" />
+
+
+				<p:outputLabel for="value"
+					style="font-size:16px;font-weight:bold" value="Enter Value:" />
+
+				<p:inputText id="value"
+						value="#{hrBean.contentValue}" required="true"
+						requiredMessage="Enter Value" placeholder="Value" />
+						
+				<p:message for="value" />
+
+				<p:commandButton value="Save"
+					action="#{hrBean.addContentInMasterTable()}"
+					update=":addContentForm" />
+
+			</h:panelGrid>
+		</p:panel>
+			
+	</h:form>
+
+</ui:composition>

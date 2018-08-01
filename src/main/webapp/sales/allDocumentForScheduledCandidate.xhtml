@@ -1,0 +1,128 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+
+	<h:form>
+
+		<p:panel style="margin-top:1%;" rendered="#{!salesBean.loginBean.hasRole('SALES MANAGER')}">
+			<f:facet name="header">
+
+				<p:commandButton value="Back" icon="fa fa-chevron-left"
+					update=":mainBody" action="#{salesBean.backToScheduledCandidateList()}"
+					styleClass="ui-priority-primary" process="@this"
+					style="background-color:LightSeaGreen" />
+			</f:facet>
+
+			<p:dataTable var="d" value="#{salesBean.documentsList}"
+				resizableColumns="true" resizeMode="true"
+				widgetVar="alladvanceSearch"
+				tableStyle="width:auto;table-layout:auto">
+
+				<f:facet name="header"> Submitted Documents</f:facet>
+
+				<p:column headerText="Document For"
+					style="width:10%;text-align:center">
+					<h:outputText value="#{d.docOtherName}" />
+				</p:column>
+
+				<p:column headerText="Name" style="width:10%;text-align:center">
+					<h:outputText value="#{d.fileName}" />
+				</p:column>
+
+				<p:column headerText="Created Date"
+					style="width:10%;text-align:center">
+					<h:outputText value="#{d.createdDate}">
+						<f:convertDateTime pattern="dd-MMMM-yyyy" />
+					</h:outputText>
+				</p:column>
+
+				<p:column headerText="Show Document"
+					style="width:10%;text-align:center">
+					<h:commandLink action="#{salesBean.openFile()}" target="_blank"
+						rendered="#{d.docOtherName eq 'Resume' or d.docOtherName eq 'Visa' }"
+						immediate="true" style="color:blue;">
+						<h:graphicImage value="/resources/assets/icon/check.png"></h:graphicImage>
+						<f:param name="filePath" value="#{d.filePath}" />
+						<f:param name="extension" value="#{d.extension}" />
+						<f:param name="filename" value="#{d.fileName}" />
+					</h:commandLink>
+				</p:column>
+
+
+				<p:column headerText="Download" style="width:10%;text-align:center">
+					<h:commandLink action="#{salesBean.openFile()}" target="_blank"
+						rendered="#{d.docOtherName eq 'Resume' or d.docOtherName eq 'Visa' }"
+						immediate="true" style="color:blue;">
+						<h:graphicImage value="/resources/assets/icon/download.png"></h:graphicImage>
+						<f:param name="filePath" value="#{d.filePath}" />
+						<f:param name="extension" value="#{d.extension}" />
+						<f:param name="filename" value="#{d.fileName}" />
+					</h:commandLink>
+				</p:column>
+			</p:dataTable>
+
+		</p:panel>
+		
+		
+		
+		<p:panel style="margin-top:1%;" rendered="#{salesBean.loginBean.hasRole('SALES MANAGER')}">
+			<f:facet name="header">
+
+				<p:commandButton value="Back" icon="fa fa-chevron-left"
+					update=":mainBody" action="#{salesBean.backToScheduledCandidateList()}"
+					styleClass="ui-priority-primary" process="@this"
+					style="background-color:LightSeaGreen" />
+			</f:facet>
+
+			<p:dataTable var="d" value="#{salesBean.documentsList}"
+				resizableColumns="true" resizeMode="true"
+				widgetVar="alladvanceSearch"
+				tableStyle="width:auto;table-layout:auto">
+
+				<f:facet name="header"> Submitted Documents</f:facet>
+
+				<p:column headerText="Document For"
+					style="width:10%;text-align:center">
+					<h:outputText value="#{d.docOtherName}" />
+				</p:column>
+
+				<p:column headerText="Name" style="width:10%;text-align:center">
+					<h:outputText value="#{d.fileName}" />
+				</p:column>
+
+				<p:column headerText="Created Date"
+					style="width:10%;text-align:center">
+					<h:outputText value="#{d.createdDate}">
+						<f:convertDateTime pattern="dd-MMMM-yyyy" />
+					</h:outputText>
+				</p:column>
+
+				<p:column headerText="Show Document"
+					style="width:10%;text-align:center">
+					<h:commandLink action="#{salesBean.openFile()}" target="_blank"
+						immediate="true" style="color:blue;">
+						<h:graphicImage value="/resources/assets/icon/check.png"></h:graphicImage>
+						<f:param name="filePath" value="#{d.filePath}" />
+						<f:param name="extension" value="#{d.extension}" />
+						<f:param name="filename" value="#{d.fileName}" />
+					</h:commandLink>
+				</p:column>
+
+
+				<p:column headerText="Download" style="width:10%;text-align:center">
+					<h:commandLink action="#{salesBean.openFile()}" target="_blank"
+						immediate="true" style="color:blue;">
+						<h:graphicImage value="/resources/assets/icon/download.png"></h:graphicImage>
+						<f:param name="filePath" value="#{d.filePath}" />
+						<f:param name="extension" value="#{d.extension}" />
+						<f:param name="filename" value="#{d.fileName}" />
+					</h:commandLink>
+				</p:column>
+			</p:dataTable>
+
+		</p:panel>
+	</h:form>
+</ui:composition>

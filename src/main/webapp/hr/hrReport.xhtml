@@ -1,0 +1,63 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+
+	<h:form>
+		<p:panel style="background-color:HoneyDew;">
+
+			<p:commandButton value="Enrollment" icon="fa fa-bar-chart"
+				update=":mainBody" action="#{hrBean.enrollmentReport()}"
+				styleClass="ui-priority-primary" process="@this" />
+				
+			<p:commandButton value="Enrollment Form" icon="fa fa-bar-chart"
+				update=":mainBody" action="#{hrBean.enrollmentFormReport()}"
+				styleClass="ui-priority-primary" process="@this" />		
+				
+			<p:commandButton value="Payment" icon="fa fa-bar-chart"
+				update=":mainBody" action="#{hrBean.paymentReport()}"
+				styleClass="ui-priority-primary" process="@this" />		
+				
+			<p:commandButton value="Spot Incentive" icon="fa fa-bar-chart"
+				update=":mainBody" action="#{hrBean.sportIncentiveReport()}"
+				styleClass="ui-priority-primary" process="@this" />	
+				
+			<p:commandButton value="Incentive" icon="fa fa-bar-chart"
+				update=":mainBody" action="#{hrBean.incentiveReport()}"
+				styleClass="ui-priority-primary" process="@this" />		
+
+			<p:commandButton value="Traning" icon="fa fa-bar-chart"
+				update=":mainBody" action="#{hrBean.traningReport()}"
+				styleClass="ui-priority-primary" process="@this" />
+
+			<p:commandButton value="Resume" icon="fa fa-bar-chart"
+				update=":mainBody" action="#{hrBean.resumeReport()}"
+				styleClass="ui-priority-primary" process="@this" />
+
+			<p:commandButton value="Mock" icon="fa fa-bar-chart"
+				update=":mainBody" action="#{hrBean.mockReport()}"
+				styleClass="ui-priority-primary" process="@this" />
+
+			<p:commandButton value="Reference" icon="fa fa-bar-chart"
+				update=":mainBody" action="#{hrBean.referenceReport()}"
+				styleClass="ui-priority-primary" process="@this" />
+
+			<p:commandButton value="Pre-Hotlist" icon="fa fa-bar-chart"
+				update=":mainBody" action="#{hrBean.prehotlistReport()}"
+				styleClass="ui-priority-primary" process="@this" />
+
+			<p:commandButton value="Hotlist" icon="fa fa-bar-chart"
+				update=":mainBody" action="#{hrBean.hotlistReport()}"
+				styleClass="ui-priority-primary" process="@this" />			
+
+
+		</p:panel>
+		
+		<div style="margin-top:15%;margin-left:40%;margin-right:20%;">
+		   <h1 style="font-size:70px;font-style:italic;">REPORT</h1>
+		</div>
+	</h:form>
+</ui:composition>

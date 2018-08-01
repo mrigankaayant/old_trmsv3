@@ -1,0 +1,902 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+
+	<h:form id="training-field-panel">
+		<p:panel style="background-color:HoneyDew;">
+			<p:commandButton value="Enrollment" icon="fa fa-pencil"
+				update=":mainBody" action="#{hrBean.enrollmentDetails()}"
+				onclick="PF('statusDialog').show()"
+				oncomplete="PF('statusDialog').hide()"
+				styleClass="ui-priority-primary" process="@this" />
+
+			<p:commandButton value="Training" icon="fa fa-slideshare"
+				update=":mainBody" action="#{hrBean.trainingDetails()}"
+				onclick="PF('statusDialog').show()"
+				oncomplete="PF('statusDialog').hide()"
+				styleClass="ui-priority-primary" process="@this" />
+
+			<p:commandButton value="Resume" icon="fa fa-file-text-o"
+				update=":mainBody" action="#{hrBean.resumeDetails()}"
+				onclick="PF('statusDialog').show()"
+				oncomplete="PF('statusDialog').hide()"
+				styleClass="ui-priority-primary" process="@this" />
+
+			<p:commandButton value="Mock-Graduation" icon="fa fa-bar-chart"
+				update=":mainBody" action="#{hrBean.mockAndGraduationDetails()}"
+				onclick="PF('statusDialog').show()"
+				oncomplete="PF('statusDialog').hide()"
+				styleClass="ui-priority-primary" process="@this" />
+
+			<p:commandButton value="Reference" icon="fa fa-street-view"
+				update=":mainBody" action="#{hrBean.referenceDetails()}"
+				onclick="PF('statusDialog').show()"
+				oncomplete="PF('statusDialog').hide()"
+				styleClass="ui-priority-primary" process="@this" />
+
+
+			<p:commandButton value="Pre-hotlist" icon="fa fa-list-ol"
+				update=":mainBody" action="#{hrBean.preHotlistDetails()}"
+				onclick="PF('statusDialog').show()"
+				oncomplete="PF('statusDialog').hide()"
+				styleClass="ui-priority-primary" process="@this" />
+
+			<p:commandButton value="Other Documents" icon="fa fa-file"
+				update=":mainBody" action="#{hrBean.documentsDetails()}"
+				onclick="PF('statusDialog').show()"
+				oncomplete="PF('statusDialog').hide()"
+				styleClass="ui-priority-primary" process="@this" />
+
+			<p:commandButton value="Mail Template" icon="fa fa-envelope"
+				update=":mainBody" action="#{hrBean.mailTemplateForm()}"
+				onclick="PF('statusDialog').show()"
+				oncomplete="PF('statusDialog').hide()"
+				styleClass="ui-priority-primary" process="@this" />
+
+			<p:commandButton value="Terminate" icon="fa fa-times"
+				update=":mainBody" action="#{hrBean.terminateForm()}"
+				onclick="PF('statusDialog').show()"
+				oncomplete="PF('statusDialog').hide()"
+				styleClass="ui-priority-primary" process="@this"
+				style="background-color:red" />
+
+		</p:panel>
+
+		<p:panel style="margin-top:0.5%;"
+			rendered="#{hrBean.trainingLabelPanel}">
+			<f:facet name="header">
+					Training Related Information
+				</f:facet>
+			<div class="ui-g" style="border: none;">
+
+
+				<div class="ui-g-12 ui-md-6 ui-lg-4" style="border: none;">
+					<h:panelGrid style="border: none;" columns="2">
+						<p:outputLabel style="font-size:16px;color:teal" value="Name:" />
+						<c:if test="${empty hrBean.candidate.candidateName}">
+							<h:outputText style="font-size:16px" value="N/A" />
+						</c:if>
+						<c:if test="${!empty hrBean.candidate.candidateName}">
+							<h:outputText style="font-size:16px"
+								value="#{hrBean.candidate.candidateName}" />
+						</c:if>
+
+					</h:panelGrid>
+				</div>
+
+
+				<div class="ui-g-12 ui-md-6 ui-lg-4" style="border: none;">
+					<h:panelGrid style="border: none;" columns="2">
+						<p:outputLabel style="font-size:16px;color:teal"
+							value="Contact No:" />
+						<c:if test="${empty hrBean.candidate.contactNo}">
+							<h:outputText style="font-size:16px" value="N/A" />
+						</c:if>
+						<c:if test="${!empty hrBean.candidate.contactNo}">
+							<h:outputText style="font-size:16px"
+								value="#{hrBean.candidate.contactNo}" />
+						</c:if>
+
+					</h:panelGrid>
+				</div>
+
+
+				<div class="ui-g-12 ui-md-6 ui-lg-4" style="border: none;">
+					<h:panelGrid style="border: none;" columns="2">
+						<p:outputLabel style="font-size:16px;color:teal" value="Email Id:" />
+						<c:if test="${empty hrBean.candidate.emailId}">
+							<h:outputText style="font-size:16px" value="N/A" />
+						</c:if>
+						<c:if test="${!empty hrBean.candidate.emailId}">
+							<h:outputText style="font-size:16px"
+								value="#{hrBean.candidate.emailId}" />
+						</c:if>
+
+					</h:panelGrid>
+				</div>
+
+
+
+				<div class="ui-g-12 ui-md-6 ui-lg-4" style="border: none;">
+					<h:panelGrid style="border: none;" columns="2">
+						<p:outputLabel style="font-size:16px;color:teal"
+							value="Primary Skill:" />
+						<c:if test="${empty hrBean.candidate.primarySkill}">
+							<h:outputText style="font-size:16px" value="N/A" />
+						</c:if>
+						<c:if test="${!empty hrBean.candidate.primarySkill}">
+							<h:outputText style="font-size:16px"
+								value="#{hrBean.candidate.primarySkill}" />
+						</c:if>
+
+					</h:panelGrid>
+				</div>
+
+				<div class="ui-g-12 ui-md-6 ui-lg-4" style="border: none;">
+					<h:panelGrid style="border: none;" columns="2">
+						<p:outputLabel style="font-size:16px;color:teal"
+							value="Training Start Date:" />
+						<c:if test="${empty hrBean.candidate.trainingStartDate}">
+							<h:outputText style="font-size:16px" value="N/A" />
+						</c:if>
+						<c:if test="${!empty hrBean.candidate.trainingStartDate}">
+							<h:outputText style="font-size:16px"
+								value="#{hrBean.candidate.trainingStartDate}">
+								<f:convertDateTime pattern="dd-MMMM-yyyy" />
+							</h:outputText>
+						</c:if>
+					</h:panelGrid>
+				</div>
+
+				<div class="ui-g-12 ui-md-6 ui-lg-4" style="border: none;">
+					<h:panelGrid style="border: none;" columns="2">
+						<p:outputLabel style="font-size:16px;color:teal"
+							value="Training End Date:" />
+						<c:if test="${empty hrBean.candidate.trainingExpectedEndDate}">
+							<h:outputText style="font-size:16px" value="N/A" />
+						</c:if>
+						<c:if test="${!empty hrBean.candidate.trainingExpectedEndDate}">
+							<h:outputText style="font-size:16px"
+								value="#{hrBean.candidate.trainingExpectedEndDate}">
+								<f:convertDateTime pattern="dd-MMMM-yyyy" />
+							</h:outputText>
+						</c:if>
+					</h:panelGrid>
+				</div>
+
+
+				<div class="ui-g-12 ui-md-6 ui-lg-4" style="border: none;">
+					<h:panelGrid style="border: none;" columns="2">
+						<p:outputLabel style="font-size:16px;color:teal"
+							value="Batch Code:" />
+
+						<c:if test="${empty hrBean.candidate.batchCode}">
+							<h:outputText style="font-size:16px" value="N/A" />
+						</c:if>
+						<c:if test="${!empty hrBean.candidate.batchCode}">
+							<h:outputText style="font-size:16px"
+								value="#{hrBean.candidate.batchCode}" />
+						</c:if>
+					</h:panelGrid>
+				</div>
+
+				<div class="ui-g-12 ui-md-6 ui-lg-4" style="border: none;">
+					<h:panelGrid style="border: none;" columns="2">
+						<p:outputLabel style="font-size:16px;color:teal"
+							value="Training Status:" />
+
+						<c:if test="${empty hrBean.candidate.trainingStatus}">
+							<h:outputText style="font-size:16px" value="N/A" />
+						</c:if>
+						<c:if test="${!empty hrBean.candidate.trainingStatus}">
+							<h:outputText style="font-size:16px"
+								value="#{hrBean.candidate.trainingStatus}" />
+						</c:if>
+					</h:panelGrid>
+				</div>
+
+				<div class="ui-g-12 ui-md-6 ui-lg-4" style="border: none;">
+					<h:panelGrid style="border: none;" columns="2">
+						<p:outputLabel style="font-size:16px;color:teal"
+							value="Training Feedback Send Date:" />
+
+						<c:if
+							test="${empty hrBean.candidate.trainingFeedbackFormSendDate}">
+							<h:outputText style="font-size:16px" value="N/A" />
+						</c:if>
+						<c:if
+							test="${!empty hrBean.candidate.trainingFeedbackFormSendDate}">
+							<h:outputText style="font-size:16px"
+								value="#{hrBean.candidate.trainingFeedbackFormSendDate}">
+								<f:convertDateTime pattern="dd-MMMM-yyyy" />
+							</h:outputText>
+						</c:if>
+					</h:panelGrid>
+				</div>
+
+
+				<div class="ui-g-12 ui-md-6 ui-lg-4" style="border: none;">
+					<h:panelGrid style="border: none;" columns="2">
+						<p:outputLabel style="font-size:16px;color:teal"
+							value="Training Feedback Receive Date:" />
+
+						<c:if test="${empty hrBean.candidate.trainingFeedbackReceiveDate}">
+							<h:outputText style="font-size:16px" value="N/A" />
+						</c:if>
+						<c:if
+							test="${!empty hrBean.candidate.trainingFeedbackReceiveDate}">
+							<h:outputText style="font-size:16px"
+								value="#{hrBean.candidate.trainingFeedbackReceiveDate}">
+								<f:convertDateTime pattern="dd-MMMM-yyyy" />
+							</h:outputText>
+						</c:if>
+					</h:panelGrid>
+				</div>
+
+
+				<div class="ui-g-12 ui-md-6 ui-lg-4" style="border: none;">
+					<h:panelGrid style="border: none;" columns="2">
+						<p:outputLabel style="font-size:16px;color:teal"
+							value="Trainer Name:" />
+
+						<c:if test="${empty hrBean.candidate.trainerName}">
+							<h:outputText style="font-size:16px" value="N/A" />
+						</c:if>
+						<c:if test="${!empty hrBean.candidate.trainerName}">
+							<h:outputText style="font-size:16px"
+								value="#{hrBean.candidate.trainerName}" />
+						</c:if>
+					</h:panelGrid>
+				</div>
+
+
+				<div class="ui-g-12 ui-md-6 ui-lg-4" style="border: none;">
+					<h:panelGrid style="border: none;" columns="2">
+						<p:outputLabel style="font-size:16px;color:teal" value="Timing:" />
+
+						<c:if test="${empty hrBean.candidate.trainingTiming}">
+							<h:outputText style="font-size:16px" value="N/A" />
+						</c:if>
+						<c:if test="${!empty hrBean.candidate.trainingTiming}">
+							<h:outputText style="font-size:16px"
+								value="#{hrBean.candidate.trainingTiming}" />
+						</c:if>
+					</h:panelGrid>
+				</div>
+
+
+				<div class="ui-g-12 ui-md-6 ui-lg-4" style="border: none;">
+					<h:panelGrid style="border: none;" columns="2">
+						<p:outputLabel style="font-size:16px;color:teal"
+							value="Training WebEx Account:" />
+
+						<c:if test="${empty hrBean.candidate.trainingWebexAccount}">
+							<h:outputText style="font-size:16px" value="N/A" />
+						</c:if>
+						<c:if test="${!empty hrBean.candidate.trainingWebexAccount}">
+							<h:outputText style="font-size:16px"
+								value="#{hrBean.candidate.trainingWebexAccount}" />
+						</c:if>
+					</h:panelGrid>
+				</div>
+			</div>
+
+			<div class="ui-g" style="border: none;">
+				<div class="ui-g-12 ui-md-12 ui-lg-12" style="border: none;">
+					<h:panelGrid style="border: none;" columns="2">
+						<p:outputLabel style="font-size:16px;color:teal"
+							value="Trainer Feedback:" />
+
+						<c:if test="${empty hrBean.candidate.trainingFeedback}">
+							<h:outputText style="font-size:16px" value="N/A" />
+						</c:if>
+						<c:if test="${!empty hrBean.candidate.trainingFeedback}">
+							<h:outputText style="font-size:16px"
+								value="#{hrBean.candidate.trainingFeedback}" />
+						</c:if>
+					</h:panelGrid>
+				</div>
+			</div>
+
+
+			<f:facet name="footer">
+				<div style="text-align: center">
+					<p:commandButton value="Edit" icon="fa fa-fw fa-edit"
+						update=":training-field-panel"
+						action="#{hrBean.editTrainingDetails()}"
+						onclick="PF('statusDialog').show()"
+						oncomplete="PF('statusDialog').hide()"
+						styleClass="ui-priority-primary" />
+				</div>
+			</f:facet>
+		</p:panel>
+
+
+
+
+
+		<p:panel style="margin-top:0.5%;"
+			rendered="#{hrBean.trainingEditPanel}">
+			<f:facet name="header">Training Related Information</f:facet>
+
+			<div class="ui-g" style="border: none;">
+
+				<div class="ui-g-12 ui-md-6 ui-lg-4" style="border: none;">
+					<h:panelGrid style="width:100%;border: none;">
+						<p:outputLabel for="primary-skill" style="font-size:16px"
+							value="Primary Skill:" />
+
+						<p:selectOneMenu id="primary-skill"
+							value="#{hrBean.candidate.primarySkill}" required="true"
+							requiredMessage="Enter Primary Skill">
+							
+							<f:selectItem itemLabel="----Select----" itemValue="" />
+							<f:selectItems value="#{appDataBean.courseList}" var="c"
+								itemLabel="#{c}" itemValue="#{c}" />
+						</p:selectOneMenu>
+
+					</h:panelGrid>
+					<p:message for="primary-skill" />
+				</div>
+
+				<div class="ui-g-12 ui-md-6 ui-lg-4" style="border: none;">
+					<h:panelGrid style="width:100%;border: none;">
+						<p:outputLabel for="training-start-date" style="font-size:16px"
+							value="Training Start Date:" />
+						<p:calendar id="training-start-date"
+							value="#{hrBean.candidate.trainingStartDate}"
+							pattern="dd-MMMM-yyyy" placeholder="Training Start Date" />
+					</h:panelGrid>
+					<p:message for="training-start-date" />
+				</div>
+
+				<div class="ui-g-12 ui-md-6 ui-lg-4" style="border: none;">
+					<h:panelGrid style="width:100%;border: none;">
+						<p:outputLabel for="training-end-date" style="font-size:16px"
+							value="Training End Date:" />
+						<p:calendar id="training-end-date"
+							value="#{hrBean.candidate.trainingExpectedEndDate}"
+							pattern="dd-MMMM-yyyy" placeholder="Training End Date" />
+					</h:panelGrid>
+					<p:message for="training-end-date" />
+				</div>
+
+				<div class="ui-g-12 ui-md-6 ui-lg-4" style="border: none;">
+					<h:panelGrid style="width:100%;border: none;">
+						<p:outputLabel for="batch-code" style="font-size:16px"
+							value="Batch Code:" />
+						<p:inputText id="batch-code" value="#{hrBean.candidate.batchCode}"
+							placeholder="Batch Code" />
+					</h:panelGrid>
+					<p:message for="batch-code" />
+				</div>
+
+				<div class="ui-g-12 ui-md-6 ui-lg-4" style="border: none;">
+					<h:panelGrid style="width:100%;border: none;">
+						<p:outputLabel for="training-status" style="font-size:16px"
+							value="Training Status:" />
+
+						<p:selectOneMenu id="training-status"
+							value="#{hrBean.candidate.trainingStatus}"
+							style="width:93%!important" required="true"
+							requiredMessage="Select Training Status"
+							validator="#{hrBean.resumeNotification}">
+							<f:selectItem itemLabel="----Select----" itemValue="" />
+							<f:selectItem itemLabel="Not Started" itemValue="NOT STARTED" />
+							<f:selectItem itemLabel="On-going" itemValue="ONGOING" />
+							<f:selectItem itemLabel="TFF Sent" itemValue="TFF SENT" />
+							<f:selectItem itemLabel="TFF Received" itemValue="TFF RECEIVED" />
+							<f:selectItem itemLabel="Completed" itemValue="COMPLETED" />
+
+							<p:ajax event="change" />
+
+						</p:selectOneMenu>
+
+					</h:panelGrid>
+					<p:message for="training-status" />
+				</div>
+
+
+				<div class="ui-g-12 ui-md-6 ui-lg-4" style="border: none;">
+					<h:panelGrid style="width:100%;border: none;">
+						<p:outputLabel for="tft-send-date" style="font-size:16px"
+							value="Training Feedback Form Send Date:" />
+						<p:calendar id="tft-send-date"
+							value="#{hrBean.candidate.trainingFeedbackFormSendDate}"
+							pattern="dd-MMMM-yyyy"
+							placeholder="Training Feedback Form Send Date" />
+					</h:panelGrid>
+					<p:message for="tft-send-date" />
+				</div>
+
+
+				<div class="ui-g-12 ui-md-6 ui-lg-4" style="border: none;">
+					<h:panelGrid style="width:100%;border: none;">
+						<p:outputLabel for="tft-receive-date" style="font-size:16px"
+							value="Training Feedback Form Receive Date:" />
+						<p:calendar id="tft-receive-date"
+							value="#{hrBean.candidate.trainingFeedbackReceiveDate}"
+							pattern="dd-MMMM-yyyy"
+							placeholder="Training Feedback Form Receive Date" />
+					</h:panelGrid>
+					<p:message for="tft-receive-date" />
+				</div>
+
+
+				<div class="ui-g-12 ui-md-6 ui-lg-4" style="border: none;">
+					<h:panelGrid style="width:100%;border: none;">
+						<p:outputLabel for="trainer-name" style="font-size:16px"
+							value="Trainer Name:" />
+						<p:inputText id="trainer-name"
+							value="#{hrBean.candidate.trainerName}"
+							placeholder="Trainer Name" />
+					</h:panelGrid>
+					<p:message for="trainer-name" />
+				</div>
+
+
+				<div class="ui-g-12 ui-md-6 ui-lg-4" style="border: none;">
+					<h:panelGrid style="width:100%;border: none;">
+						<p:outputLabel for="timing" style="font-size:16px" value="Timing:" />
+						<p:inputText id="timing"
+							value="#{hrBean.candidate.trainingTiming}" placeholder="Timing" />
+					</h:panelGrid>
+					<p:message for="timing" />
+				</div>
+
+
+				<div class="ui-g-12 ui-md-6 ui-lg-4" style="border: none;">
+					<h:panelGrid style="width:100%;border: none;">
+						<p:outputLabel for="training-webex-account" style="font-size:16px"
+							value="Training WebEx Account:" />
+						<p:inputText id="training-webex-account"
+							value="#{hrBean.candidate.trainingWebexAccount}"
+							placeholder="Training WebEx Account" />
+					</h:panelGrid>
+					<p:message for="training-webex-account" />
+				</div>
+
+			</div>
+
+			<div class="ui-g" style="border: none;">
+				<div class="ui-g-12 ui-md-12 ui-lg-12" style="border: none;">
+					<h:panelGrid style="width:100%;border: none;">
+						<p:outputLabel for="trainer-feedback" style="font-size:16px"
+							value="Trainer Feedback:" />
+						<p:inputTextarea id="trainer-feedback"
+							value="#{hrBean.candidate.trainingFeedback}"
+							placeholder="Trainer Feedback" />
+					</h:panelGrid>
+					<p:message for="trainer-feedback" />
+				</div>
+			</div>
+
+
+			<f:facet name="footer">
+				<div style="text-align: center">
+					<p:commandButton value="Save" icon="fa fa-save"
+						update=":training-field-panel,:training-followup-form"
+						action="#{hrBean.saveTrainerDetails()}"
+						onclick="PF('statusDialog').show()"
+						oncomplete="PF('statusDialog').hide()"
+						styleClass="ui-priority-primary" />
+				</div>
+			</f:facet>
+		</p:panel>
+	</h:form>
+
+
+
+	<h:form id="training-document-panel">
+		<p:panel style="margin-top:1%;">
+			<f:facet name="header">Training Related Documents</f:facet>
+			<div class="ui-g" style="border: none;">
+				<div class="ui-g-12 ui-md-6 ui-lg-4" style="border: none;">
+					<span style="color: teal; padding-right: 2%"> Do You Want To
+						Genarate Training Feedback Form? </span>
+
+					<p:commandButton value="YES" icon="fa fa-check-square-o"
+						update=":training-document-panel,:training-followup-form"
+						action="#{hrBean.generatetrainingFeedbackForm()}"
+						styleClass="ui-priority-primary"
+						onclick="return confirm('Are you sure?')" />
+				</div>
+				<div class="ui-g-12 ui-md-6 ui-lg-5" style="border: none;">
+					<c:if test="${!empty hrBean.trainingFileHandleUtil}">
+						<h:panelGrid id="generated-doc-panel" columns="2"
+							style="margin-top:1%;">
+							<span style="color: teal"> Genarated Document :</span>
+							<h:commandLink action="#{hrBean.openFile()}"
+								value="#{hrBean.trainingFileHandleUtil.fileName}"
+								target="_blank" immediate="true">
+								<f:param name="filePath"
+									value="#{hrBean.trainingFileHandleUtil.filePath}" />
+								<f:param name="extension"
+									value="#{hrBean.trainingFileHandleUtil.fileExtension}" />
+								<f:param name="filename"
+									value="#{hrBean.trainingFileHandleUtil.fileName}" />
+							</h:commandLink>
+						</h:panelGrid>
+					</c:if>
+				</div>
+
+				<div class="ui-g-12 ui-md-6 ui-lg-2"
+					style="border: none; margin-right: 8%">
+					<c:if test="${!empty hrBean.trainingFileHandleUtil}">
+						<p:commandButton value="Send Mail" icon="fa fa-envelope-o"
+							action="#{hrBean.mailSendFormForTrainingFeedbackForm()}"
+							oncomplete="PF('mailDlg').show();" immediate="true"
+							update=":mail-Form" />
+					</c:if>
+				</div>
+			</div>
+
+
+
+			<div class="ui-g" style="border: none;">
+				<div class="ui-g-12 ui-md-6 ui-lg-6" style="border: none;">
+					<p:panel id="sending-doc-panel" style="margin-top:1%;">
+						<f:facet name="header">Sending Training Feedback Form Details</f:facet>
+						<div class="ui-g" style="border: none;">
+							<div class="ui-g-12 ui-md-6 ui-lg-12" style="border: none;">
+								<h:panelGrid columns="1" style="border:none;">
+									<p:fileUpload
+										fileUploadListener="#{hrBean.savetrainingEnrollmentForm}"
+										update="file" mode="advanced" />
+								</h:panelGrid>
+							</div>
+							<div style="border: none">
+
+								<div class="ui-g-12 ui-md-6 ui-lg-12"
+									style="border: none !important;">
+									<h:panelGrid id="file" columns="2" cellpadding="0"
+										cellspacing="2"
+										style="margin-left:27.5%;border:none !important;">
+										<p:outputLabel value=" Uploaded Documents:"
+											rendered="#{hrBean.sendingTrainingFileName.size() > '0'}" />
+										<br></br>
+										<c:forEach items="${hrBean.sendingTrainingFileName}" var="doc">
+											<p:outputLabel style="font-weight: bold;color:Teal"
+												value="#{doc}" />
+											<p:commandLink
+												actionListener="#{hrBean.sendingTrainingFileDelete}"
+												update="file" style="font-weight: bold;color:red"
+												value="delete">
+												<f:param name="deletefile" value="#{doc}" />
+											</p:commandLink>
+										</c:forEach>
+									</h:panelGrid>
+								</div>
+							</div>
+						</div>
+						<f:facet name="footer">
+							<p:commandButton value="Save"
+								actionListener="#{hrBean.saveSendingTrainingFormInDatabase()}"
+								update=":training-document-panel,:training-followup-form" />
+							<p:commandButton value="Cancel"
+								actionListener="#{hrBean.cancelSendingTrainingFileUpload()}"
+								update=":training-document-panel" />
+						</f:facet>
+
+
+						<c:if test="${!empty hrBean.sendingTrainingFileHandleUtil}">
+							<p:panel id="sendingtraining-doc-panel" style="margin-top:1%;">
+								<span style="color: teal">Sending Training Feedback Form
+									:</span>
+								<h:commandLink action="#{hrBean.openFile()}"
+									value="#{hrBean.sendingTrainingFileHandleUtil.fileName}"
+									target="_blank" immediate="true">
+									<f:param name="filePath"
+										value="#{hrBean.sendingTrainingFileHandleUtil.filePath}" />
+									<f:param name="extension"
+										value="#{hrBean.sendingTrainingFileHandleUtil.fileExtension}" />
+									<f:param name="filename"
+										value="#{hrBean.sendingTrainingFileHandleUtil.fileName}" />
+								</h:commandLink>
+							</p:panel>
+						</c:if>
+					</p:panel>
+				</div>
+
+				<div class="ui-g-12 ui-md-6 ui-lg-6" style="border: none;">
+					<p:panel id="receiving-doc-panel" style="margin-top:1%;">
+						<f:facet name="header">Receiving Training Feedback Form Details</f:facet>
+						<div class="ui-g" style="border: none;">
+							<div class="ui-g-12 ui-md-6 ui-lg-12" style="border: none;">
+								<h:panelGrid columns="1">
+									<p:fileUpload
+										fileUploadListener="#{hrBean.saveReceivingTrainingFeedbackForm}"
+										update="file-tff" mode="advanced" />
+								</h:panelGrid>
+							</div>
+							<div style="border: none">
+								<div class="ui-g-12 ui-md-6 ui-lg-12"
+									style="border: none !important;">
+									<h:panelGrid id="file-tff" columns="2" cellpadding="0"
+										cellspacing="2" style="margin-left:27.5%;">
+										<p:outputLabel value=" Uploaded Documents:"
+											rendered="#{hrBean.receivingTrainingFileName.size() > '0'}" />
+										<br></br>
+										<c:forEach items="${hrBean.receivingTrainingFileName}"
+											var="doc">
+											<p:outputLabel style="font-weight: bold;color:Teal"
+												value="#{doc}" />
+											<p:commandLink
+												actionListener="#{hrBean.receivingTrainingFileDelete}"
+												update="file-tff" style="font-weight: bold;color:red"
+												value="delete">
+												<f:param name="deletefile" value="#{doc}" />
+											</p:commandLink>
+										</c:forEach>
+									</h:panelGrid>
+								</div>
+							</div>
+						</div>
+						<f:facet name="footer">
+							<p:commandButton value="Save"
+								actionListener="#{hrBean.saveReceivingTrainingFormInDatabase()}"
+								update=":training-document-panel,:training-followup-form" />
+							<p:commandButton value="Cancel"
+								actionListener="#{hrBean.cancelReceivingTrainingFileUpload()}"
+								update=":training-document-panel" />
+						</f:facet>
+
+
+						<c:if test="${!empty hrBean.receivingTrainingFileHandleUtil}">
+							<p:panel id="receivingtrainingform-doc-panel"
+								style="margin-top:1%;">
+								<span style="color: teal"> Receiving Training Feedback
+									Form :</span>
+								<h:commandLink action="#{hrBean.openFile()}"
+									value="#{hrBean.receivingTrainingFileHandleUtil.fileName}"
+									target="_blank" immediate="true">
+									<f:param name="filePath"
+										value="#{hrBean.receivingTrainingFileHandleUtil.filePath}" />
+									<f:param name="extension"
+										value="#{hrBean.receivingTrainingFileHandleUtil.fileExtension}" />
+									<f:param name="filename"
+										value="#{hrBean.receivingTrainingFileHandleUtil.fileName}" />
+								</h:commandLink>
+							</p:panel>
+
+						</c:if>
+					</p:panel>
+				</div>
+			</div>
+		</p:panel>
+	</h:form>
+
+
+
+
+	<h:form id="training-followup-form">
+		<p:panel id="training-followup-panel" style="margin-top:1%">
+			<f:facet name="header">Follow Up</f:facet>
+			<h:panelGrid columns="8" layout="grid" style="border: none;">
+				<p:outputLabel for="follow-up"
+					style="font-size:16px;font-weight:bold" value="Follow Up:" />
+
+				<p:inputText id="follow-up"
+					value="#{hrBean.hrFollowup.followUpRemarks}" required="true"
+					requiredMessage="Enter Follow Up" placeholder="Follow Up"
+					size="100" />
+				<p:message for="follow-up" />
+
+
+				<p:outputLabel for="next-follow-up-date"
+					style="font-size:16px;font-weight:bold"
+					value="Next Follow Up Date:" />
+
+				<p:calendar id="next-follow-up-date"
+					value="#{hrBean.hrFollowup.nextFollowUpDate}"
+					placeholder="Next Follow Up Date" pattern="dd-MMMM-yyyy" />
+
+				<p:message for="next-follow-up-date" />
+
+
+				<p:commandButton value="Save"
+					action="#{hrBean.saveTrainingFollowup()}"
+					onclick="PF('statusDialog').show()"
+					oncomplete="PF('statusDialog').hide()"
+					update=":training-followup-form" />
+
+			</h:panelGrid>
+		</p:panel>
+
+
+		<p:panel id="training-followup-table-panel"
+			rendered="#{not empty hrBean.trainingFollowUpList}"
+			style="margin-top:1%">
+
+			<p:dataTable var="h" value="#{hrBean.trainingFollowUpList}"
+				paginator="true" rows="50" resizableColumns="true" resizeMode="true"
+				widgetVar="enrolladvanceSearch" sortBy="#{h.hrFollowUpId}"
+				sortOrder="descending"
+				paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
+				rowsPerPageTemplate="50,100,200,300,500" rowKey="#{h.hrFollowUpId}"
+				tableStyle="width:auto;table-layout:auto">
+
+
+				<f:facet name="header">Training Related Follow Up</f:facet>
+
+				<p:column headerText="Remarks" sortBy="#{h.followUpRemarks}"
+					filterBy="#{h.followUpRemarks}" style="width:30%" styleClass="wrap">
+					<h:outputText style="font-size:14px;" value="#{h.followUpRemarks}" />
+				</p:column>
+
+				<p:column headerText="Follow Up Date" sortBy="#{h.followUpDate}"
+					filterBy="#{h.followUpDate}" style="width:10%">
+					<h:outputText value="#{h.followUpDate}">
+					</h:outputText>
+				</p:column>
+
+				<p:column headerText="Next Follow Up Date"
+					sortBy="#{h.nextFollowUpDate}" filterBy="#{h.nextFollowUpDate}"
+					style="text-align:center;width:10%">
+					<h:outputText value="#{h.nextFollowUpDate}">
+					</h:outputText>
+				</p:column>
+
+				<p:column headerText="User Name"
+					sortBy="#{h.userProfile.userFullName}"
+					filterBy="#{h.userProfile.userFullName}" style="width:10%">
+					<h:outputText value="#{h.userProfile.userFullName}" />
+				</p:column>
+
+			</p:dataTable>
+		</p:panel>
+
+
+		<p:panel id="all-followup-table-panel"
+			rendered="#{not empty hrBean.allHrFollowuList}" style="margin-top:1%">
+			<p:dataTable var="h" value="#{hrBean.allHrFollowuList}"
+				paginator="true" rows="50" resizableColumns="true" resizeMode="true"
+				widgetVar="alladvanceSearch" sortBy="#{h.hrFollowUpId}"
+				sortOrder="descending"
+				paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
+				rowsPerPageTemplate="50,100,200,300,500" rowKey="#{h.hrFollowUpId}"
+				tableStyle="width:auto;table-layout:auto">
+
+
+				<f:facet name="header">Follow Up Details</f:facet>
+
+				<p:column headerText="Remarks" sortBy="#{h.followUpRemarks}"
+					filterBy="#{h.followUpRemarks}" style="width:30%" styleClass="wrap">
+					<h:outputText style="font-size:14px;" value="#{h.followUpRemarks}" />
+				</p:column>
+
+				<p:column headerText="Follow Up Date" sortBy="#{h.followUpDate}"
+					filterBy="#{h.followUpDate}" style="width:10%">
+					<h:outputText value="#{h.followUpDate}">
+					</h:outputText>
+				</p:column>
+
+				<p:column headerText="Next Follow Up Date"
+					sortBy="#{h.nextFollowUpDate}" filterBy="#{h.nextFollowUpDate}"
+					style="width:10%">
+					<h:outputText value="#{h.nextFollowUpDate}">
+					</h:outputText>
+				</p:column>
+
+				<p:column headerText="User Name"
+					sortBy="#{h.userProfile.userFullName}"
+					filterBy="#{h.userProfile.userFullName}" style="width:10%">
+					<h:outputText value="#{h.userProfile.userFullName}" />
+				</p:column>
+
+			</p:dataTable>
+		</p:panel>
+	</h:form>
+
+
+
+	<h:form id="mail-Form">
+		<p:dialog header="Mail" id="dialog2" widgetVar="mailDlg" modal="true"
+			showEffect="explode" hideEffect="fade" width="1200" height="500"
+			responsive="true">
+
+			<p:panel style="margin-top:1%" id="mail-send-panel">
+				<f:facet name="header">Send Mail</f:facet>
+
+				<div class="ui-g" style="border: none">
+					<div class="ui-g-12 ui-md-12 ui-lg-12" style="border: none">
+						<h:panelGrid style="width:100%">
+							<p:outputLabel for="to" value="To" />
+							<p:inputText id="to" value="#{hrBean.mailDto.toEmail}"
+								readonly="true" />
+							<p:message for="to" />
+						</h:panelGrid>
+					</div>
+				</div>
+
+				<div class="ui-g" style="border: none">
+					<div class="ui-g-12 ui-md-12 ui-lg-12" style="border: none">
+						<h:panelGrid style="width:100%">
+							<p:outputLabel for="from" value="From" />
+							<p:inputText id="from" value="#{hrBean.mailDto.userName}"
+								readonly="true" />
+							<p:message for="from" />
+						</h:panelGrid>
+					</div>
+				</div>
+
+				<div class="ui-g" style="border: none">
+					<div class="ui-g-12 ui-md-12 ui-lg-12" style="border: none">
+						<h:panelGrid style="width:100%">
+							<p:outputLabel for="subject" value="Subject" />
+							<p:inputText id="subject" required="true"
+								value="#{hrBean.mailDto.subject}"
+								requiredMessage="Enter Mail Subject" placeholder="Mail Subject" />
+							<p:message for="subject" />
+						</h:panelGrid>
+					</div>
+				</div>
+
+
+				<div class="ui-g" style="border: none">
+					<div class="ui-g-12 ui-md-12 ui-lg-12" style="border: none">
+						<h:panelGrid style="width:100%">
+							<p:outputLabel for="body-content" value="Body Content:" />
+							<p:editor id="body-content" widgetVar="editorWidget"
+								value="#{hrBean.mailDto.mailMessage}" />
+							<p:message for="body-content" />
+						</h:panelGrid>
+					</div>
+				</div>
+
+				<div class="ui-g" style="border: none">
+					<div class="ui-g-12 ui-md-12 ui-lg-12" style="border: none">
+						<h:panelGrid style="width:100%">
+							<p:outputLabel for="body-content" value="Training Feedback Form:"
+								style="color:Teal" />
+							<h:commandLink action="#{hrBean.openFile()}"
+								value="#{hrBean.trainingFileHandleUtil.fileName}"
+								target="_blank" immediate="true">
+								<f:param name="filePath"
+									value="#{hrBean.trainingFileHandleUtil.filePath}" />
+								<f:param name="extension"
+									value="#{hrBean.trainingFileHandleUtil.fileExtension}" />
+								<f:param name="filename"
+									value="#{hrBean.trainingFileHandleUtil.fileName}" />
+							</h:commandLink>
+							<p:message for="body-content" />
+						</h:panelGrid>
+					</div>
+				</div>
+
+				<f:facet name="footer">
+					<div style="text-align: center">
+						<p:commandButton value="Send"
+							action="#{hrBean.sendMailForTraining()}"
+							oncomplete="handleMail(xhr, status, args)"
+							update="mail-send-panel,:training-field-panel" />
+					</div>
+				</f:facet>
+			</p:panel>
+		</p:dialog>
+	</h:form>
+
+
+
+	<script type="text/javascript">
+
+
+
+    function handleMail(xhr, status, args) {
+        if(args.validationFailed) {
+            PF('mailDlg').jq.effect("shake", {times:10}, 100);
+        }
+        else {
+            PF('mailDlg').hide();
+        }
+    }
+
+
+</script>
+
+
+</ui:composition>

@@ -1,0 +1,130 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<h:form id="importForm">
+
+		<p:panel style="margin-top:1%">
+			<f:facet name="header">Import Candidate</f:facet>
+			<h:panelGrid columns="11" layout="grid"
+				style="border: none;margin-left:30%">
+				<p:outputLabel for="import-by"
+					style="font-size:16px;font-weight:bold" value="Import By:" />
+
+				<p:selectOneMenu id="import-by" value="#{hrBean.importBy}"
+					required="true" requiredMessage="Select Import By">
+					<f:selectItem itemLabel="----Select----" itemValue="" />
+					<f:selectItem itemLabel="ID" itemValue="id" />
+					<f:selectItem itemLabel="Name" itemValue="name" />
+					<f:selectItem itemLabel="Email" itemValue="email" />
+					<f:selectItem itemLabel="Phone No" itemValue="phone_no" />
+				</p:selectOneMenu>
+				<p:message for="import-by" />
+
+
+				<p:outputLabel for="import-value"
+					style="font-size:16px;font-weight:bold" value="Import Value:" />
+
+				<p:inputText id="import-value" value="#{hrBean.importValue}"
+					required="true" requiredMessage="Enter Import Value"
+					placeholder="Import Value" />
+
+				<p:message for="import-value" />
+
+
+				<p:commandButton value="Search"
+					action="#{hrBean.searchImportCandidate()}"
+					onclick="PF('statusDialog').show()"
+					oncomplete="PF('statusDialog').hide()" update=":importForm" />
+
+			</h:panelGrid>
+		</p:panel>
+
+		<p:panel id="eee"
+			style="margin-top:15%;margin-left:33%;margin-right:20%;border:none"
+			rendered="#{!not empty hrBean.candidateUtils}">
+			<h1 style="font-size: 50px; font-style: italic;">IMPORT
+				CANDIDATE</h1>
+		</p:panel>
+
+
+		<p:panel id="importCandidatePanel" style="margin-top:1%"
+			rendered="#{not empty hrBean.candidateUtils}">
+			<f:facet name="header">Select The Particular Candidate</f:facet>
+			<p:dataTable var="c" value="#{hrBean.candidateUtils}"
+				paginator="true" rows="50" resizableColumns="true" resizeMode="true"
+				widgetVar="advanceSearch" sortBy="#{c.candidateId}"
+				sortOrder="descending"
+				paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
+				rowsPerPageTemplate="50,100,200,300,500"
+				selection="#{hrBean.selectedCandidateUtil}"
+				rowKey="#{c.candidateId}" tableStyle="width:auto;table-layout:auto">
+
+
+
+				<p:column selectionMode="single"
+					style="width:16px;text-align:center;width:2%" />
+
+				<p:column headerText="Id" sortBy="#{c.candidateId}"
+					filterBy="#{c.candidateId}" style="text-align:center;width:10%">
+					<h:outputText value="#{c.candidateId}" />
+				</p:column>
+
+				<p:column headerText="Name" sortBy="#{c.candidateName}"
+					filterBy="#{c.candidateName}" style="text-align:center;width:10%">
+					<h:outputText value="#{c.candidateName}" />
+				</p:column>
+
+				<p:column headerText="Email" sortBy="#{c.candidateEmail}"
+					filterBy="#{c.candidateEmail}" style="text-align:center;width:10%">
+					<h:outputText value="#{c.candidateEmail}" />
+				</p:column>
+
+				<p:column headerText="Work Mobile" sortBy="#{c.candidateWorkMobile}"
+					filterBy="#{c.candidateWorkMobile}"
+					style="text-align:center;width:10%">
+					<h:outputText value="#{c.candidateWorkMobile}" />
+				</p:column>
+
+				<p:column headerText="Current Location"
+					sortBy="#{c.candidateCurrentLocation}"
+					filterBy="#{c.candidateCurrentLocation}"
+					style="text-align:center;width:10%">
+					<h:outputText value="#{c.candidateCurrentLocation}" />
+				</p:column>
+
+				<p:column headerText="Preferred Location"
+					sortBy="#{c.candidatePreferredLocation}"
+					filterBy="#{c.candidatePreferredLocation}"
+					style="text-align:center;width:10%">
+					<h:outputText value="#{c.candidatePreferredLocation}" />
+				</p:column>
+
+				<p:column headerText="Visa" sortBy="#{c.candidateVisa}"
+					filterBy="#{c.candidateVisa}" style="text-align:center;width:10%">
+					<h:outputText value="#{c.candidateVisa}" />
+				</p:column>
+
+				<p:column headerText="Total Amount" sortBy="#{c.totalAmount}"
+					filterBy="#{c.totalAmount}" style="text-align:center;width:10%">
+					<h:outputText value="#{c.totalAmount}" />
+				</p:column>
+
+				<f:facet name="footer">
+					<p:commandButton value="Import"
+						action="#{hrBean.importCandidateInhrModule}"
+						onclick="PF('statusDialog').show()"
+						oncomplete="PF('statusDialog').hide()" update=":mainBody" />
+				</f:facet>
+
+			</p:dataTable>
+
+		</p:panel>
+
+
+
+	</h:form>
+
+</ui:composition>

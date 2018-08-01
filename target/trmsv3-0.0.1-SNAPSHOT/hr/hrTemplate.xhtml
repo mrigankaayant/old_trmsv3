@@ -1,0 +1,104 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" template="/template/common.xhtml">
+
+	<ui:define name="submenu">
+
+		<div class="ui-ribbon-groups ui-helper-clearfix">
+			<h:form>
+
+				<table class="ui-ribbon-group-content ui-ribbon-group ui-widget">
+					<tr>
+
+						<td><p:commandButton value="Add"
+								style="color:teal !important" icon="fa fa-plus fa-3x"
+								styleClass="ui-ribbon-bigbutton"
+								action="#{hrBean.importCandidate()}"
+								onclick="PF('statusDialog').show()"
+								oncomplete="PF('statusDialog').hide()" update=":mainBody" /></td>
+
+						<td><p:commandButton value="List"
+								style="color:teal !important" icon="fa fa-list-ol fa-3x"
+								styleClass="ui-ribbon-bigbutton"
+								action="#{hrBean.listCandidate()}"
+								onclick="PF('statusDialog').show()"
+								oncomplete="PF('statusDialog').hide()" update=":mainBody" /></td>
+
+						<td><p:commandButton value="Terminated"
+								style="color:teal !important" icon="fa fa-trash fa-3x"
+								styleClass="ui-ribbon-bigbutton"
+								action="#{hrBean.terminatedCandidates()}"
+								onclick="PF('statusDialog').show()"
+								oncomplete="PF('statusDialog').hide()" update=":mainBody" /></td>
+
+					</tr>
+					<tfoot>
+						<tr>
+							<td colspan="2" class="ui-ribbon-group-label">Candidate</td>
+						</tr>
+					</tfoot>
+				</table>
+
+
+				<table class="ui-ribbon-group-content ui-ribbon-group ui-widget">
+					<tr>
+
+						<td><p:commandButton value="Report"
+								style="color:teal !important" icon="fa fa-bar-chart fa-3x"
+								styleClass="ui-ribbon-bigbutton" action="#{hrBean.hrReport()}"
+								onclick="PF('statusDialog').show()"
+								oncomplete="PF('statusDialog').hide()" update=":mainBody" /></td>
+
+					</tr>
+					<tfoot>
+						<tr>
+							<td colspan="2" class="ui-ribbon-group-label">Report</td>
+						</tr>
+					</tfoot>
+				</table>
+				
+				
+				<table class="ui-ribbon-group-content ui-ribbon-group ui-widget">
+					<tr>
+
+						<td><p:commandButton value="Add"
+								style="color:teal !important" icon="fa fa-plus fa-3x"
+								styleClass="ui-ribbon-bigbutton"
+								action="#{hrBean.addContentForm()}"
+								onclick="PF('statusDialog').show()"
+								oncomplete="PF('statusDialog').hide()" update=":mainBody" /></td>
+
+					</tr>
+					<tfoot>
+						<tr>
+							<td colspan="2" class="ui-ribbon-group-label">Add Content</td>
+						</tr>
+					</tfoot>
+				</table>
+
+				<table class="ui-ribbon-group-content ui-ribbon-group ui-widget">
+					<tr>
+						<td><p:commandButton value="Logout"
+								style="color:teal !important" icon="fa fa-power-off fa-3x"
+								styleClass="ui-ribbon-bigbutton" id="logout-button"
+								action="#{loginBean.logout()}"
+								onclick="PF('statusDialog').show()"
+								oncomplete="PF('statusDialog').hide()" update=":mainBody" /></td>
+					</tr>
+					<tfoot>
+						<tr>
+							<td colspan="7" class="ui-ribbon-group-label">Logout</td>
+						</tr>
+					</tfoot>
+				</table>
+
+			</h:form>
+
+		</div>
+
+	</ui:define>
+
+</ui:composition>

@@ -1,0 +1,87 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+
+	<h:form id="mail-details-form">
+		<p:panel style="margin-top:1%;"
+			rendered="#{not empty salesBean.mailHistory}">
+			<f:facet name="header">Mail History
+			
+			<p:commandLink id="referesh"  oncomplete="PF('advanceSearch').clearFilters()" style="padding-left:92.3%;color:teal"
+							 process="@this" update=":mainBody" >
+								<i class="fa fa-refresh fa-1x"></i>
+						</p:commandLink>
+						<p:tooltip  for="referesh" value="Referesh Data Table" trackMouse="true" style="font-size:20px"/>
+			</f:facet>
+
+			<p:dataTable var="h" value="#{salesBean.mailHistory}"
+				paginator="true" rows="50" resizableColumns="true" resizeMode="true"
+				widgetVar="advanceSearch" sortBy="#{h.id}" sortOrder="descending"
+				paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
+				rowsPerPageTemplate="50,100,200,300,500" rowKey="#{h.id}"
+				tableStyle="width:auto;table-layout:auto">
+
+
+				<p:column headerText="Vendor Email" sortBy="#{h.receiverEmail}"
+					filterBy="#{h.receiverEmail}" style="text-align:center;width:10%">
+					<h:outputText value="#{h.receiverEmail}" />
+				</p:column>
+
+				<p:column headerText="Sender Email" sortBy="#{h.senderEmail}"
+					filterBy="#{h.senderEmail}" style="text-align:center;width:10%">
+					<h:outputText value="#{h.senderEmail}" />
+				</p:column>
+
+				<p:column headerText="Subject" sortBy="#{h.subject}"
+					filterBy="#{h.subject}" style="text-align:center;width:10%">
+					<h:outputText value="#{h.subject}" />
+				</p:column>
+
+				<p:column headerText="Sending Date" sortBy="#{h.createdDate}"
+					filterBy="#{h.createdDate}" style="text-align:center;width:10%">
+					<h:outputText value="#{h.createdDate}" />
+				</p:column>
+
+				<p:column headerText="Show Message"
+					style="text-align:center;width:10%">
+					<p:commandButton update=":email-message-form"
+						oncomplete="PF('messageDialog').show()" icon="ui-icon-search"
+						title="Message" action="#{salesBean.showMailMessage(h)}">
+					</p:commandButton>
+				</p:column>
+
+			</p:dataTable>
+		</p:panel>
+
+		<p:panel style="margin-top:1%;"
+			rendered="#{empty salesBean.mailHistory}">
+			<f:facet name="header">Mail History</f:facet>
+			<h:outputText value="No Data Found"
+				style="font-size:25px;color:teal;margin-left:45%" />
+		</p:panel>
+
+
+
+	</h:form>
+
+	<h:form id="email-message-form">
+
+		<div class="ui-g">
+			<div class="ui-g-12 ui-md-6 ui-lg-12">
+				<p:dialog header="Mail Message" widgetVar="messageDialog"
+					modal="true" width="1000" height="500" showEffect="fade"
+					hideEffect="fade" resizable="false">
+					<p:outputPanel id="messageDetail" style="text-align:center;">
+						<p:editor id="msg" value="#{salesBean.mailDetails.bodyContent}"
+							height="500" />
+					</p:outputPanel>
+				</p:dialog>
+			</div>
+		</div>
+
+	</h:form>
+</ui:composition>
